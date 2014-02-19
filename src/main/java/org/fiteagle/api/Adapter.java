@@ -7,6 +7,7 @@ public abstract class Adapter {
 	public static final String STATUS_STARTED = "started";
 	public static final String STATUS_STOPPED = "stopped";
 	public static final String PROPERTY_STATUS = "status";
+	public static final String PROPERTY_TYPE = "type";
 	
 	public static String toDebugString(TextMessage message) throws JMSException {
 		String text = message.getText();

@@ -2,16 +2,17 @@ package org.fiteagle.api;
 
 import java.util.List;
 
+
 public interface IEndpointDAO {
 
-	public List<? extends IEndpoint> findEndpoints(String serviceId, String regionId,
+	public List<? extends Endpoint> findEndpoints(String serviceId, String regionId,
 			String interfaceType);
 
-	public IEndpoint addEndpoint(IEndpoint endpoint);
+	public Endpoint addEndpoint(Endpoint endpoint);
 
-	public IEndpoint findEndpoint(long endpointId);
+	public Endpoint findEndpoint(long endpointId);
 
-	public IEndpoint updateEndpoint(long endpointId, IEndpoint endpoint);
+	public Endpoint updateEndpoint(long endpointId, Endpoint endpoint);
 
 	public void deleteEndpoint(long endpointId);
 

@@ -2,15 +2,16 @@ package org.fiteagle.api;
 
 import java.util.List;
 
+
 public interface IServiceDAO {
 
-	public IService createService(IService service);
+	public Service createService(Service service);
 
-	public List<? extends IService> findServices(String type);
+	public List<? extends Service> findServices(String type);
 
-	public IService findService(long serviceid);
+	public Service findService(long serviceid);
 
-	public IService updateService(IService service);
+	public Service updateService(Service service);
 
 	public void deleteService(long serviceid);
 

@@ -4,29 +4,29 @@ import java.util.List;
 
 public interface IRegionDAO {
 
-	public IRegion createRegion(IRegion region);
+	public Region createRegion(Region region);
 
-	public IRegion findRegion(long regionid);
+	public Region findRegion(long regionid);
 
-	public List<? extends IRegion> findRegions(String country);
+	public List<? extends Region> findRegions(String country);
 
-	public IRegion updateRegion(IRegion r);
+	public Region updateRegion(Region r);
 
 	public void deleteRegion(long regionid);
 
-	public IRegionStatus findRegionStatusForId(long regionid);
+	public RegionStatus findRegionStatusForId(long regionid);
 
-	public IRegionStatus updateRegionStatus(IRegionStatus status);
+	public RegionStatus updateRegionStatus(RegionStatus status);
 
-	public IContactInformation addContactInforamtion(long regionid,
-			IContactInformation contactInfo);
+	public ContactInformation addContactInforamtion(long regionid,
+			ContactInformation contactInfo);
 
-	public List<? extends IContactInformation> getContacts(long regionid, String type);
+	public List<? extends ContactInformation> getContacts(long regionid, String type);
 
-	public IContactInformation getContactInfo(long contactId);
+	public ContactInformation getContactInfo(long contactId);
 
-	public IContactInformation updateContactInformation(long contactId,
-			IContactInformation updated);
+	public ContactInformation updateContactInformation(long contactId,
+			ContactInformation updated);
 
 	public void deleteContact(long contactId);
 

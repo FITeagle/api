@@ -1,5 +1,6 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,14 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-import javax.swing.plaf.synth.Region;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
 @Entity
-public class ContactInformation extends LinkableEntity {
+public class ContactInformation extends LinkableEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	@Transient
+	@XmlTransient
+	private static final long serialVersionUID = 7094746177500617956L;
 	@Id
 	@Column(name="ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,6 +49,16 @@ public class ContactInformation extends LinkableEntity {
 	@XmlTransient
 	Region region;
 	
+	
+	
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.fiteagle.xifi.api.model.IContactInformation#getType()
 	 */
@@ -54,7 +70,6 @@ public class ContactInformation extends LinkableEntity {
 	/* (non-Javadoc)
 	 * @see org.fiteagle.xifi.api.model.IContactInformation#setType(java.lang.String)
 	 */
-	
 	public void setType(String type) {
 		this.type = type;
 	}

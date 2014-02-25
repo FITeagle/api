@@ -1,5 +1,6 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +17,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
-//@XmlRootElement
+@XmlRootElement
 @Entity
-public class Region extends LinkableEntity {
+public class Region extends LinkableEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	@Transient
+	@XmlTransient
+	private static final long serialVersionUID = -5479092749921972138L;
 	@Id
 	@Column(name="ID")
 	@GeneratedValue

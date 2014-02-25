@@ -1,5 +1,6 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,10 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
-public class Endpoint {
+public class Endpoint implements Serializable{
 
+	/**
+	 * 
+	 */
+	@Transient
+	@XmlTransient
+	private static final long serialVersionUID = -7561461571103631142L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;

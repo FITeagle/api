@@ -1,5 +1,6 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 @XmlRootElement
@@ -19,9 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 	@NamedQuery(name="Service.findAll", query="SELECT s FROM Service s"),
 	@NamedQuery(name="Service.findByType", query="SELECT s FROM Service s WHERE s.type = :type")
 })
-public class Service extends LinkableEntity{
+public class Service extends LinkableEntity implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	@Transient
+	@XmlTransient
+	private static final long serialVersionUID = 644655674529022190L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
@@ -105,7 +114,7 @@ public class Service extends LinkableEntity{
 	 */
 	
 	public void addLinksWithoutId(String uriInfo) {
-		// TODO Auto-generated method stub
+		this.addLink("self",  new LinkInfo(trimURI(uriInfo)));
 		
 	}
 	

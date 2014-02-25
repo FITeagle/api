@@ -1,5 +1,6 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +9,20 @@ import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType
 @Entity
-public class RegionStatus extends LinkableEntity{
+public class RegionStatus extends LinkableEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	@Transient
+	@XmlTransient
+	private static final long serialVersionUID = 6096080413211248518L;
+
 
 	@Id
 	long region;

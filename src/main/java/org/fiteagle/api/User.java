@@ -1,10 +1,11 @@
 package org.fiteagle.api;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
-public interface User {
+public interface User extends Serializable{
   
   public abstract void updateAttributes(String firstName, String lastName, String email, String affiliation,
       String password, List<UserPublicKey> publicKeys);
@@ -54,5 +55,37 @@ public interface User {
   public abstract List<UserPublicKey> getPublicKeys();
   
   public abstract boolean hasKeyWithDescription(String description);
+  
+  public class PublicKeyNotFoundException extends RuntimeException {
+    private static final long serialVersionUID = 4906415519200726744L;  
+    
+    public PublicKeyNotFoundException(){
+      super("no public key with this description could be found in the database");
+    }
+  }
+
+  public static class NotEnoughAttributesException extends RuntimeException {
+    private static final long serialVersionUID = -8279867183643310351L;
+    
+    public NotEnoughAttributesException(){
+      super();
+    }
+    
+    public NotEnoughAttributesException(String message){
+      super(message);
+    }
+  }
+
+  public static class InValidAttributeException extends RuntimeException {
+    private static final long serialVersionUID = -1299121776233955847L;
+    
+    public InValidAttributeException(){
+      super();
+    }
+    
+    public InValidAttributeException(String message){
+      super(message);      
+    }
+  }
   
 }

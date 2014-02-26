@@ -1,9 +1,10 @@
 package org.fiteagle.api;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.security.PublicKey;
 
-public interface UserPublicKey {
+public interface UserPublicKey extends Serializable{
   
   public abstract String toString();
   

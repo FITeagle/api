@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -54,7 +55,7 @@ public class FiteagleUser implements Serializable, User{
 //  @JsonIgnore
   private String passwordSalt;
   
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner")
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<FiteagleUserPublicKey> publicKeys;
   
   private final static int MINIMUM_PASSWORD_LENGTH = 3;

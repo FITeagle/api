@@ -1,5 +1,9 @@
 package org.fiteagle.api.core;
 
-public interface ResourceRepository {
-	public String listResources();
+public interface IResourceRepository {
+	public static enum Serialization {
+		XML, TTL
+	}
+
+	public String listResources(Serialization type);
 }

@@ -13,5 +13,7 @@ public interface IResourceRepository {
 	public static final String SERIALIZATION_TRIG = "TRIG";
 	public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " = '" + LIST_RESOURCES + "'";
 
+	public String listResources();
 	public String listResources(String type);
+	public String listResources(String query, String type);
 }

@@ -2,6 +2,7 @@ package org.fiteagle.api.usermanagement;
 
 import java.util.List;
 
+import org.fiteagle.api.usermanagement.User.PublicKeyNotFoundException;
 import org.fiteagle.api.usermanagement.User.Role;
 
 public interface UserManager {
@@ -26,6 +27,10 @@ public interface UserManager {
   public abstract void deleteKey(String username, String description);
   
   public abstract void renameKey(String username, String description, String newDescription);
+  
+  public abstract String createUserKeyPairAndCertificate(String username, String passphrase) throws Exception;
+  
+  public abstract String createUserCertificateForPublicKey(String username, String description) throws Exception, PublicKeyNotFoundException;
   
   public abstract List<User> getAllUsers();
   

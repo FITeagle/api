@@ -1,6 +1,5 @@
 package org.fiteagle.api;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.security.PublicKey;
 import java.util.Date;
@@ -48,7 +47,7 @@ public class UserPublicKey implements Serializable{
   protected UserPublicKey() {
   } 
   
-  public UserPublicKey(PublicKey publicKey, String description, String publicKeyString) throws User.NotEnoughAttributesException, IOException {
+  public UserPublicKey(PublicKey publicKey, String description, String publicKeyString) throws User.NotEnoughAttributesException {
     this.publicKey = publicKey;
     
     checkPublicKeyString(publicKeyString);

@@ -1,4 +1,4 @@
-package org.fiteagle.api;
+package org.fiteagle.api.usermanagement;
 
 import java.io.Serializable;
 import java.security.PublicKey;
@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-
+import org.fiteagle.api.usermanagement.User.NotEnoughAttributesException;
 
 @Entity
 @Table(name="PUBLICKEYS", uniqueConstraints=@UniqueConstraint(columnNames={"owner_username", "description"}))
@@ -47,7 +47,7 @@ public class UserPublicKey implements Serializable{
   protected UserPublicKey() {
   } 
   
-  public UserPublicKey(PublicKey publicKey, String description, String publicKeyString) throws User.NotEnoughAttributesException {
+  public UserPublicKey(PublicKey publicKey, String description, String publicKeyString) throws NotEnoughAttributesException {
     this.publicKey = publicKey;
     
     checkPublicKeyString(publicKeyString);
@@ -57,7 +57,7 @@ public class UserPublicKey implements Serializable{
     this.description = description;
   } 
   
-  private void checkDescription(String description) throws User.NotEnoughAttributesException {
+  private void checkDescription(String description) throws NotEnoughAttributesException {
     if(description == null || description.length() == 0){
       throw new User.NotEnoughAttributesException("no description for public key given");
     }
@@ -66,7 +66,7 @@ public class UserPublicKey implements Serializable{
     }
   }   
   
-  private void checkPublicKeyString(String publicKeyString) throws User.NotEnoughAttributesException {
+  private void checkPublicKeyString(String publicKeyString) throws NotEnoughAttributesException {
     if(publicKeyString == null || publicKeyString.length() == 0){
       throw new User.NotEnoughAttributesException("no publicKeyString given");
     }

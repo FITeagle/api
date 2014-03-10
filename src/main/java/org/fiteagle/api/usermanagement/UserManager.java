@@ -1,10 +1,10 @@
-package org.fiteagle.api;
+package org.fiteagle.api.usermanagement;
 
 import java.util.List;
 
-import org.fiteagle.api.User.Role;
+import org.fiteagle.api.usermanagement.User.Role;
 
-public interface UserDB {
+public interface UserManager {
   
   public abstract void add(User user);
   

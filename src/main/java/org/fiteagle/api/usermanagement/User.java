@@ -1,4 +1,4 @@
-package org.fiteagle.api;
+package org.fiteagle.api.usermanagement;
 
 import java.io.Serializable;
 import java.security.MessageDigest;

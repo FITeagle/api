@@ -84,7 +84,7 @@ public class UserPublicKey implements Serializable{
     return "PublicKey [publicKey=" + publicKey + ", description=" + description + ", created=" + created + "]";
   }
   
-  protected PublicKey getPublicKey() {
+  public PublicKey publicKey() {
     return publicKey;
   }
 

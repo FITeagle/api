@@ -337,6 +337,14 @@ public static User createAdminUser(String username, String password) throws NotE
     return affiliation;
   }
 
+  public String hash(){
+    return passwordHash;
+  }
+  
+  public String salt(){
+    return passwordSalt;
+  }
+  
   public Role getRole() {
     return role;
   }

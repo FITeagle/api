@@ -1,5 +1,7 @@
 package org.fiteagle.api.usermanagement;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.fiteagle.api.usermanagement.User.PublicKeyNotFoundException;
@@ -31,6 +33,8 @@ public interface UserManager {
   public abstract String createUserKeyPairAndCertificate(String username, String passphrase) throws Exception;
   
   public abstract String createUserCertificateForPublicKey(String username, String description) throws Exception, PublicKeyNotFoundException;
+  
+  public abstract boolean verifyCredentials(String username, String password) throws NoSuchAlgorithmException, IOException, UserNotFoundException;
   
   public abstract List<User> getAllUsers();
   

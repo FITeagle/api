@@ -33,7 +33,7 @@ public class User implements Serializable{
 //  private static Logger log = LoggerFactory.getLogger(User.class);
   
   public enum Role {
-    ADMIN, USER
+    ADMIN, USER, TBOWNER
   }
   
   @Id

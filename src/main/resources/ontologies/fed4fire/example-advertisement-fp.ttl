@@ -20,52 +20,6 @@
                                              
                                              owl:imports <http://open-multinet.info/ontology> .
 
-
-#################################################################
-#
-#    Annotation properties
-#
-#################################################################
-
-
-###  http://geni.net/ontology#expires
-
-geni:expires rdf:type owl:AnnotationProperty .
-
-
-
-###  http://geni.net/ontology#generated
-
-geni:generated rdf:type owl:AnnotationProperty .
-
-
-
-###  http://geni.net/ontology#manager
-
-geni:manager rdf:type owl:AnnotationProperty .
-
-
-
-###  http://geni.net/ontology#type
-
-geni:type rdf:type owl:AnnotationProperty .
-
-
-
-###  http://xmlns.com/foaf/0.1/Image
-
-foaf:Image rdf:type owl:AnnotationProperty .
-
-
-
-###  http://xmlns.com/foaf/0.1/based_near
-
-foaf:based_near rdf:type owl:AnnotationProperty .
-
-
-
-
-
 #################################################################
 #
 #    Classes
@@ -192,27 +146,6 @@ foaf:based_near rdf:type owl:AnnotationProperty .
       rdfs:subClassOf :EpcLink .
 
 
-
-###  http://geni.net/ontology#AggregateManager
-
-geni:AggregateManager rdf:type owl:Class .
-
-
-
-###  http://geni.net/ontology#Message
-
-geni:Message rdf:type owl:Class .
-
-
-
-###  http://www.w3.org/2003/01/geo/wgs84_pos#Point
-
-geo:Point rdf:type owl:Class .
-
-
-
-
-
 #################################################################
 #
 #    Individuals
@@ -281,7 +214,6 @@ geo:Point rdf:type owl:Class .
            
            foaf:based_near [ rdf:type geo:Point
                            ] .
-
 
 
 ###  http://fuseco.fokus.fraunhofer.de/ontology#vmserver2

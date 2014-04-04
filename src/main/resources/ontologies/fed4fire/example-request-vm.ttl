@@ -1,4 +1,4 @@
-@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix : <http://example.org/myexperiment#> .
 @prefix nml: <http://schemas.ogf.org/nml/base/2013/02#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -8,7 +8,7 @@
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix fp: <http://fuseco.fokus.fraunhofer.de/ontology#> .
-@base <http://open-multinet.info/ontology#> .
+@prefix omn: <http://open-multinet.info/ontology#> .
 
 :message rdf:type geni:Message ;
         geni:type geni:Request .

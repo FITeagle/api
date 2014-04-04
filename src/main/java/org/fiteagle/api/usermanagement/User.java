@@ -1,4 +1,4 @@
-package org.fiteagle.api;
+package org.fiteagle.api.usermanagement;
 
 import java.io.Serializable;
 import java.security.MessageDigest;
@@ -33,7 +33,7 @@ public class User implements Serializable{
 //  private static Logger log = LoggerFactory.getLogger(User.class);
   
   public enum Role {
-    ADMIN, USER
+    ADMIN, USER, TBOWNER
   }
   
   @Id
@@ -337,6 +337,14 @@ public static User createAdminUser(String username, String password) throws NotE
     return affiliation;
   }
 
+  public String hash(){
+    return passwordHash;
+  }
+  
+  public String salt(){
+    return passwordSalt;
+  }
+  
   public Role getRole() {
     return role;
   }

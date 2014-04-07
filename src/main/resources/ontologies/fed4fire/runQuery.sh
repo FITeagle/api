@@ -4,6 +4,61 @@
 #   - sparql command line tool (e.g. 'brew install jena')
 #
 
+
+##########################################################################################
+# Example data
+##########################################################################################
+example1=( "data:request-vm"
+        "query:getType"
+        "description:Get the type of the message"
+        "command:example1" )
+example2=( "data:advertisement-fp"
+        "query:getnodes"
+        "description:Get the nodes published in the FUSECO Playground example"
+        "command:example2" )
+
+commands=( example1 example2 )
+##########################################################################################
+
+
+
+
+##########################################################################################
+# Work with associative arrays in Bash 3
+##########################################################################################
+function debug_command () {
+    declare -a hash=("${!1}")
+    for command in "${hash[@]}"; do
+        key="${command%%:*}"
+        value="${command#*:}"
+        echo "Key: ${key}"
+        echo "Value: ${value}"
+    done
+}
+
+function show_command () {
+    declare -a hash=("${!1}")
+    for command in "${hash[@]}"; do
+        key="${command%%:*}"
+        value="${command#*:}"
+        [ "$key" == "description" ] && description="$value"
+        [ "$key" == "command" ] && command="$value"
+    done
+    echo " - '$command' ($description)"
+}
+
+function show_commands () {
+    declare -a hash=("${!1}")
+    for command in "${hash[@]}"; do
+        show_command $command[@]
+    done
+}
+##########################################################################################
+
+
+##########################################################################################
+# Helper methods
+##########################################################################################
 function checkBinary {
   if command -v $1 >/dev/null 2>&1; then
      return 0
@@ -37,21 +92,42 @@ function runQuery {
   echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
 }
 
-checkEnvironment
-[ "${#}" -eq 2 ] || { 
-  echo "Usage: $(basename $0) <data> <query>"
-  echo "Examples:"
-  echo " - $(basename $0) request-vm getType"
-  echo " - $(basename $0) advertisement-fp getnodes"
-  exit 1;
+function runCommand {
+    for command in "${commands[@]}"; do
+        if [ "$1" == $command ]; then
+            foo=$command[@] 
+            declare -a hash=("${!foo}")
+            for command in "${hash[@]}"; do
+                key="${command%%:*}"
+                value="${command#*:}"
+                [ "$key" == "description" ] && description="$value"
+                [ "$key" == "command" ] && command="$value"
+                [ "$key" == "data" ] && data="$value"
+                [ "$key" == "query" ] && query="$value"
+            done
+            echo "Running '$command' ($description)..."
+            runQuery $data $query
+        fi
+    done
 }
 
-runQuery $1 $2
+##########################################################################################
 
-#for arg in "$@"; do
-#    [ "${arg}" = "getNodes" ] && runQuery advertisement-example-fp.ttl advertisement-query-getnodes.sparql
-#    [ "${arg}" = "getNodesWithMon" ] && runQuery advertisement-example-fp.ttl advertisement-query-getnodes-with-mon.sparql
-#    [ "${arg}" = "getCertificates" ] && runQuery advertisement-example-fp.ttl advertisement-query-getcertificate.sparql
-#    [ "${arg}" = "getMetadata" ] && runQuery advertisement-example-fp.ttl advertisement-query-getcertificate.sparql
-#done
 
+##########################################################################################
+# Main
+##########################################################################################
+checkEnvironment
+
+[ "${#}" -eq 1 ] && runCommand $1 && exit 0
+[ "${#}" -eq 2 ] && runQuery $1 $2 && exit 0
+
+echo "Usage: $(basename $0) <command> OR <data> <query>"
+echo "Predefined commands:"
+show_commands commands[@]
+echo "Arbitrary query examples:"
+echo " - $(basename $0) advertisement-fp getcertificate (get certificate of testbed)"
+echo " - $(basename $0) advertisement-fp getnodestatus (get resource status for FLS)"
+
+exit 1;
+##########################################################################################

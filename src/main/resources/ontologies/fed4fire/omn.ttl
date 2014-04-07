@@ -7,10 +7,11 @@
 @prefix geni: <http://geni.net/ontology#> .
 @prefix indl: <http://www.science.uva.nl/research/sne/indl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology#> .
+@base <http://open-multinet.info/ontology> .
 
 <http://open-multinet.info/ontology> rdf:type owl:Ontology ;
-                                     owl:imports <http://schemas.ogf.org/nml/base/2013/02#> ,
+                                     
+                                     owl:imports nml: ,
                                                  <http://www.science.uva.nl/research/sne/indl> .
 
 
@@ -31,9 +32,7 @@
 
 ###  http://open-multinet.info/ontology#partOfGroup
 
-<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty ;
-                                                 
-                                                 rdfs:domain nml:NetworkObject .
+<http://open-multinet.info/ontology#partOfGroup> rdf:type owl:AnnotationProperty .
 
 
 
@@ -60,7 +59,9 @@
 
 <http://open-multinet.info/ontology#partOfGroup> rdf:type owl:ObjectProperty ;
                                                  
-                                                 rdfs:range nml:Group .
+                                                 rdfs:range nml:Group ;
+                                                 
+                                                 rdfs:domain nml:NetworkObject .
 
 
 
@@ -129,6 +130,16 @@
                                                        rdfs:domain nml:Node ;
                                                        
                                                        rdfs:range xsd:boolean .
+
+
+
+###  http://open-multinet.info/ontology#up
+
+<http://open-multinet.info/ontology#up> rdf:type owl:DatatypeProperty ;
+                                        
+                                        rdfs:domain nml:Node ;
+                                        
+                                        rdfs:range xsd:boolean .
 
 
 

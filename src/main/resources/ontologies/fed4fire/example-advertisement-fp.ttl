@@ -303,6 +303,8 @@ geo:Point rdf:type owl:Class .
            
            omn:partOfGroup :FusecoPlayground ;
            
+           omn:up "true"^^xsd:boolean ;
+           
            foaf:based_near :location .
 
 
@@ -311,6 +313,8 @@ geo:Point rdf:type owl:Class .
 
 :vmserver2 rdf:type :OpenStackServer ,
                     owl:NamedIndividual ;
+                    
+           omn:up "false"^^xsd:boolean ;
            
            omn:partOfGroup :FusecoPlayground .
 

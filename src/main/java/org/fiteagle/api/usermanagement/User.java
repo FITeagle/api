@@ -16,7 +16,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PostRemove;
 import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -58,7 +60,7 @@ public class User implements Serializable{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<UserPublicKey> publicKeys;
   
-  @ManyToMany(cascade = CascadeType.ALL, mappedBy="participants", fetch=FetchType.EAGER)
+  @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
   private List<Course> courses;
   
   private final static int MINIMUM_PASSWORD_LENGTH = 3;
@@ -158,6 +160,13 @@ public static User createAdminUser(String username, String password) throws NotE
     lastModified = new Date();
     if(created == null) {
       created = new Date();
+    }
+  }
+  
+  @PreRemove
+  private void deleteParticipantInCourses(){
+    for(Course course : courses){
+      course.removeParticipant(this);
     }
   }
   
@@ -391,6 +400,10 @@ public static User createAdminUser(String username, String password) throws NotE
   
   protected void addCourse(Course course){
     this.courses.add(course);
+  }
+  
+  protected void removeCourse(Course course){
+    this.courses.remove(course);
   }
   
   public class PublicKeyNotFoundException extends RuntimeException {

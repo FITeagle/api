@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PostRemove;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +26,7 @@ public class Course implements Serializable{
   private String name;
   private String description;
   
-  @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+  @ManyToMany(fetch=FetchType.EAGER)
   private List<User> participants;
 
   public Course(String name, String description){
@@ -37,6 +38,13 @@ public class Course implements Serializable{
   protected Course(){
   }
   
+  @PreRemove
+  private void deleteCourseInUsers(){
+    for(User u : participants){
+      u.removeCourse(this);
+    }
+  }
+  
   public long getId() {
     return id;
   }
@@ -44,6 +52,10 @@ public class Course implements Serializable{
   public void addParticipant(User user){
     user.addCourse(this);
     this.participants.add(user);
+  }
+  
+  public void removeParticipant(User user){
+    this.participants.remove(user);
   }
   
   public List<User> getParticipants() {

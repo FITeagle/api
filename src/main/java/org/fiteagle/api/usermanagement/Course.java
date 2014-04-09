@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.PostRemove;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 

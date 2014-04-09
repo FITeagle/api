@@ -81,7 +81,7 @@ public interface UserManager {
   
   public abstract void delete(long id);
   
-  public abstract void addParticipant(Course course, User user);
+  public abstract void addParticipant(long id, String username);
   
   public abstract List<Course> getAllCourses();
   

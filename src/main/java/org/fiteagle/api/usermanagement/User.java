@@ -16,7 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.PostRemove;
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
@@ -381,7 +380,7 @@ public static User createAdminUser(String username, String password) throws NotE
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
-  public List<Course> getCourses() {
+  public List<Course> joinedCourses() {
     return courses;
   }
 

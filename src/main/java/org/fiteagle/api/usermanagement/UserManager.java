@@ -71,5 +71,29 @@ public interface UserManager {
     }
   }
   
+  public abstract void add(Course course);
+  
+  public abstract Course get(Course course);
+  
+  public abstract Course get(long id);
+  
+  public abstract void delete(Course course);
+  
+  public abstract void delete(long id);
+  
+  public abstract void addParticipant(Course course, User user);
+  
+  public abstract List<Course> getAllCourses();
+  
+  public static class CourseNotFoundException extends RuntimeException {    
+    
+    private static final long serialVersionUID = 5952413074712514371L;
+
+    public CourseNotFoundException(){
+      super("no course with this id could be found in the database");
+    }
+  }
+
+  public abstract void deleteAllEntries();
   
 }

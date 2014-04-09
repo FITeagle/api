@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -30,7 +31,6 @@ import net.iharder.Base64;
 public class User implements Serializable{
 
   private static final long serialVersionUID = -8580256972066486588L;
-//  private static Logger log = LoggerFactory.getLogger(User.class);
   
   public enum Role {
     ADMIN, USER, TBOWNER
@@ -58,6 +58,9 @@ public class User implements Serializable{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<UserPublicKey> publicKeys;
   
+  @ManyToMany(cascade = CascadeType.ALL, mappedBy="participants", fetch=FetchType.EAGER)
+  private List<Course> courses;
+  
   private final static int MINIMUM_PASSWORD_LENGTH = 3;
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
   private final static Pattern EMAIL_PATTERN = Pattern.compile("[^@]+@{1}[^@]+\\.+[^@]+");
@@ -81,11 +84,12 @@ public class User implements Serializable{
     if(publicKeys == null){
       this.publicKeys = new ArrayList<>();
     }
+    this.courses = new ArrayList<>();
     setOwners(publicKeys);
     checkAttributes();
   }
   public static User createDefaultUser(String username) {
-    return new User(username, "default", "default", createDefaultEmail(username), "default", "default", null);
+    return new User(username, "default", "default", createDefaultEmail(username), "default", "default", new ArrayList<UserPublicKey>());
   }
   
   private static String createDefaultEmail(String username2) {
@@ -245,13 +249,6 @@ public static User createAdminUser(String username, String password) throws NotE
   }
   
   @Override
-  public String toString() {
-    return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-        + ", affiliation=" + affiliation + ", created=" + created + ", lastModified=" + lastModified
-        + ", publicKeys=" + publicKeys + "]";
-  } 
-  
-  @Override
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
@@ -303,6 +300,13 @@ public static User createAdminUser(String username, String password) throws NotE
     return true;
   }
   
+  @Override
+  public String toString() {
+    return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+        + ", affiliation=" + affiliation + ", role=" + role + ", created=" + created + ", lastModified=" + lastModified
+        + ", publicKeys=" + publicKeys + "]";
+  }
+
   public String getUsername() {
     return username;
   }
@@ -368,6 +372,14 @@ public static User createAdminUser(String username, String password) throws NotE
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
+  public List<Course> getCourses() {
+    return courses;
+  }
+
+  public void setCourses(List<Course> courses) {
+    this.courses = courses;
+  }
+
   public boolean hasKeyWithDescription(String description){
     for(UserPublicKey key: publicKeys){
       if(key.getDescription().equals(description)){
@@ -375,6 +387,10 @@ public static User createAdminUser(String username, String password) throws NotE
       }
     }
     return false;
+  }
+  
+  protected void addCourse(Course course){
+    this.courses.add(course);
   }
   
   public class PublicKeyNotFoundException extends RuntimeException {

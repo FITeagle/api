@@ -1,5 +1,6 @@
 package org.fiteagle.api.usermanagement;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,8 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="COURSES")
-public class Testbed {
+public class Testbed implements Serializable{
   
+  private static final long serialVersionUID = -8243471509830325276L;
+
   @Id
   @GeneratedValue
   private long id;

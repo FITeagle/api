@@ -71,7 +71,7 @@ public interface UserManager {
     }
   }
   
-  public abstract void add(Course course);
+  public abstract Course add(Course course);
   
   public abstract Course get(Course course);
   

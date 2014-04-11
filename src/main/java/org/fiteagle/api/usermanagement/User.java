@@ -34,7 +34,7 @@ public class User implements Serializable{
   private static final long serialVersionUID = -8580256972066486588L;
   
   public enum Role {
-    ADMIN, USER, TBOWNER
+    FEDERATION_ADMIN, NODE_ADMIN, CLASSOWNER, STUDENT 
   }
   
   @Id
@@ -77,7 +77,7 @@ public class User implements Serializable{
     this.lastName = lastName;
     this.email = email;
     this.affiliation = affiliation;
-    this.role = Role.USER;
+    this.role = Role.STUDENT;
     byte[] salt = generatePasswordSalt();
     this.passwordSalt = Base64.encodeBytes(salt);        
     this.passwordHash = generatePasswordHash(salt, password);
@@ -104,7 +104,7 @@ public class User implements Serializable{
 
 public static User createAdminUser(String username, String password) throws NotEnoughAttributesException, InValidAttributeException{
     User admin = new User(username, "default", "default", "default", "default", password, null);
-    admin.setRole(Role.ADMIN);
+    admin.setRole(Role.FEDERATION_ADMIN);
     return admin;
   }
   

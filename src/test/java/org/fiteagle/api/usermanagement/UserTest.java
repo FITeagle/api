@@ -22,7 +22,7 @@ public class UserTest {
   @Test
   public void testCreateAdminUser(){
     User user = User.createAdminUser("admin", "admin");
-    Assert.assertEquals(Role.ADMIN, user.getRole());
+    Assert.assertEquals(Role.FEDERATION_ADMIN, user.getRole());
   }
   
   @Test(expected=InValidAttributeException.class)

@@ -16,4 +16,6 @@ public interface IResourceRepository {
 	public String listResources();
 	public String listResources(String type);
 	public String listResources(String query, String type);
+	
+	public String queryDatabse(String query, String type);
 }

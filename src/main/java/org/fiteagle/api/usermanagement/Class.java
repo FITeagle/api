@@ -13,8 +13,8 @@ import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="COURSES")
-public class Course implements Serializable{
+@Table(name="CLASSES")
+public class Class implements Serializable{
 
   private static final long serialVersionUID = 3183722562956503240L;
   
@@ -31,20 +31,20 @@ public class Course implements Serializable{
   @ManyToMany(mappedBy="courses", fetch=FetchType.EAGER)
   private List<Testbed> testbeds;
 
-  public Course(String name, String description){
+  public Class(String name, String description){
     this.name = name;
     this.description = description;
     this.participants = new ArrayList<User>();
     this.testbeds = new ArrayList<Testbed>();
   }
   
-  protected Course(){
+  protected Class(){
   }
   
   @PreRemove
-  private void deleteCourseInUsers(){
+  private void deleteClassInUsers(){
     for(User u : participants){
-      u.removeCourse(this);
+      u.removeClass(this);
     }
   }
   
@@ -107,7 +107,7 @@ public class Course implements Serializable{
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Course other = (Course) obj;
+    Class other = (Class) obj;
     if (description == null) {
       if (other.description != null)
         return false;

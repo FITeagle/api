@@ -60,7 +60,7 @@ public class User implements Serializable{
   private List<UserPublicKey> publicKeys;
   
   @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
-  private List<Course> courses;
+  private List<Class> classes;
   
   private final static int MINIMUM_PASSWORD_LENGTH = 3;
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
@@ -85,7 +85,7 @@ public class User implements Serializable{
     if(publicKeys == null){
       this.publicKeys = new ArrayList<>();
     }
-    this.courses = new ArrayList<>();
+    this.classes = new ArrayList<>();
     setOwners(publicKeys);
     checkAttributes();
   }
@@ -164,7 +164,7 @@ public static User createAdminUser(String username, String password) throws NotE
   
   @PreRemove
   private void deleteParticipantInCourses(){
-    for(Course course : courses){
+    for(Class course : classes){
       course.removeParticipant(this);
     }
   }
@@ -380,12 +380,12 @@ public static User createAdminUser(String username, String password) throws NotE
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
-  public List<Course> joinedCourses() {
-    return courses;
+  public List<Class> joinedCourses() {
+    return classes;
   }
 
-  public void setCourses(List<Course> courses) {
-    this.courses = courses;
+  public void setCourses(List<Class> courses) {
+    this.classes = courses;
   }
 
   public boolean hasKeyWithDescription(String description){
@@ -397,12 +397,12 @@ public static User createAdminUser(String username, String password) throws NotE
     return false;
   }
   
-  protected void addCourse(Course course){
-    this.courses.add(course);
+  protected void addCourse(Class course){
+    this.classes.add(course);
   }
   
-  protected void removeCourse(Course course){
-    this.courses.remove(course);
+  protected void removeClass(Class targetClass){
+    this.classes.remove(targetClass);
   }
   
   public class PublicKeyNotFoundException extends RuntimeException {

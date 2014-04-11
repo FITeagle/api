@@ -71,19 +71,19 @@ public interface UserManager {
     }
   }
   
-  public abstract Course add(Course course);
+  public abstract Class add(Class targetClass);
   
-  public abstract Course get(Course course);
+  public abstract Class get(Class targetClass);
   
-  public abstract Course get(long id);
+  public abstract Class get(long id);
   
-  public abstract void delete(Course course);
+  public abstract void delete(Class targetClass);
   
   public abstract void delete(long id);
   
   public abstract void addParticipant(long id, String username);
   
-  public abstract List<Course> getAllCourses();
+  public abstract List<Class> getAllClasses();
   
   public static class CourseNotFoundException extends RuntimeException {    
     

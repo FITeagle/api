@@ -23,7 +23,7 @@ public class Testbed implements Serializable{
   private String name;
   
   @ManyToMany(fetch=FetchType.EAGER)
-  private List<Course> courses;
+  private List<Class> courses;
 
   protected Testbed(){
   }
@@ -40,7 +40,7 @@ public class Testbed implements Serializable{
     this.name = name;
   }
 
-  public void setCourses(List<Course> courses) {
+  public void setCourses(List<Class> courses) {
     this.courses = courses;
   }
   

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="COURSES")
-public class Testbed implements Serializable{
+public class Node implements Serializable{
   
   private static final long serialVersionUID = -8243471509830325276L;
 
@@ -25,7 +25,7 @@ public class Testbed implements Serializable{
   @ManyToMany(fetch=FetchType.EAGER)
   private List<Class> courses;
 
-  protected Testbed(){
+  protected Node(){
   }
   
   public long getId() {

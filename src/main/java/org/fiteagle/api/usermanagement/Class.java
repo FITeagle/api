@@ -29,13 +29,13 @@ public class Class implements Serializable{
   private List<User> participants;
   
   @ManyToMany(mappedBy="courses", fetch=FetchType.EAGER)
-  private List<Testbed> testbeds;
+  private List<Node> nodes;
 
   public Class(String name, String description){
     this.name = name;
     this.description = description;
     this.participants = new ArrayList<User>();
-    this.testbeds = new ArrayList<Testbed>();
+    this.nodes = new ArrayList<Node>();
   }
   
   protected Class(){
@@ -85,12 +85,12 @@ public class Class implements Serializable{
     this.description = description;
   }
   
-  public List<Testbed> getTestbeds() {
-    return testbeds;
+  public List<Node> getNodes() {
+    return nodes;
   }
 
-  public void setTestbeds(List<Testbed> testbeds) {
-    this.testbeds = testbeds;
+  public void setNodes(List<Node> nodes) {
+    this.nodes = nodes;
   }
   
   @Override

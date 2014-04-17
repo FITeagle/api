@@ -62,6 +62,9 @@ public class User implements Serializable{
   @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
   private List<Class> classes;
   
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
+  private List<Class> classesOwned;
+  
   private final static int MINIMUM_PASSWORD_LENGTH = 3;
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
   private final static Pattern EMAIL_PATTERN = Pattern.compile("[^@]+@{1}[^@]+\\.+[^@]+");
@@ -380,7 +383,11 @@ public static User createAdminUser(String username, String password) throws NotE
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
-  public List<Class> joinedCourses() {
+  public List<Class> getClassesOwned() {
+    return classesOwned;
+  }
+
+  public List<Class> joinedClasses() {
     return classes;
   }
 

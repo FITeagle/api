@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
@@ -24,6 +26,10 @@ public class Class implements Serializable{
 
   private String name;
   private String description;
+  
+  @JoinColumn(name="owner_username")
+  @ManyToOne
+  private User owner;
   
   @ManyToMany(fetch=FetchType.EAGER)
   private List<User> participants;
@@ -93,12 +99,20 @@ public class Class implements Serializable{
     this.nodes = nodes;
   }
   
+  public User owner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
+  }
+  
   @Override
   public String toString() {
     return "Course [id=" + id + ", name=" + name + ", description=" + description + ", participants=" + participants
         + "]";
   }
-
+  
   @Override
   public boolean equals(Object obj) {
     if (this == obj)

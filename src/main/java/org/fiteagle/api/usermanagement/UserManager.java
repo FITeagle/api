@@ -95,5 +95,7 @@ public interface UserManager {
   }
 
   public abstract void deleteAllEntries();
+
+  List<Class> getAllClassesFromUser(String username);
   
 }

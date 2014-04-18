@@ -71,7 +71,15 @@ public interface UserManager {
     }
   }
   
-  public abstract Class add(Class targetClass);
+  public static class DuplicateClassException extends RuntimeException {
+	private static final long serialVersionUID = 7701360611614483760L;
+
+	public DuplicateClassException(){
+      super("this class has been already added to the user");
+    }
+  }
+  
+  public abstract Class addClass(String ownerUsername, Class targetClass);
   
   public abstract Class get(Class targetClass);
   
@@ -82,6 +90,10 @@ public interface UserManager {
   public abstract void delete(long id);
   
   public abstract void addParticipant(long id, String username);
+
+  public abstract List<Class> getAllClassesFromUser(String username);
+
+  public abstract List<Class> getAllClassesOwnedByUser(String username);
   
   public abstract List<Class> getAllClasses();
   
@@ -95,7 +107,5 @@ public interface UserManager {
   }
 
   public abstract void deleteAllEntries();
-
-  List<Class> getAllClassesFromUser(String username);
   
 }

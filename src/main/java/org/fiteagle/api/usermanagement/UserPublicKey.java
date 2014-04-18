@@ -110,7 +110,7 @@ public class UserPublicKey implements Serializable{
   }
 
   public void setOwner(User owner) {
-    this.owner = (User) owner;
+    this.owner = owner;
   }
 
   @Override

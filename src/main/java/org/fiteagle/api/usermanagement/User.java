@@ -89,6 +89,7 @@ public class User implements Serializable{
       this.publicKeys = new ArrayList<>();
     }
     this.classes = new ArrayList<>();
+    this.classesOwned = new ArrayList<>();
     setOwners(publicKeys);
     checkAttributes();
   }
@@ -383,7 +384,7 @@ public static User createAdminUser(String username, String password) throws NotE
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
-  public List<Class> getClassesOwned() {
+  public List<Class> classesOwned() {
     return classesOwned;
   }
 
@@ -404,8 +405,17 @@ public static User createAdminUser(String username, String password) throws NotE
     return false;
   }
   
-  protected void addCourse(Class course){
-    this.classes.add(course);
+  public void addOwnedClass(Class targetClass){
+	  targetClass.setOwner(this);
+	  this.classesOwned.add(targetClass);
+  }
+  
+  public void removeOwnedClass(Class targetClass){
+	  this.classesOwned.remove(targetClass);
+  }
+  
+  protected void addClass(Class targetClass){
+    this.classes.add(targetClass);
   }
   
   protected void removeClass(Class targetClass){

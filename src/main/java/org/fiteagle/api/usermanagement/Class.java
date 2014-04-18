@@ -59,7 +59,7 @@ public class Class implements Serializable{
   }
   
   public void addParticipant(User user){
-    user.addCourse(this);
+    user.addClass(this);
     this.participants.add(user);
   }
   
@@ -99,7 +99,7 @@ public class Class implements Serializable{
     this.nodes = nodes;
   }
   
-  public User owner() {
+  public User getOwner() {
     return owner;
   }
 

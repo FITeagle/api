@@ -107,12 +107,14 @@ public class Class implements Serializable{
     this.owner = owner;
   }
   
+  
   @Override
   public String toString() {
-    return "Course [id=" + id + ", name=" + name + ", description=" + description + ", participants=" + participants
-        + "]";
+	return "Class [id=" + id + ", name=" + name + ", description="
+			+ description + ", owner=" + owner + ", participants="
+			+ participants + ", nodes=" + nodes + "]";
   }
-  
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)

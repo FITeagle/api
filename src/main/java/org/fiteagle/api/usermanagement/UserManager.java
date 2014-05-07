@@ -90,6 +90,8 @@ public interface UserManager {
   public abstract void delete(long id);
   
   public abstract void addParticipant(long id, String username);
+  
+  public abstract void removeParticipant(long id, String username);
 
   public abstract List<Class> getAllClassesFromUser(String username);
 

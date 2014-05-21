@@ -1,11 +1,11 @@
-package org.fiteagle.api.usermanagement;
+package org.fiteagle.api.core.usermanagement;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import org.fiteagle.api.usermanagement.User.PublicKeyNotFoundException;
-import org.fiteagle.api.usermanagement.User.Role;
+import org.fiteagle.api.core.usermanagement.User.PublicKeyNotFoundException;
+import org.fiteagle.api.core.usermanagement.User.Role;
 
 public interface UserManager {
   

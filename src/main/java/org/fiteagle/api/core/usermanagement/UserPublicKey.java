@@ -1,4 +1,4 @@
-package org.fiteagle.api.usermanagement;
+package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
 import java.security.PublicKey;
@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-import org.fiteagle.api.usermanagement.User.NotEnoughAttributesException;
+import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
 
 @Entity
 @Table(name="PUBLICKEYS", uniqueConstraints=@UniqueConstraint(columnNames={"owner_username", "description"}))

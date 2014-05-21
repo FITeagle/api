@@ -1,4 +1,4 @@
-package org.fiteagle.api.usermanagement;
+package org.fiteagle.api.core.usermanagement;
 
 public interface PolicyEnforcementPoint {
   

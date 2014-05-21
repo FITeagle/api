@@ -1,4 +1,4 @@
-package org.fiteagle.api.usermanagement;
+package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
 import java.util.List;

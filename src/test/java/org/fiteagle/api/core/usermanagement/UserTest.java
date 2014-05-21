@@ -1,8 +1,9 @@
-package org.fiteagle.api.usermanagement;
+package org.fiteagle.api.core.usermanagement;
 
-import org.fiteagle.api.usermanagement.User.InValidAttributeException;
-import org.fiteagle.api.usermanagement.User.NotEnoughAttributesException;
-import org.fiteagle.api.usermanagement.User.Role;
+import org.fiteagle.api.core.usermanagement.User;
+import org.fiteagle.api.core.usermanagement.User.InValidAttributeException;
+import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
+import org.fiteagle.api.core.usermanagement.User.Role;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class UserTest {
   }
   
   @Test(expected=InValidAttributeException.class)
-  public void testCreaateUserWithInvalidEmail(){
+  public void testCreateUserWithInvalidEmail(){
     new User("test1", "test1", "test1", "te@st1@test.de", "test1", "test1", null);
   }
   

@@ -1,9 +1,6 @@
 package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-
-import net.iharder.Base64;
 
 
 @Entity
@@ -65,7 +60,6 @@ public class User implements Serializable{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<Class> classesOwned;
   
-  private final static int MINIMUM_PASSWORD_LENGTH = 3;
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
   private final static Pattern EMAIL_PATTERN = Pattern.compile("[^@]+@{1}[^@]+\\.+[^@]+");
   private final static int MINIMUM_FIRST_AND_LASTNAME_LENGTH = 2;
@@ -74,16 +68,15 @@ public class User implements Serializable{
   protected User(){
   }
   
-  public User(String username, String firstName, String lastName, String email, String affiliation, String password, List<UserPublicKey> publicKeys){
+  public User(String username, String firstName, String lastName, String email, String affiliation, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys){
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.affiliation = affiliation;
     this.role = Role.STUDENT;
-    byte[] salt = generatePasswordSalt();
-    this.passwordSalt = Base64.encodeBytes(salt);        
-    this.passwordHash = generatePasswordHash(salt, password);
+    this.passwordSalt = passwordSalt;
+    this.passwordHash = passwordHash;
     this.publicKeys = publicKeys;
     if(publicKeys == null){
       this.publicKeys = new ArrayList<>();
@@ -93,8 +86,9 @@ public class User implements Serializable{
     setOwners(publicKeys);
     checkAttributes();
   }
-  public static User createDefaultUser(String username) {
-    return new User(username, "default", "default", createDefaultEmail(username), "default", "default", new ArrayList<UserPublicKey>());
+  
+  public static User createDefaultUser(String username, String passwordHash, String passwordSalt) {
+    return new User(username, "default", "default", createDefaultEmail(username), "default", passwordHash, passwordSalt, new ArrayList<UserPublicKey>());
   }
   
   private static String createDefaultEmail(String username2) {
@@ -103,11 +97,10 @@ public class User implements Serializable{
 	  }else {
 		return username2;
 	}
-	  
 }
 
-public static User createAdminUser(String username, String password) throws NotEnoughAttributesException, InValidAttributeException{
-    User admin = new User(username, "default", "default", "default", "default", password, null);
+public static User createAdminUser(String username, String passwordHash, String passwordSalt) throws NotEnoughAttributesException, InValidAttributeException{
+    User admin = new User(username, "default", "default", "default", "default", passwordHash, passwordSalt, null);
     admin.setRole(Role.FEDERATION_ADMIN);
     return admin;
   }
@@ -136,10 +129,9 @@ public static User createAdminUser(String username, String password) throws NotE
     if(affiliation == null){
       this.affiliation = "default";
     }  
-    if(passwordHash == null){
-      throw new NotEnoughAttributesException("no password given or password too short");
-    }   
-    
+    if(passwordHash == null || passwordSalt == null || passwordHash.equals("") || passwordSalt.equals("")){
+        throw new NotEnoughAttributesException("no password given or password too short");
+    }
     if(!USERNAME_PATTERN.matcher(username).matches()){
       throw new InValidAttributeException("invalid username, only letters, numbers, \"@\", \".\", \"_\", and \"-\" is allowed and the username has to be from 3 to 200 characters long");
     }
@@ -173,34 +165,8 @@ public static User createAdminUser(String username, String password) throws NotE
     }
   }
   
-  private byte[] generatePasswordSalt(){
-    SecureRandom random = new SecureRandom();
-    return random.generateSeed(20);
-  }
-  
-  private String generatePasswordHash(byte[] salt, String password){
-    if(password == null || password.length() < MINIMUM_PASSWORD_LENGTH){
-      return null;
-    }
-    
-    byte[] passwordBytes = null;
-    try {
-      passwordBytes = createHash(salt, password);
-    } catch (NoSuchAlgorithmException e) {
-//      log.error(e.getMessage());
-    }
-    return Base64.encodeBytes(passwordBytes);
-  }
-  
-  private byte[] createHash(byte[] salt, String password) throws NoSuchAlgorithmException {    
-    MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    digest.reset();
-    digest.update(salt);
-    return digest.digest(password.getBytes());
-  }
-  
   @SuppressWarnings("unchecked")
-  public void updateAttributes(String firstName, String lastName, String email, String affiliation, String password, List<UserPublicKey> publicKeys) {
+  public void updateAttributes(String firstName, String lastName, String email, String affiliation, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys) {
     if(firstName != null){
      this.firstName = firstName;
     }
@@ -216,11 +182,11 @@ public static User createAdminUser(String username, String password) throws NotE
     if(affiliation != null){
       this.affiliation = affiliation;
     }
-    if(password != null){
-      byte[] salt = generatePasswordSalt();
-      this.passwordSalt = Base64.encodeBytes(salt);        
-      this.passwordHash = generatePasswordHash(salt, password);
+    if(passwordHash != null && passwordSalt != null && !passwordHash.equals("") && !passwordSalt.equals("")){
+      this.passwordHash = passwordHash;
+      this.passwordSalt = passwordSalt;
     }
+    
     checkAttributes();      
   } 
   

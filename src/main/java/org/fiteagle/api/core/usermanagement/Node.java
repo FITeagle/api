@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="COURSES")
+@Table(name="NODES")
 public class Node implements Serializable{
   
   private static final long serialVersionUID = -8243471509830325276L;
@@ -23,7 +23,7 @@ public class Node implements Serializable{
   private String name;
   
   @ManyToMany(fetch=FetchType.EAGER)
-  private List<Class> courses;
+  private List<Class> classes;
 
   protected Node(){
   }
@@ -40,8 +40,8 @@ public class Node implements Serializable{
     this.name = name;
   }
 
-  public void setCourses(List<Class> courses) {
-    this.courses = courses;
+  public void setClasses(List<Class> classes) {
+    this.classes = classes;
   }
   
 }

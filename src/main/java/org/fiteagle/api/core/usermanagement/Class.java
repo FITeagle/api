@@ -34,7 +34,7 @@ public class Class implements Serializable{
   @ManyToMany(fetch=FetchType.EAGER)
   private List<User> participants;
   
-  @ManyToMany(mappedBy="courses", fetch=FetchType.EAGER)
+  @ManyToMany(mappedBy="classes", fetch=FetchType.EAGER)
   private List<Node> nodes;
 
   public Class(String name, String description){

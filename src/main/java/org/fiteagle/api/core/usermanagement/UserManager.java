@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import org.fiteagle.api.core.IMessageBus;
 import org.fiteagle.api.core.usermanagement.User.PublicKeyNotFoundException;
 import org.fiteagle.api.core.usermanagement.User.Role;
 
 public interface UserManager {
+  
+  public static final String GET_ALL_USERS = "getAllUsers";
+  public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " = '" + GET_ALL_USERS + "'";
   
   public abstract void add(User user);
   

@@ -11,11 +11,12 @@ import org.fiteagle.api.core.usermanagement.User.Role;
 public interface UserManager {
   
   public static final String GET_ALL_USERS = "getAllUsers";
-  public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " = '" + GET_ALL_USERS + "'";
+  public static final String GET_USER = "getUser";
+  public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " != '" + null + "'";
   
   public abstract void add(User user);
   
-  public abstract User get(User user) ;
+  public abstract User getUser(User user) ;
   
   public abstract User get(String username);
   

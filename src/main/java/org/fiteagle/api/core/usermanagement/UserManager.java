@@ -14,11 +14,13 @@ public interface UserManager {
   public static final String GET_USER = "getUser";
   public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " != '" + null + "'";
   
+  public static final String TYPE_PARAMETER_USERNAME = "parameter_username";  
+  
   public abstract void add(User user);
   
   public abstract User getUser(User user) ;
   
-  public abstract User get(String username);
+  public abstract User getUser(String username);
   
   public abstract void delete(User user);
   

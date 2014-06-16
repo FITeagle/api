@@ -18,10 +18,35 @@ public interface UserManager {
   public static final String ADD_PUBLIC_KEY = "addPublicKey";
   public static final String DELETE_PUBLIC_KEY = "deletePublicKey";
   public static final String RENAME_PUBLIC_KEY = "renamePublicKey";
-  
+  public static final String CREATE_USER_CERT_AND_PRIVATE_KEY = "createUserCertAndPrivateKey";
+  public static final String GET_USER_CERT_FOR_PUBLIC_KEY = "getUserCertForPublicKey";
+  public static final String GET_ALL_CLASSES_FROM_USER = "getAllClassesFromUser";
+  public static final String GET_ALL_CLASSES_OWNED_BY_USER = "getAllClassesOwnedByUser";
+  public static final String SIGN_UP_FOR_CLASS = "signUpForClass";
+  public static final String LEAVE_CLASS = "leaveClass";
+  public static final String GET_CLASS = "getClass";
+  public static final String ADD_CLASS = "addClass";
+  public static final String DELETE_CLASS = "deleteClass";
+  public static final String GET_ALL_CLASSES = "getAllClasses";
+  public static final String VERIFY_CREDENTIALS = "verifyCredentials";
+
   public static final String TYPE_PARAMETER_USERNAME = "parameter_username";
-  public static final String TYPE_PARAMETER_USER_JSON = "parameter_user_json";
+  public static final String TYPE_PARAMETER_FIRSTNAME = "parameter_firstname";
+  public static final String TYPE_PARAMETER_LASTNAME = "parameter_lastname";
+  public static final String TYPE_PARAMETER_EMAIL = "parameter_email";
+  public static final String TYPE_PARAMETER_AFFILIATION = "parameter_affiliation";
+  public static final String TYPE_PARAMETER_PASSWORD = "parameter_password";
   public static final String TYPE_PARAMETER_PUBLIC_KEY = "parameter_public_key";
+  public static final String TYPE_PARAMETER_PUBLIC_KEY_DESCRIPTION = "parameter_public_key_description";
+  public static final String TYPE_PARAMETER_PUBLIC_KEY_DESCRIPTION_NEW = "parameter_public_key_description_new";
+  public static final String TYPE_PARAMETER_PUBLIC_KEYS = "parameter_public_keys";
+  public static final String TYPE_PARAMETER_ROLE = "parameter_role";
+  public static final String TYPE_PARAMETER_PASSPHRASE = "parameter_passphrase";
+  public static final String TYPE_PARAMETER_CLASS_ID = "parameter_class_id";
+  
+  public static final String TYPE_PARAMETER_USER_JSON = "parameter_user_json";
+  public static final String TYPE_PARAMETER_CLASS_JSON = "parameter_class_json";
+  
   
   public abstract void add(User user);
   
@@ -113,12 +138,12 @@ public interface UserManager {
   
   public abstract List<Class> getAllClasses();
   
-  public static class CourseNotFoundException extends RuntimeException {    
+  public static class FiteagleClassNotFoundException extends RuntimeException {    
     
     private static final long serialVersionUID = 5952413074712514371L;
 
-    public CourseNotFoundException(){
-      super("no course with this id could be found in the database");
+    public FiteagleClassNotFoundException(){
+      super("no class with this id could be found in the database");
     }
   }
 

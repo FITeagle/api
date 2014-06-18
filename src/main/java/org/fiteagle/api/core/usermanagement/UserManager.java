@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import org.fiteagle.api.core.IMessageBus;
 import org.fiteagle.api.core.usermanagement.User.PublicKeyNotFoundException;
 import org.fiteagle.api.core.usermanagement.User.Role;
 
@@ -47,6 +48,9 @@ public interface UserManager {
   public static final String TYPE_PARAMETER_USER_JSON = "parameter_user_json";
   public static final String TYPE_PARAMETER_CLASS_JSON = "parameter_class_json";
   
+  public static final String TARGET = "usermanagement";
+  
+  public static final String MESSAGE_FILTER = IMessageBus.TYPE_TARGET + " = '" + TARGET + "'";
   
   public abstract void add(User user);
   

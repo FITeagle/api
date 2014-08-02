@@ -8,83 +8,12 @@
 	<artifactId>api</artifactId>
 	<packaging>jar</packaging>
 	<version>0.1-SNAPSHOT</version>
-	<url>https://github.com/fiteagle</url>
 
-	<description>
-        FITeagle | Future Internet Testbed Experimentation and Management Framework
-    </description>
-
-	<organization>
-		<name>Berlin University of Technology, Next Generation Networks (AV)</name>
-		<url>http://av.tu-berlin.de</url>
-	</organization>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0 </url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<email>alexander.willner@tu-berlin.de</email>
-			<name>Alexander Willner</name>
-			<url>http://av.tu-berlin.de/willner</url>
-			<id>Alex</id>
-		</developer>
-	</developers>
-	<scm>
-		<connection>scm:git:git://github.com/tubav/fiteagle.git</connection>
-		<developerConnection>scm:git:git@github.com:tubav/fiteagle.git</developerConnection>
-		<url>https://github.com/tubav/fiteagle</url>
-	</scm>
-
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>fiteagle</id>
-			<name>fiteagle</name>
-			<url>http://fiteagle.org/maven</url>
-		</repository>
-		<site>
-			<id>github</id>
-			<name>fiteagle</name>
-			<url>https://github.com/tubav/fiteagle/</url>
-		</site>
-	</distributionManagement>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>http://github.com/tubav/fiteagle</url>
-	</issueManagement>
-
-	<mailingLists>
-		<mailingList>
-			<name>fiteagle-dev</name>
-			<subscribe>http://lists.fiteagle.org/cgi-bin/mailman/listinfo/dev</subscribe>
-			<unsubscribe>http://lists.fiteagle.org/cgi-bin/mailman/listinfo/dev</unsubscribe>
-			<post>dev@lists.fiteagle.org</post>
-			<archive>http://lists.fiteagle.org/pipermail/dev/</archive>
-		</mailingList>
-		<mailingList>
-			<name>fiteagle-user</name>
-			<subscribe>http://lists.fiteagle.org/cgi-bin/mailman/listinfo/users</subscribe>
-			<unsubscribe>http://lists.fiteagle.org/cgi-bin/mailman/listinfo/users</unsubscribe>
-			<post>users@lists.fiteagle.org</post>
-			<archive>http://lists.fiteagle.org/pipermail/users/</archive>
-		</mailingList>
-	</mailingLists>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<fiteagle.version>${project.version}</fiteagle.version>
-		<github.global.server>github</github.global.server>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
-	</properties>
+	<parent>
+		<groupId>org.fiteagle</groupId>
+		<artifactId>bootstrap</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
 
 	<repositories>
 		<repository>
@@ -92,31 +21,6 @@
 			<url>http://fiteagle.org/maven</url>
 		</repository>
 	</repositories>
-
-	<dependencies>
-	  <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-	
-		<!-- General FITeagle dependencies -->
-		<dependency>
-			<groupId>org.wildfly</groupId>
-			<artifactId>wildfly-jms-client-bom</artifactId>
-			<version>8.0.0.Beta1</version>
-			<scope>provided</scope>
-			<type>pom</type>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
-			<scope>provided</scope>
-		</dependency>
-		
-	</dependencies>
 
 </project>
 

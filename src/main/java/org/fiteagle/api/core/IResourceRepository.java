@@ -6,16 +6,17 @@ public interface IResourceRepository {
 	public static final String SERIALIZATION_RDFXML_PLAIN = "RDF/XML";
 	public static final String SERIALIZATION_RDFXML_ABBREV = "RDF/XML-ABBREV";
 	public static final String SERIALIZATION_NTRIPLES = "NT";
-	public static final String SERIALIZATION_TURTLE = "TTL";
 	public static final String SERIALIZATION_N3 = "N3";
-	public static final String SERIALIZATION_JSONLD = "JSON-LD";
 	public static final String SERIALIZATION_RDFJSON = "RDFJSON";
 	public static final String SERIALIZATION_TRIG = "TRIG";
-	public static final String MESSAGE_FILTER = IMessageBus.TYPE_REQUEST + " = '" + LIST_RESOURCES + "'";
+	public static final String SERVICE_NAME = "fiteagle_resourceDatabase";
+	public static final String MESSAGE_FILTER =
+			IMessageBus.TARGET + " = '" + SERVICE_NAME + "' OR " +
+			IMessageBus.TYPE + " = '"+ IMessageBus.DISCOVERY + "'";
 
 	public String listResources();
+
 	public String listResources(String type);
-	public String listResources(String query, String type);
-	
+
 	public String queryDatabse(String query, String type);
 }

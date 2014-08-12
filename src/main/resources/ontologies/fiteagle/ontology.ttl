@@ -52,6 +52,49 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 #################################################################
 #
+#    Object Properties
+#
+#################################################################
+
+
+###  http://fiteagle.org/ontology#implementedBy
+
+:implementedBy rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ,
+                        owl:ObjectProperty ;
+               
+               rdfs:label "implemented by"@en ;
+               
+               rdfs:comment "Defines that a resource (subject) is implemented/instantiated/created by an other resource (object)."@en ;
+               
+               rdfs:domain :Resource ;
+               
+               rdfs:range :Resource .
+
+
+
+###  http://fiteagle.org/ontology#implements
+
+:implements rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "implements"@en ;
+            
+            rdfs:comment "Defines that the subject implements/instantiates/creates the object."@en ;
+            
+            rdfs:range :Resource ;
+            
+            rdfs:domain :Resource ;
+            
+            owl:inverseOf :implementedBy .
+
+
+
+
+
+#################################################################
+#
 #    Classes
 #
 #################################################################
@@ -108,6 +151,12 @@ foaf:name rdf:type owl:AnnotationProperty .
 :Request rdf:type owl:Class ;
          
          rdfs:subClassOf :Method .
+
+
+
+###  http://fiteagle.org/ontology#Resource
+
+:Resource rdf:type owl:Class .
 
 
 

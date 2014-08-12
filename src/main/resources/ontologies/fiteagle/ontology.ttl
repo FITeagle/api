@@ -1,87 +1,50 @@
 @prefix : <http://fiteagle.org/ontology#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://fiteagle.org/ontology#> .
-@prefix dcterms:<http://purl.org/dc/terms/> .
+@base <http://fiteagle.org/ontology> .
 
-<http://fiteagle.org/ontology#> rdf:type owl:Ontology ;                                
-                                owl:versionInfo "Version 0.1"@en ;
-                                   dcterms:issued "2006-10-14" ;
-                                   dcterms:modified "2012-10-29" ;
-                                   dcterms:title "The FITeagle Resource Ontology"@en ;
-                                   dcterms:creator "Alexander Willner" ;
-.
-
-
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
-
-
-###  http://fiteagle.org/ontology#consumes
-
-:consumes rdf:type owl:ObjectProperty .
-
-
-
-###  http://fiteagle.org/ontology#images
-
-:images rdf:type owl:ObjectProperty ;
-        
-        rdfs:domain :vmserver .
-
-
-
-###  http://fiteagle.org/ontology#instanciates
-
-:instanciates rdf:type owl:ObjectProperty ,
-                       owl:TransitiveProperty ;
-              
-              owl:inverseOf :isInstantiatedBy ;
-              
-              rdfs:domain :resource ;
-              
-              rdfs:range :resource .
-
-
-
-###  http://fiteagle.org/ontology#isInstantiatedBy
-
-:isInstantiatedBy rdf:type owl:ObjectProperty ;
-                  
-                  rdfs:domain :resource ;
-                  
-                  rdfs:range :resource .
-
-
-
-###  http://fiteagle.org/ontology#produces
-
-:produces rdf:type owl:ObjectProperty ;
-          
-          rdfs:subPropertyOf owl:topObjectProperty .
-
-
-
+<http://fiteagle.org/ontology> rdf:type owl:Ontology ;
+                               
+                               rdfs:label "FITeagle"@en ;
+                               
+                               dc:date "2014-08-12"^^xsd:dateTime ;
+                               
+                               owl:versionInfo "0.1" ;
+                               
+                               dc:description "An internal ontology for FITeagle."@en ;
+                               
+                               dc:rights "Creative Commons Attribution Licence"@en ;
+                               
+                               dc:title "FITeagle Internal Ontology."@en ;
+                               
+                               rdfs:comment "FITeagle Internal Ontology."@en ;
+                               
+                               rdfs:seeAlso <http://fiteagle.org> ;
+                               
+                               dc:creator :AlexanderWillner .
 
 
 #################################################################
 #
-#    Data properties
+#    Annotation properties
 #
 #################################################################
 
 
-###  http://fiteagle.org/ontology#images
+###  http://xmlns.com/foaf/0.1/mbox
 
-:images rdf:type owl:DatatypeProperty ;
-        
-        rdfs:range xsd:string .
+foaf:mbox rdf:type owl:AnnotationProperty .
+
+
+
+###  http://xmlns.com/foaf/0.1/name
+
+foaf:name rdf:type owl:AnnotationProperty .
 
 
 
@@ -94,34 +57,85 @@
 #################################################################
 
 
-###  http://fiteagle.org/ontology#resource
+###  http://fiteagle.org/ontology#Configure
 
-:resource rdf:type owl:Class .
-
-
-
-###  http://fiteagle.org/ontology#vm
-
-:vm rdf:type owl:Class ;
-    
-    rdfs:subClassOf :resource .
+:Configure rdf:type owl:Class ;
+           
+           rdfs:subClassOf :Method .
 
 
 
-###  http://fiteagle.org/ontology#vmserver
+###  http://fiteagle.org/ontology#Create
 
-:vmserver rdf:type owl:Class ;
+:Create rdf:type owl:Class ;
+        
+        rdfs:subClassOf :Method .
+
+
+
+###  http://fiteagle.org/ontology#Discover
+
+:Discover rdf:type owl:Class ;
           
-          rdfs:label "vmserver"@en ;
-          
-          owl:equivalentClass [ rdf:type owl:Restriction ;
-                                owl:onProperty :instanciates ;
-                                owl:someValuesFrom :vm
-                              ] ;
-          
-          rdfs:subClassOf :resource ;
-          
-          rdfs:comment "Server für virtuelle Maschinen"@de .
+          rdfs:subClassOf :Method .
+
+
+
+###  http://fiteagle.org/ontology#Inform
+
+:Inform rdf:type owl:Class ;
+        
+        rdfs:subClassOf :Method .
+
+
+
+###  http://fiteagle.org/ontology#Method
+
+:Method rdf:type owl:Class .
+
+
+
+###  http://fiteagle.org/ontology#Release
+
+:Release rdf:type owl:Class ;
+         
+         rdfs:subClassOf :Method .
+
+
+
+###  http://fiteagle.org/ontology#Request
+
+:Request rdf:type owl:Class ;
+         
+         rdfs:subClassOf :Method .
+
+
+
+###  http://xmlns.com/foaf/0.1/Person
+
+foaf:Person rdf:type owl:Class .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://fiteagle.org/ontology#AlexanderWillner
+
+:AlexanderWillner rdf:type owl:NamedIndividual ,
+                           foaf:Person ;
+                  
+                  foaf:name "Alexander Willner" ;
+                  
+                  rdfs:isDefinedBy <http://alex.willner.ws> ;
+                  
+                  foaf:mbox <mailto:alexander.willner@tu-berlin.de> .
 
 
 

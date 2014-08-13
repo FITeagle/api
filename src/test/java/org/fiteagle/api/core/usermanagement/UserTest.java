@@ -10,7 +10,7 @@ public class UserTest {
   
   @Test(expected=NotEnoughAttributesException.class)
     public void testCreateUserWithoutPassword() {
-      new User("test1", "test1", "test1", "test1@test.de", "test1", "", "", null);
+      new User("test1", "test1", "test1", "test1@test.de", "test1", null, "", "", null);
   }
 	
   @Test
@@ -27,17 +27,17 @@ public class UserTest {
   
   @Test(expected=InValidAttributeException.class)
   public void testCreateUserWithInvalidUsername(){
-    new User("test!", "test1", "test1", "test1@test.de", "test1", "weropj", "wrohpj", null);
+    new User("test!", "test1", "test1", "test1@test.de", "test1", null, "weropj", "wrohpj", null);
   }
   
   @Test(expected=InValidAttributeException.class)
   public void testCreateUserWithInvalidEmail(){
-    new User("test1", "test1", "test1", "te@st1@test.de", "test1", "weioparhg", "wrgoj", null);
+    new User("test1", "test1", "test1", "te@st1@test.de", "test1", null, "weioparhg", "wrgoj", null);
   }
   
   @Test(expected=InValidAttributeException.class)
   public void testCreateUserWithInvalidEmail2(){
-    new User("test1", "test1", "test1", "test1@testde", "test1", "eerhzrh", "worpgj", null);
+    new User("test1", "test1", "test1", "test1@testde", "test1", null, "eerhzrh", "worpgj", null);
   }
   
 }

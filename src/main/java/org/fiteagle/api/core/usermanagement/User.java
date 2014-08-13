@@ -11,7 +11,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
@@ -51,6 +53,10 @@ public class User implements Serializable{
   private String passwordHash;
   private String passwordSalt;
   
+  @JoinColumn(name="node_id")
+  @ManyToOne
+  private Node node;
+  
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<UserPublicKey> publicKeys;
   
@@ -68,13 +74,14 @@ public class User implements Serializable{
   protected User(){
   }
   
-  public User(String username, String firstName, String lastName, String email, String affiliation, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys){
+  public User(String username, String firstName, String lastName, String email, String affiliation, Node node, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys){
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.affiliation = affiliation;
     this.role = Role.STUDENT;
+    this.node = node;
     this.passwordSalt = passwordSalt;
     this.passwordHash = passwordHash;
     this.publicKeys = publicKeys;
@@ -88,7 +95,7 @@ public class User implements Serializable{
   }
   
   public static User createDefaultUser(String username, String passwordHash, String passwordSalt) {
-    return new User(username, "default", "default", createDefaultEmail(username), "default", passwordHash, passwordSalt, new ArrayList<UserPublicKey>());
+    return new User(username, "default", "default", createDefaultEmail(username), "default", Node.defaultNode, passwordHash, passwordSalt, new ArrayList<UserPublicKey>());
   }
   
   private static String createDefaultEmail(String username2) {
@@ -100,7 +107,7 @@ public class User implements Serializable{
 }
 
 public static User createAdminUser(String username, String passwordHash, String passwordSalt) throws NotEnoughAttributesException, InValidAttributeException{
-    User admin = new User(username, "default", "default", "default", "default", passwordHash, passwordSalt, null);
+    User admin = new User(username, "default", "default", "default", "default", Node.defaultNode, passwordHash, passwordSalt, null);
     admin.setRole(Role.FEDERATION_ADMIN);
     return admin;
   }
@@ -159,10 +166,11 @@ public static User createAdminUser(String username, String passwordHash, String 
   }
   
   @PreRemove
-  private void deleteParticipantInCourses(){
+  private void deleteParticipantInCoursesAndNode(){
     for(Class course : classes){
       course.removeParticipant(this);
     }
+    this.node.removeUser(this);
   }
   
   @SuppressWarnings("unchecked")
@@ -317,6 +325,14 @@ public static User createAdminUser(String username, String passwordHash, String 
 
   public String getAffiliation() {
     return affiliation;
+  }
+
+  public Node node() {
+    return node;
+  }
+
+  public void setNode(Node node) {
+    this.node = node;
   }
 
   public String hash(){

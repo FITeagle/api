@@ -30,6 +30,7 @@ public interface UserManager {
   public static final String DELETE_CLASS = "deleteClass";
   public static final String GET_ALL_CLASSES = "getAllClasses";
   public static final String VERIFY_CREDENTIALS = "verifyCredentials";
+  public static final String GET_ALL_NODES = "getAllNodes";
 
   public static final String TYPE_PARAMETER_USERNAME = "parameter_username";
   public static final String TYPE_PARAMETER_FIRSTNAME = "parameter_firstname";
@@ -150,7 +151,22 @@ public interface UserManager {
       super("no class with this id could be found in the database");
     }
   }
-
-  public abstract void deleteAllEntries();
   
+  public void addNode(Node node);
+  
+  public Node getNode(long id) throws NodeNotFoundException;
+  
+  public List<Node> getAllNodes();
+
+  public static class NodeNotFoundException extends RuntimeException {    
+    
+    private static final long serialVersionUID = 3977041585248360400L;
+
+    public NodeNotFoundException(){
+      super("no node with this id could be found in the database");
+    }
+  }
+  
+  public abstract void deleteAllEntries();
+
 }

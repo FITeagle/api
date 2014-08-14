@@ -50,6 +50,7 @@ public class User implements Serializable{
   @Temporal(TemporalType.TIMESTAMP)
   private Date lastModified;
   
+  private String password;
   private String passwordHash;
   private String passwordSalt;
   
@@ -366,6 +367,14 @@ public static User createAdminUser(String username, String passwordHash, String 
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
  
+  public String password() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   public List<Class> classesOwned() {
     return classesOwned;
   }

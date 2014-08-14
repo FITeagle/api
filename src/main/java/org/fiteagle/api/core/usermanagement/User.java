@@ -90,7 +90,6 @@ public class User implements Serializable{
     }
     this.classes = new ArrayList<>();
     this.classesOwned = new ArrayList<>();
-    setOwners(publicKeys);
     checkAttributes();
   }
   
@@ -112,9 +111,9 @@ public static User createAdminUser(String username, String passwordHash, String 
     return admin;
   }
   
-  private void setOwners(List<UserPublicKey> publicKeys){
-    if(publicKeys != null){
-      for(UserPublicKey publicKey : publicKeys){
+  private void setOwnersOfPublicKeys(){
+    if(this.publicKeys != null){
+      for(UserPublicKey publicKey : this.publicKeys){
         publicKey.setOwner(this);
       }
     }
@@ -158,7 +157,8 @@ public static User createAdminUser(String username, String passwordHash, String 
   
   @PreUpdate
   @PrePersist
-  public void updateTimeStamps() {
+  public void updateTimeStampsAndPublicKeys() {
+    setOwnersOfPublicKeys();
     lastModified = new Date();
     if(created == null) {
       created = new Date();

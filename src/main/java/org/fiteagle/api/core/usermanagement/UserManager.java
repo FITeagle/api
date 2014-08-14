@@ -31,6 +31,7 @@ public interface UserManager {
   public static final String GET_ALL_CLASSES = "getAllClasses";
   public static final String VERIFY_CREDENTIALS = "verifyCredentials";
   public static final String GET_ALL_NODES = "getAllNodes";
+  public static final String ADD_NODE = "addNode";
 
   public static final String TYPE_PARAMETER_USERNAME = "parameter_username";
   public static final String TYPE_PARAMETER_FIRSTNAME = "parameter_firstname";
@@ -48,6 +49,7 @@ public interface UserManager {
   
   public static final String TYPE_PARAMETER_USER_JSON = "parameter_user_json";
   public static final String TYPE_PARAMETER_CLASS_JSON = "parameter_class_json";
+  public static final String TYPE_PARAMETER_NODE_JSON = "parameter_node_json";
   
   public static final String TARGET = "usermanagement";
   
@@ -152,7 +154,7 @@ public interface UserManager {
     }
   }
   
-  public void addNode(Node node);
+  public Node addNode(Node node);
   
   public Node getNode(long id) throws NodeNotFoundException;
   

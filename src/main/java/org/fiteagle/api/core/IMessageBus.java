@@ -2,7 +2,7 @@ package org.fiteagle.api.core;
 
 public interface IMessageBus {
 	public static final String TYPE_RESPONSE = "response";
-	public static final String TYPE_REQUEST = "request";
+	//public static final String TYPE_REQUEST = "request";
 	public static final String TYPE_RESULT = "result";
 	public static final String TYPE_EXCEPTION = "exception";
 	public static final String TYPE_TARGET = "target";
@@ -24,4 +24,15 @@ public interface IMessageBus {
 	public static final String DISCOVERY = "fiteagle_discovery";
 	public static final String RESPONSE = "fiteagle_response";
 	public static final String RESULT = "fiteagle_result";
+
+
+	public static final String METHOD_TYPE = "method_type";
+	public static final String RDF = "rdf";
+
+	public static final String TYPE_REQUEST = "type_request";
+	public static final String TYPE_CREATE = "type_create";
+	public static final String TYPE_CONFIGURE = "type_configure";
+	public static final String TYPE_RELEASE = "type_release";
+	public static final String TYPE_INFORM = "type_inform";
+	public static final String TYPE_DISCOVER = "type_discover";
 }

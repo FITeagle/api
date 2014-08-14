@@ -34,11 +34,14 @@ public class Node implements Serializable{
   private List<User> users;
 
   protected Node(){
+    this.users = new ArrayList<User>();
+    this.classes = new ArrayList<Class>();
   }
   
   public Node(String name){
     this.name = name;
     this.users = new ArrayList<User>();
+    this.classes = new ArrayList<Class>();
   }
   
   public static Node createDefaultNode(){
@@ -55,6 +58,15 @@ public class Node implements Serializable{
   public void removeUser(User user){
     this.users.remove(user);
   }
+  
+  public void addClass(Class targetClass){
+    this.classes.add(targetClass);
+  }
+  
+  public void removeClass(Class targetClass){
+    this.classes.remove(targetClass);
+  }
+  
   public static void setDefaultNode(Node node){
     defaultNode = node;
   }
@@ -71,6 +83,10 @@ public class Node implements Serializable{
     this.name = name;
   }
 
+  public List<Class> getClasses(){
+    return this.classes;
+  }
+  
   public void setClasses(List<Class> classes) {
     this.classes = classes;
   }

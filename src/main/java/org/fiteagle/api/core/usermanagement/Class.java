@@ -45,12 +45,16 @@ public class Class implements Serializable{
   }
   
   protected Class(){
+    this.nodes = new ArrayList<Node>();
   }
   
   @PreRemove
-  private void deleteClassInUsers(){
+  private void deleteClassInUsersAndNodes(){
     for(User u : participants){
       u.removeClass(this);
+    }
+    for(Node n : this.nodes){
+      n.removeClass(this);
     }
   }
   
@@ -74,7 +78,7 @@ public class Class implements Serializable{
   public void setParticipants(List<User> participants) {
     this.participants = participants;
   }
-
+  
   public String getName() {
     return name;
   }
@@ -91,7 +95,11 @@ public class Class implements Serializable{
     this.description = description;
   }
   
-  public List<Node> getNodes() {
+  public void addNode(Node node){
+    this.nodes.add(node);
+  }
+  
+  public List<Node> nodes() {
     return nodes;
   }
 
@@ -106,13 +114,11 @@ public class Class implements Serializable{
   public void setOwner(User owner) {
     this.owner = owner;
   }
-  
-  
+
   @Override
   public String toString() {
-	return "Class [id=" + id + ", name=" + name + ", description="
-			+ description + ", owner=" + owner + ", participants="
-			+ participants + ", nodes=" + nodes + "]";
+    return "Class [id=" + id + ", name=" + name + ", description=" + description + ", owner=" + owner
+        + ", participants=" + participants + "]";
   }
 
   @Override

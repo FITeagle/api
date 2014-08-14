@@ -75,6 +75,14 @@ public class Node implements Serializable{
     this.classes = classes;
   }
 
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (this == obj)

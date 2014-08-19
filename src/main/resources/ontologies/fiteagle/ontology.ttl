@@ -83,11 +83,11 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:comment "Defines that the subject implements/instantiates/creates the object."@en ;
             
-            rdfs:range :Resource ;
+            owl:inverseOf :implementedBy ;
             
-            rdfs:domain :Resource ;
+            rdfs:domain owl:Thing ;
             
-            owl:inverseOf :implementedBy .
+            rdfs:range owl:Thing .
 
 
 

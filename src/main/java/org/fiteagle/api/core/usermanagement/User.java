@@ -23,6 +23,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="USERS", uniqueConstraints=@UniqueConstraint(name="EMAIL", columnNames={"email"}))
@@ -61,11 +63,13 @@ public class User implements Serializable{
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<UserPublicKey> publicKeys;
   
+  @JsonIgnore
   @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
-  private List<Class> classes;
-  
+  private List<Class> joinedClasses;
+
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
-  private List<Class> classesOwned;
+  private List<Class> ownedClasses;
   
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
   private final static Pattern EMAIL_PATTERN = Pattern.compile("[^@]+@{1}[^@]+\\.+[^@]+");
@@ -89,8 +93,8 @@ public class User implements Serializable{
     if(publicKeys == null){
       this.publicKeys = new ArrayList<>();
     }
-    this.classes = new ArrayList<>();
-    this.classesOwned = new ArrayList<>();
+    this.joinedClasses = new ArrayList<>();
+    this.ownedClasses = new ArrayList<>();
     checkAttributes();
   }
   
@@ -167,9 +171,9 @@ public static User createAdminUser(String username, String passwordHash, String 
   }
   
   @PreRemove
-  private void deleteParticipantInCoursesAndNode(){
-    for(Class course : classes){
-      course.removeParticipant(this);
+  private void deleteParticipantInClassesAndNode(){
+    for(Class joinedClass : joinedClasses){
+      joinedClass.removeParticipant(this);
     }
     this.node.removeUser(this);
   }
@@ -264,16 +268,6 @@ public static User createAdminUser(String username, String passwordHash, String 
         return false;
     } else if (!lastName.equals(other.lastName))
       return false;
-    if (passwordHash == null) {
-      if (other.passwordHash != null)
-        return false;
-    } else if (!passwordHash.equals(other.passwordHash))
-      return false;
-    if (passwordSalt == null) {
-      if (other.passwordSalt != null)
-        return false;
-    } else if (!passwordSalt.equals(other.passwordSalt))
-      return false;
     if (publicKeys == null) {
       if (other.publicKeys != null)
         return false;
@@ -291,7 +285,7 @@ public static User createAdminUser(String username, String passwordHash, String 
   public String toString() {
     return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
         + ", affiliation=" + affiliation + ", role=" + role + ", created=" + created + ", lastModified=" + lastModified
-        + ", publicKeys=" + publicKeys + "]";
+        + ", node=" + node + ", publicKeys=" + publicKeys + "]";
   }
 
   public String getUsername() {
@@ -328,7 +322,7 @@ public static User createAdminUser(String username, String passwordHash, String 
     return affiliation;
   }
 
-  public Node node() {
+  public Node getNode() {
     return node;
   }
 
@@ -336,12 +330,30 @@ public static User createAdminUser(String username, String passwordHash, String 
     this.node = node;
   }
 
-  public String hash(){
+  public String getPasswordHash(){
     return passwordHash;
   }
   
-  public String salt(){
+  public void setPasswordHash(String hash){
+    this.passwordHash = hash;
+  }
+  
+  public String getPasswordSalt(){
     return passwordSalt;
+  }
+  
+  public void setPasswordSalt(String salt){
+    this.passwordSalt = salt;
+  }
+  
+  @JsonIgnore
+  public String getPassword() {
+    return password;
+  }
+
+  @JsonProperty
+  public void setPassword(String password) {
+    this.password = password;
   }
   
   public Role getRole() {
@@ -366,25 +378,17 @@ public static User createAdminUser(String username, String passwordHash, String 
   public List<UserPublicKey> getPublicKeys() {
     return (List<UserPublicKey>)(List<?>) publicKeys;
   }
- 
-  public String password() {
-    return password;
+
+  public List<Class> getOwnedClasses() {
+    return ownedClasses;
+  }
+  
+  public List<Class> getJoinedClasses() {
+    return joinedClasses;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public List<Class> classesOwned() {
-    return classesOwned;
-  }
-
-  public List<Class> joinedClasses() {
-    return classes;
-  }
-
-  public void setCourses(List<Class> courses) {
-    this.classes = courses;
+  public void setJoinedClasses(List<Class> targetClasses) {
+    this.joinedClasses = targetClasses;
   }
 
   public boolean hasKeyWithDescription(String description){
@@ -398,19 +402,19 @@ public static User createAdminUser(String username, String passwordHash, String 
   
   public void addOwnedClass(Class targetClass){
 	  targetClass.setOwner(this);
-	  this.classesOwned.add(targetClass);
+	  this.ownedClasses.add(targetClass);
   }
   
   public void removeOwnedClass(Class targetClass){
-	  this.classesOwned.remove(targetClass);
+	  this.ownedClasses.remove(targetClass);
   }
   
   protected void addClass(Class targetClass){
-    this.classes.add(targetClass);
+    this.joinedClasses.add(targetClass);
   }
   
   protected void removeClass(Class targetClass){
-    this.classes.remove(targetClass);
+    this.joinedClasses.remove(targetClass);
   }
   
   public class PublicKeyNotFoundException extends RuntimeException {

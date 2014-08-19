@@ -18,6 +18,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="PUBLICKEYS", uniqueConstraints=@UniqueConstraint(columnNames={"owner_username", "description"}))
 public class UserPublicKey implements Serializable{
@@ -34,6 +36,7 @@ public class UserPublicKey implements Serializable{
   @Id
   @JoinColumn(name="owner_username")
   @ManyToOne
+  @JsonIgnore
   private User owner;
   
   @Id

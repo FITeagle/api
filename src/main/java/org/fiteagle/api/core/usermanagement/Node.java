@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="NODES")
 public class Node implements Serializable{
@@ -27,9 +29,11 @@ public class Node implements Serializable{
 
   private String name;
   
-  @ManyToMany(fetch=FetchType.EAGER)
+  @JsonIgnore
+  @ManyToMany(fetch=FetchType.EAGER, mappedBy="nodes")
   private List<Class> classes;
   
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="node", fetch=FetchType.EAGER)
   private List<User> users;
 
@@ -115,7 +119,7 @@ public class Node implements Serializable{
 
   @Override
   public String toString() {
-    return "Node [id=" + id + ", name=" + name + ", classes=" + classes + ", users=" + users + "]";
+    return "Node [id=" + id + ", name=" + name + "]";
   }
   
 }

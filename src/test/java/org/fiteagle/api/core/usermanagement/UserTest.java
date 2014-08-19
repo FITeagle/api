@@ -1,12 +1,24 @@
 package org.fiteagle.api.core.usermanagement;
 
+import java.io.IOException;
+
 import org.fiteagle.api.core.usermanagement.User.InValidAttributeException;
 import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
 import org.fiteagle.api.core.usermanagement.User.Role;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class UserTest {
+  
+  private static ObjectMapper objectMapper;
+  
+  @BeforeClass
+  public static void initSerializer() {
+    objectMapper = new ObjectMapper();
+  }
   
   @Test(expected=NotEnoughAttributesException.class)
     public void testCreateUserWithoutPassword() {
@@ -40,4 +52,11 @@ public class UserTest {
     new User("test1", "test1", "test1", "test1@testde", "test1", null, "eerhzrh", "worpgj", null);
   }
   
+  @Test
+  public void testSerialization() throws IOException{
+    User user = new User("test", "ewrg", "er", "er@fr.de", "erg", null, "erh", "erg", null);
+    String json = objectMapper.writeValueAsString(user);
+    User user2 = objectMapper.readValue(json, User.class);
+    Assert.assertEquals(user, user2);
+  }
 }

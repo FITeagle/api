@@ -34,7 +34,7 @@ public class Class implements Serializable{
   @ManyToMany(fetch=FetchType.EAGER)
   private List<User> participants;
   
-  @ManyToMany(mappedBy="classes", fetch=FetchType.EAGER)
+  @ManyToMany(fetch=FetchType.EAGER)
   private List<Node> nodes;
 
   public Class(String name, String description){
@@ -99,7 +99,7 @@ public class Class implements Serializable{
     this.nodes.add(node);
   }
   
-  public List<Node> nodes() {
+  public List<Node> getNodes() {
     return nodes;
   }
 
@@ -118,7 +118,7 @@ public class Class implements Serializable{
   @Override
   public String toString() {
     return "Class [id=" + id + ", name=" + name + ", description=" + description + ", owner=" + owner
-        + ", participants=" + participants + "]";
+        + ", participants=" + participants + ", nodes=" + nodes + "]";
   }
 
   @Override

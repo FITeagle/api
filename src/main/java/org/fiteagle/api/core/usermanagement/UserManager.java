@@ -55,17 +55,17 @@ public interface UserManager {
   
   public static final String MESSAGE_FILTER = IMessageBus.TYPE_TARGET + " = '" + TARGET + "'";
   
-  public abstract void add(User user);
+  public abstract void addUser(User user);
   
   public abstract User getUser(User user) ;
   
   public abstract User getUser(String username);
   
-  public abstract void delete(User user);
+  public abstract void deleteUser(User user);
   
-  public abstract void delete(String username);
+  public abstract void deleteUser(String username);
   
-  public abstract void update(String username, String firstName, String lastName, String email, String affiliation,
+  public abstract void updateUser(String username, String firstName, String lastName, String email, String affiliation,
       String password, List<UserPublicKey> publicKeys);
   
   public abstract void setRole(String username, Role role);
@@ -127,13 +127,13 @@ public interface UserManager {
   
   public abstract Class addClass(String ownerUsername, Class targetClass);
   
-  public abstract Class get(Class targetClass);
+  public abstract Class getClass(Class targetClass);
   
-  public abstract Class get(long id);
+  public abstract Class getClass(long id);
   
-  public abstract void delete(Class targetClass);
+  public abstract void deleteClass(Class targetClass);
   
-  public abstract void delete(long id);
+  public abstract void deleteClass(long id);
   
   public abstract void addParticipant(long id, String username);
   

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -30,11 +29,11 @@ public class Node implements Serializable{
   private String name;
   
   @JsonIgnore
-  @ManyToMany(fetch=FetchType.EAGER, mappedBy="nodes")
+  @ManyToMany(mappedBy="nodes")
   private List<Class> classes;
   
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="node", fetch=FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="node")
   private List<User> users;
 
   protected Node(){

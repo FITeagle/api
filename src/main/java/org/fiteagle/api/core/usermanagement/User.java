@@ -60,7 +60,7 @@ public class User implements Serializable{
   @ManyToOne
   private Node node;
   
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner")
   private List<UserPublicKey> publicKeys;
   
   @JsonIgnore
@@ -68,7 +68,7 @@ public class User implements Serializable{
   private List<Class> joinedClasses;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
   private List<Class> ownedClasses;
   
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");

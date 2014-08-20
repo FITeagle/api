@@ -25,6 +25,7 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name="USERS", uniqueConstraints=@UniqueConstraint(name="EMAIL", columnNames={"email"}))
@@ -53,8 +54,15 @@ public class User implements Serializable{
   private Date lastModified;
   
   private String password;
+  @JsonView(VIEW.INTERNAL.class)
   private String passwordHash;
+  @JsonView(VIEW.INTERNAL.class)
   private String passwordSalt;
+  
+  public static class VIEW {
+    public static class PUBLIC{};
+    static class INTERNAL extends PUBLIC{};
+  }
   
   @JoinColumn(name="node_id")
   @ManyToOne
@@ -102,15 +110,15 @@ public class User implements Serializable{
     return new User(username, "default", "default", createDefaultEmail(username), "default", Node.defaultNode, passwordHash, passwordSalt, new ArrayList<UserPublicKey>());
   }
   
-  private static String createDefaultEmail(String username2) {
-	  if(!EMAIL_PATTERN.matcher(username2).matches()){
-		  return username2+"@test.org"; 
+  private static String createDefaultEmail(String username) {
+	  if(!EMAIL_PATTERN.matcher(username).matches()){
+		  return username+"@test.org"; 
 	  }else {
-		return username2;
-	}
-}
+  		return username;
+  	}
+  }
 
-public static User createAdminUser(String username, String passwordHash, String passwordSalt) throws NotEnoughAttributesException, InValidAttributeException{
+  public static User createAdminUser(String username, String passwordHash, String passwordSalt) throws NotEnoughAttributesException, InValidAttributeException{
     User admin = new User(username, "default", "default", "default", "default", Node.defaultNode, passwordHash, passwordSalt, null);
     admin.setRole(Role.FEDERATION_ADMIN);
     return admin;
@@ -352,7 +360,7 @@ public static User createAdminUser(String username, String passwordHash, String 
   }
 
   @JsonProperty
-  public void setPassword(String password) {
+  protected void setPassword(String password) {
     this.password = password;
   }
   
@@ -374,9 +382,8 @@ public static User createAdminUser(String username, String passwordHash, String 
     return lastModified;
   }
 
-  @SuppressWarnings("unchecked")
   public List<UserPublicKey> getPublicKeys() {
-    return (List<UserPublicKey>)(List<?>) publicKeys;
+    return publicKeys;
   }
 
   public List<Class> getOwnedClasses() {
@@ -450,3 +457,4 @@ public static User createAdminUser(String username, String passwordHash, String 
   }
 
 }
+

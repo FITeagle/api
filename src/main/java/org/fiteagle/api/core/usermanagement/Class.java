@@ -63,8 +63,10 @@ public class Class implements Serializable{
   }
   
   public void addParticipant(User user){
-    user.addClass(this);
-    this.participants.add(user);
+    if(!this.participants.contains(user)){
+      user.addClass(this);
+      this.participants.add(user);
+    }
   }
   
   public void removeParticipant(User user){

@@ -35,4 +35,12 @@ public interface IMessageBus {
 	public static final String TYPE_RELEASE = "type_release";
 	public static final String TYPE_INFORM = "type_inform";
 	public static final String TYPE_DISCOVER = "type_discover";
+	
+	        
+	// These serializations are compatible with Apache Jena        
+	public static final String SERIALIZATION_TURTLE2 = "TURTLE";
+  public static final String SERIALIZATION_RDFXML = "RDF/XML";
+  public static final String SERIALIZATION_NTRIPLE = "N-TRIPLE";
+  
+  public static final String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE2;
 }

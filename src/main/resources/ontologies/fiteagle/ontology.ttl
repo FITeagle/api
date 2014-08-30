@@ -88,6 +88,22 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:domain owl:Thing ;
             
             rdfs:range owl:Thing .
+            
+            
+###  http://fiteagle.org/ontology#releases
+
+:releases rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "releases"@en ;
+            
+            rdfs:comment "Defines that the subject releases object."@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
+            
 
 
 

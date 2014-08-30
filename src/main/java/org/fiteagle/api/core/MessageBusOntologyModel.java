@@ -6,6 +6,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MessageBusOntologyModel {
     
@@ -17,7 +18,9 @@ public class MessageBusOntologyModel {
         propertyFiteagleDiscover = fiteagle.getProperty("http://fiteagle.org/ontology#Discover");
         propertyFiteagleRelease = fiteagle.getProperty("http://fiteagle.org/ontology#Release");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://fiteagle.org/ontology#implementedBy");
-        propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");   
+        propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");  
+        
+        methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");  
     
     }
     
@@ -28,6 +31,8 @@ public class MessageBusOntologyModel {
     public static final Property propertyFiteagleRelease;
     public static final Property propertyFiteagleImplementedBy;
     public static final Property propertyFiteagleImplements;
+    
+    public static final Property methodReleases;
         
     
     public static Model loadModel(String filename, String serialization) {

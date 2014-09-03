@@ -17,6 +17,7 @@ public class MessageBusOntologyModel {
         propertyFiteagleConfigure = fiteagle.getProperty("http://fiteagle.org/ontology#Configure");
         propertyFiteagleDiscover = fiteagle.getProperty("http://fiteagle.org/ontology#Discover");
         propertyFiteagleRelease = fiteagle.getProperty("http://fiteagle.org/ontology#Release");
+        propertyFiteagleRequest = fiteagle.getProperty("http://fiteagle.org/ontology#Request");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://fiteagle.org/ontology#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");  
         
@@ -29,6 +30,7 @@ public class MessageBusOntologyModel {
     public static final Property propertyFiteagleConfigure;
     public static final Property propertyFiteagleDiscover;
     public static final Property propertyFiteagleRelease;
+    public static final Property propertyFiteagleRequest;
     public static final Property propertyFiteagleImplementedBy;
     public static final Property propertyFiteagleImplements;
     

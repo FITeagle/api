@@ -43,4 +43,10 @@ public interface IMessageBus {
   public static final String SERIALIZATION_NTRIPLE = "N-TRIPLE";
   
   public static final String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE2;
+  
+  public static final String STATUS_400 = "400";
+  public static final String STATUS_404 = "404";
+  public static final String STATUS_408 = "408";
+  public static final String STATUS_200 = "200";
+  
 }

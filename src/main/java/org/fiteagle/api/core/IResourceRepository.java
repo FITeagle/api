@@ -10,9 +10,12 @@ public interface IResourceRepository {
 	public static final String SERIALIZATION_RDFJSON = "RDFJSON";
 	public static final String SERIALIZATION_TRIG = "TRIG";
 	public static final String SERVICE_NAME = "fiteagle_resourceDatabase";
-	public static final String MESSAGE_FILTER =
-			IMessageBus.TARGET + " = '" + SERVICE_NAME + "' OR " +
-			IMessageBus.TYPE + " = '"+ IMessageBus.DISCOVERY + "'";
+	public static final String MESSAGE_FILTER = IMessageBus.TARGET + " = '"
+			+ SERVICE_NAME + "' OR " + IMessageBus.TYPE + " = '"
+			+ IMessageBus.DISCOVERY + "'";
+
+	public static final String REQUEST_FILTER = IMessageBus.TYPE_REQUEST
+			+ " = '" + LIST_RESOURCES + "'";
 
 	public String listResources();
 

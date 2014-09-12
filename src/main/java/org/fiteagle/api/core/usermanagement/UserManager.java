@@ -28,6 +28,8 @@ public interface UserManager {
   public static final String GET_CLASS = "getClass";
   public static final String ADD_CLASS = "addClass";
   public static final String DELETE_CLASS = "deleteClass";
+  public static final String ADD_TASK = "addTask";
+  public static final String REMOVE_TASK = "removeTask";
   public static final String GET_ALL_CLASSES = "getAllClasses";
   public static final String VERIFY_CREDENTIALS = "verifyCredentials";
   public static final String GET_ALL_NODES = "getAllNodes";
@@ -46,10 +48,12 @@ public interface UserManager {
   public static final String TYPE_PARAMETER_ROLE = "parameter_role";
   public static final String TYPE_PARAMETER_PASSPHRASE = "parameter_passphrase";
   public static final String TYPE_PARAMETER_CLASS_ID = "parameter_class_id";
+  public static final String TYPE_PARAMETER_TASK_ID = "parameter_task_id";
   
   public static final String TYPE_PARAMETER_USER_JSON = "parameter_user_json";
   public static final String TYPE_PARAMETER_CLASS_JSON = "parameter_class_json";
   public static final String TYPE_PARAMETER_NODE_JSON = "parameter_node_json";
+  public static final String TYPE_PARAMETER_TASK_JSON = "parameter_task_json";
   
   public static final String TARGET = "usermanagement";
   
@@ -135,6 +139,10 @@ public interface UserManager {
   
   public abstract void deleteClass(long id);
   
+  public abstract Task addTask(long id, Task task);
+  
+  public abstract void removeTask(long classId, long taskId);
+  
   public abstract void addParticipant(long id, String username);
   
   public abstract void removeParticipant(long id, String username);
@@ -151,6 +159,15 @@ public interface UserManager {
 
     public FiteagleClassNotFoundException(){
       super("no class with this id could be found in the database");
+    }
+  }
+  
+ public static class TaskNotFoundException extends RuntimeException {    
+    
+    private static final long serialVersionUID = 5952413074712514371L;
+
+    public TaskNotFoundException(){
+      super("no task with this id could be found in the database");
     }
   }
   

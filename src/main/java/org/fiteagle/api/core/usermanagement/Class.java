@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
@@ -37,15 +39,21 @@ public class Class implements Serializable{
   @ManyToMany(fetch=FetchType.EAGER)
   private List<Node> nodes;
 
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owningClass")
+  private List<Task> tasks;
+  
   public Class(String name, String description){
     this.name = name;
     this.description = description;
     this.participants = new ArrayList<User>();
     this.nodes = new ArrayList<Node>();
+    this.tasks = new ArrayList<Task>();
   }
   
   protected Class(){
+    this.participants = new ArrayList<User>();
     this.nodes = new ArrayList<Node>();
+    this.tasks = new ArrayList<Task>();
   }
   
   @PreRemove
@@ -115,6 +123,25 @@ public class Class implements Serializable{
 
   public void setOwner(User owner) {
     this.owner = owner;
+  }
+  
+  public void addTask(Task task){
+    if(!this.tasks.contains(task)){
+      task.setOwningClass(this);
+      this.tasks.add(task);
+    }
+  }
+  
+  public void removeTask(Task task){
+    this.tasks.remove(task);
+  }
+
+  public List<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    this.tasks = tasks;
   }
 
   @Override

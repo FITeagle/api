@@ -4,9 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+
+import org.apache.jena.riot.RiotException;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class MessageBusMsgFactory {
@@ -35,7 +41,7 @@ public class MessageBusMsgFactory {
         return getDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleConfigure);
     }
 
-    private static Model getDefaultMessageModel(Model messageModel, Property messageTypeProperty) {
+    private static Model getDefaultMessageModel(Model messageModel, Resource messageTypeProperty) {
         Model rdfModel = ModelFactory.createDefaultModel();
 
         rdfModel.add(messageModel);
@@ -63,7 +69,7 @@ public class MessageBusMsgFactory {
         return writer.toString();
     }
 
-    public static Model parseSerializedModel(String modelString) {
+    public static Model parseSerializedModel(String modelString) throws RiotException {
         Model rdfModel = ModelFactory.createDefaultModel();
 
         InputStream is = new ByteArrayInputStream(modelString.getBytes());
@@ -73,5 +79,28 @@ public class MessageBusMsgFactory {
 
         return rdfModel;
     }
+    
+    public static boolean isMessageType(Model messageModel, Resource messageTypePropety) {
+        return messageModel.contains(null, RDF.type, messageTypePropety);
+    }
+    
+    public static Model getMessageRDFModel(Message jmsMessage) throws JMSException {
+        // create an empty model
+        Model messageModel = null;
+
+        if (jmsMessage.getStringProperty(IMessageBus.RDF) != null) {
+
+            String inputRDF = jmsMessage.getStringProperty(IMessageBus.RDF);
+            
+            try {
+                messageModel = parseSerializedModel(inputRDF);
+            } catch (RiotException e) {
+                System.err.println("MDB Listener: Received invalid RDF");
+            }
+        }
+
+        return messageModel;
+    }
+
 
 }

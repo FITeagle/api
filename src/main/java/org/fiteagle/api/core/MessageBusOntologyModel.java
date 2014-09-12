@@ -5,6 +5,7 @@ import java.io.InputStream;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
@@ -12,29 +13,35 @@ public class MessageBusOntologyModel {
     
     static{
         Model fiteagle = loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
-        propertyFiteagleCreate = fiteagle.getProperty("http://fiteagle.org/ontology#Create");
-        propertyFiteagleInform = fiteagle.getProperty("http://fiteagle.org/ontology#Inform");
-        propertyFiteagleConfigure = fiteagle.getProperty("http://fiteagle.org/ontology#Configure");
-        propertyFiteagleDiscover = fiteagle.getProperty("http://fiteagle.org/ontology#Discover");
-        propertyFiteagleRelease = fiteagle.getProperty("http://fiteagle.org/ontology#Release");
-        propertyFiteagleRequest = fiteagle.getProperty("http://fiteagle.org/ontology#Request");
+        
+        propertyFiteagleCreate = fiteagle.getResource("http://fiteagle.org/ontology#Create");
+        propertyFiteagleInform = fiteagle.getResource("http://fiteagle.org/ontology#Inform");
+        propertyFiteagleConfigure = fiteagle.getResource("http://fiteagle.org/ontology#Configure");
+        propertyFiteagleDiscover = fiteagle.getResource("http://fiteagle.org/ontology#Discover");
+        propertyFiteagleRelease = fiteagle.getResource("http://fiteagle.org/ontology#Release");
+        propertyFiteagleRequest = fiteagle.getResource("http://fiteagle.org/ontology#Request");
+        
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://fiteagle.org/ontology#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");  
         
-        methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");  
-    
+        methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");
+        
+        classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
     }
     
-    public static final Property propertyFiteagleCreate;
-    public static final Property propertyFiteagleInform;
-    public static final Property propertyFiteagleConfigure;
-    public static final Property propertyFiteagleDiscover;
-    public static final Property propertyFiteagleRelease;
-    public static final Property propertyFiteagleRequest;
+    public static final Resource propertyFiteagleCreate;
+    public static final Resource propertyFiteagleInform;
+    public static final Resource propertyFiteagleConfigure;
+    public static final Resource propertyFiteagleDiscover;
+    public static final Resource propertyFiteagleRelease;
+    public static final Resource propertyFiteagleRequest;
+    
     public static final Property propertyFiteagleImplementedBy;
     public static final Property propertyFiteagleImplements;
     
     public static final Property methodReleases;
+    
+    public static final Resource classAdapter;
         
     
     public static Model loadModel(String filename, String serialization) {

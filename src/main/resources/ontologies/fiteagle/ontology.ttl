@@ -175,6 +175,11 @@ foaf:name rdf:type owl:AnnotationProperty .
 :Resource rdf:type owl:Class .
 
 
+###  http://fiteagle.org/ontology#Adapter
+
+:Adapter rdf:type owl:Class .
+
+
 
 ###  http://xmlns.com/foaf/0.1/Person
 

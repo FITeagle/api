@@ -25,6 +25,7 @@ public class MessageBusOntologyModel {
         propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");  
         
         methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");
+        methodRestores = fiteagle.getProperty("http://fiteagle.org/ontology#restores");
         
         classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
     }
@@ -40,6 +41,7 @@ public class MessageBusOntologyModel {
     public static final Property propertyFiteagleImplements;
     
     public static final Property methodReleases;
+    public static final Property methodRestores;
     
     public static final Resource classAdapter;
         

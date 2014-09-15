@@ -12,7 +12,7 @@
                                
                                rdfs:label "FITeagle"@en ;
                                
-                               dc:date "2014-08-12"^^xsd:dateTime ;
+                               dc:date "2014-08-12T12:00:00"^^xsd:dateTime ;
                                
                                owl:versionInfo "0.1" ;
                                
@@ -104,6 +104,20 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:range owl:Thing .
             
+            
+###  http://fiteagle.org/ontology#restores
+
+:restores rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "restores"@en ;
+            
+            rdfs:comment "Defines that the subject restores the object."@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
 
 
 

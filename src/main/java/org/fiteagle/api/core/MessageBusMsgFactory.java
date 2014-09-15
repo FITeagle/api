@@ -11,7 +11,6 @@ import org.apache.jena.riot.RiotException;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
@@ -80,8 +79,8 @@ public class MessageBusMsgFactory {
         return rdfModel;
     }
     
-    public static boolean isMessageType(Model messageModel, Resource messageTypePropety) {
-        return messageModel.contains(null, RDF.type, messageTypePropety);
+    public static boolean isMessageType(Model messageModel, Resource messageTypeProperty) {
+        return messageModel.contains(null, RDF.type, messageTypeProperty);
     }
     
     public static Model getMessageRDFModel(Message jmsMessage) throws JMSException {

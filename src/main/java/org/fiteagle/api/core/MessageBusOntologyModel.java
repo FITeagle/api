@@ -7,7 +7,6 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class MessageBusOntologyModel {
     
@@ -28,6 +27,7 @@ public class MessageBusOntologyModel {
         methodRestores = fiteagle.getProperty("http://fiteagle.org/ontology#restores");
         
         classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
+        internalMessage = fiteagle.getResource("http://fiteagleinternal#Message");
     }
     
     public static final Resource propertyFiteagleCreate;
@@ -44,6 +44,8 @@ public class MessageBusOntologyModel {
     public static final Property methodRestores;
     
     public static final Resource classAdapter;
+    
+    public static final Resource internalMessage;
         
     
     public static Model loadModel(String filename, String serialization) {

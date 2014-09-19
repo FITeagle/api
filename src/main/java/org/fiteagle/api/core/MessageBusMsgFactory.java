@@ -46,8 +46,7 @@ public class MessageBusMsgFactory {
         rdfModel.add(messageModel);
         rdfModel.setNsPrefixes(messageModel.getNsPrefixMap());
 
-        com.hp.hpl.jena.rdf.model.Resource message = rdfModel.createResource("http://fiteagleinternal#Message");
-        message.addProperty(RDF.type, messageTypeProperty);
+        rdfModel.add(MessageBusOntologyModel.internalMessage, RDF.type, messageTypeProperty);
 
         setFiteaglePrefixes(rdfModel);
 

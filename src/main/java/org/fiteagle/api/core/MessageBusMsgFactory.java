@@ -72,8 +72,12 @@ public class MessageBusMsgFactory {
 
         InputStream is = new ByteArrayInputStream(modelString.getBytes());
 
-        // read the RDF/XML file
-        rdfModel.read(is, null, IMessageBus.SERIALIZATION_DEFAULT);
+        try{
+            // read the RDF/XML file
+            rdfModel.read(is, null, IMessageBus.SERIALIZATION_DEFAULT);
+        } catch (org.apache.jena.riot.RiotException e){
+            System.err.println("Error parsing serialized model: " + modelString);
+        }
 
         return rdfModel;
     }

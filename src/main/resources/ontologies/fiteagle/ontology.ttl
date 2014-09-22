@@ -118,6 +118,21 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:domain owl:Thing ;
             
             rdfs:range owl:Thing .
+            
+            
+###  http://fiteagle.org/ontology#containsAdapter
+
+:containsAdapter rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "containsAdapter"@en ;
+            
+            rdfs:comment "Defines that the subject(testbed) contains the object as an adapter."@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
 
 
 

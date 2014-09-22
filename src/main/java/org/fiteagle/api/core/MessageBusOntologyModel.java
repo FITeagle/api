@@ -21,12 +21,14 @@ public class MessageBusOntologyModel {
         propertyFiteagleRequest = fiteagle.getResource("http://fiteagle.org/ontology#Request");
         
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://fiteagle.org/ontology#implementedBy");
-        propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");  
+        propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");
+        propertyFiteagleContainsAdapter = fiteagle.getProperty("http://fiteagle.org/ontology#containsAdapter");
         
         methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");
         methodRestores = fiteagle.getProperty("http://fiteagle.org/ontology#restores");
         
         classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
+        classTestbed = fiteagle.getResource("http://fiteagle.org/ontology#Testbed");
         internalMessage = fiteagle.getResource("http://fiteagleinternal#Message");
     }
     
@@ -39,11 +41,14 @@ public class MessageBusOntologyModel {
     
     public static final Property propertyFiteagleImplementedBy;
     public static final Property propertyFiteagleImplements;
+    public static final Property propertyFiteagleContainsAdapter;
     
     public static final Property methodReleases;
     public static final Property methodRestores;
     
     public static final Resource classAdapter;
+    public static final Resource classTestbed;
+    
     
     public static final Resource internalMessage;
         

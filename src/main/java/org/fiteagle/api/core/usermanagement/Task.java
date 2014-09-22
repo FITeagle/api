@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Task implements Serializable{
   
   private final static Pattern TASK_NAME_PATTERN = Pattern.compile("[\\w|\\s]+");
-  private final static Pattern TASK_DESCRIPTION_PATTERN = TASK_NAME_PATTERN;
   
   private static final long serialVersionUID = 845421382194272905L;
 
@@ -48,9 +47,6 @@ public class Task implements Serializable{
   private void checkDescription(String description) throws NotEnoughAttributesException {
     if(description == null || description.length() == 0){
       throw new User.NotEnoughAttributesException("no description for task given");
-    }
-    if(!TASK_DESCRIPTION_PATTERN.matcher(description).matches()){
-      throw new User.InValidAttributeException("empty or invalid task description, only letters, numbers and whitespace is allowed: "+description);
     }
   }   
   

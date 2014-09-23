@@ -117,20 +117,28 @@ public class UserPublicKey implements Serializable{
   }
 
   @Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserPublicKey other = (UserPublicKey) obj;
-		if (publicKey == null) {
-			if (other.publicKey != null)
-				return false;
-		} else if (!publicKey.equals(other.publicKey))
-			return false;
-		return true;
-	}
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((publicKey == null) ? 0 : publicKey.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    UserPublicKey other = (UserPublicKey) obj;
+    if (publicKey == null) {
+      if (other.publicKey != null)
+        return false;
+    } else if (!publicKey.equals(other.publicKey))
+      return false;
+    return true;
+  }
 
 }

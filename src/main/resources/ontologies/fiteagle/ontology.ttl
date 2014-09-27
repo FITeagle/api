@@ -208,8 +208,6 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 :Adapter rdf:type owl:Class .
 
-###  http://fiteagle.org/ontology#isAdapterIn
-:isAdapterIn rdf:type owl:ObjectProperty .
 
 ###  http://xmlns.com/foaf/0.1/Person
 

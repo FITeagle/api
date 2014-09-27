@@ -43,8 +43,10 @@ public class MessageBusMsgFactory {
     private static Model getDefaultMessageModel(Model messageModel, Resource messageTypeProperty) {
         Model rdfModel = ModelFactory.createDefaultModel();
 
-        rdfModel.add(messageModel);
-        rdfModel.setNsPrefixes(messageModel.getNsPrefixMap());
+        if(messageModel != null){
+          rdfModel.add(messageModel);
+          rdfModel.setNsPrefixes(messageModel.getNsPrefixMap());
+        }
 
         rdfModel.add(MessageBusOntologyModel.internalMessage, RDF.type, messageTypeProperty);
 
@@ -102,6 +104,17 @@ public class MessageBusMsgFactory {
         }
 
         return messageModel;
+    }
+    
+    public static void setCommonPrefixes(Model model){
+        model.setNsPrefix("", "http://fiteagleinternal#");
+        model.setNsPrefix("motor", "http://fiteagle.org/ontology/adapter/motor#");
+        model.setNsPrefix("stopwatch", "http://fiteagle.org/ontology/adapter/stopwatch#");
+        model.setNsPrefix("fiteagle", "http://fiteagle.org/ontology#");
+        model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
+        model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+        model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+        model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
     }
 
 

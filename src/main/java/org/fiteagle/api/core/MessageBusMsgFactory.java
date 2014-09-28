@@ -3,6 +3,7 @@ package org.fiteagle.api.core;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.nio.charset.Charset;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -72,12 +73,12 @@ public class MessageBusMsgFactory {
     public static Model parseSerializedModel(String modelString) throws RiotException {
         Model rdfModel = ModelFactory.createDefaultModel();
 
-        InputStream is = new ByteArrayInputStream(modelString.getBytes());
+        InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
 
         try{
             // read the RDF/XML file
             rdfModel.read(is, null, IMessageBus.SERIALIZATION_DEFAULT);
-        } catch (org.apache.jena.riot.RiotException e){
+        } catch (RiotException e){
             System.err.println("Error parsing serialized model: " + modelString);
         }
 

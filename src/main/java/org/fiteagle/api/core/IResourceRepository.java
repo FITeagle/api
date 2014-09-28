@@ -1,25 +1,25 @@
 package org.fiteagle.api.core;
 
 public interface IResourceRepository {
-	public static final String LIST_RESOURCES = "listResources";
-	public static final String PROP_SERIALIZATION = "serialization";
-	public static final String SERIALIZATION_RDFXML_PLAIN = "RDF/XML";
-	public static final String SERIALIZATION_RDFXML_ABBREV = "RDF/XML-ABBREV";
-	public static final String SERIALIZATION_NTRIPLES = "NT";
-	public static final String SERIALIZATION_N3 = "N3";
-	public static final String SERIALIZATION_RDFJSON = "RDFJSON";
-	public static final String SERIALIZATION_TRIG = "TRIG";
-	public static final String SERVICE_NAME = "fiteagle_resourceDatabase";
-	public static final String MESSAGE_FILTER = IMessageBus.TARGET + " = '"
+	String LIST_RESOURCES = "listResources";
+	String PROP_SERIALIZATION = "serialization";
+	String SERIALIZATION_RDFXML_PLAIN = "RDF/XML";
+	String SERIALIZATION_RDFXML_ABBREV = "RDF/XML-ABBREV";
+	String SERIALIZATION_NTRIPLES = "NT";
+	String SERIALIZATION_N3 = "N3";
+	String SERIALIZATION_RDFJSON = "RDFJSON";
+	String SERIALIZATION_TRIG = "TRIG";
+	String SERVICE_NAME = "fiteagle_resourceDatabase";
+	String MESSAGE_FILTER = IMessageBus.TARGET + " = '"
 			+ SERVICE_NAME + "' OR " + IMessageBus.TYPE + " = '"
 			+ IMessageBus.DISCOVERY + "'";
 
-	public static final String REQUEST_FILTER = IMessageBus.TYPE_REQUEST
+	String REQUEST_FILTER = IMessageBus.TYPE_REQUEST
 			+ " = '" + LIST_RESOURCES + "'";
 
-	public String listResources();
+	String listResources();
 
-	public String listResources(String type);
+	String listResources(String type);
 
-	public String queryDatabse(String query, String type);
+	String queryDatabse(String query, String type);
 }

@@ -27,6 +27,10 @@ public class MessageBusOntologyModel {
         methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");
         methodRestores = fiteagle.getProperty("http://fiteagle.org/ontology#restores");
         
+        propertySparqlQuery = fiteagle.getProperty("http://fiteagle.org/ontology#sparqlQuery");
+        propertyJsonResult = fiteagle.getProperty("http://fiteagle.org/ontology#jsonResult");
+     
+        
         classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
         classTestbed = fiteagle.getResource("http://fiteagle.org/ontology#Testbed");
         internalMessage = fiteagle.getResource("http://fiteagleinternal#Message");
@@ -42,6 +46,8 @@ public class MessageBusOntologyModel {
     public static final Property propertyFiteagleImplementedBy;
     public static final Property propertyFiteagleImplements;
     public static final Property propertyFiteagleContainsAdapter;
+    public static final Property propertySparqlQuery;
+    public static final Property propertyJsonResult;
     
     public static final Property methodReleases;
     public static final Property methodRestores;

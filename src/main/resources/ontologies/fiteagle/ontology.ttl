@@ -133,6 +133,36 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:domain owl:Thing ;
             
             rdfs:range owl:Thing .
+            
+            
+###  http://fiteagle.org/ontology#sparqlQuery
+
+:sparqlQuery rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "a SPARQL Query"@en ;
+            
+            rdfs:comment "Specifies a SPARQL Query"@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
+
+
+###  http://fiteagle.org/ontology#jsonResult
+
+:sparqlQuery rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "a JSON Result"@en ;
+            
+            rdfs:comment "Specifies a JSON Result"@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
 
 
 

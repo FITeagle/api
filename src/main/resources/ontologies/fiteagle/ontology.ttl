@@ -206,13 +206,19 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://fiteagle.org/ontology#Adapter
 
-:Adapter rdf:type owl:Class .
+:Adapter rdf:type owl:Class ;
+
+      rdfs:subClassOf :Resource .
 
 
 ###  http://xmlns.com/foaf/0.1/Person
 
 foaf:Person rdf:type owl:Class .
 
+
+:Testbed rdf:type owl:Class ;
+
+            rdfs:subClassOf :Resource .
 
 
 

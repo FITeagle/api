@@ -48,5 +48,6 @@ public interface IMessageBus {
   public static final String STATUS_404 = "404";
   public static final String STATUS_408 = "408";
   public static final String STATUS_200 = "200";
+  public static final String STATUS_201 = "201";
   
 }

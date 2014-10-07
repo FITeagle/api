@@ -18,7 +18,7 @@ public interface IMessageBus {
 	String SERIALIZATION = "fiteagle_serialization";
 	String QUERY = "fiteagle_query";
 	String TARGET = "fiteagle_targets";
-	int TIMEOUT = 2000;
+	int TIMEOUT = 6000;
 	String SERIALIZATION_TURTLE = "TTL";
 	String SERIALIZATION_JSONLD = "JSON-LD";
 	String DISCOVERY = "fiteagle_discovery";

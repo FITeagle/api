@@ -33,6 +33,8 @@ public class MessageBusOntologyModel {
         
         classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
         classTestbed = fiteagle.getResource("http://fiteagle.org/ontology#Testbed");
+        classResource = fiteagle.getResource("http://fiteagle.org/ontology#Resource");
+        
         internalMessage = fiteagle.getResource("http://fiteagleinternal#Message");
     }
     
@@ -54,12 +56,12 @@ public class MessageBusOntologyModel {
     
     public static final Resource classAdapter;
     public static final Resource classTestbed;
-    
+    public static final Resource classResource;
     
     public static final Resource internalMessage;
         
     
-    public static Model loadModel(String filename, String serialization) {
+    private static Model loadModel(String filename, String serialization) {
         Model fiteagle = ModelFactory.createDefaultModel();
 
         InputStream in2 = FileManager.get().open(filename);

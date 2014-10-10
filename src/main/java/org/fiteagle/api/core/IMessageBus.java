@@ -1,18 +1,10 @@
 package org.fiteagle.api.core;
 
 public interface IMessageBus {
-	String TYPE_RESPONSE = "response";
-	// public static final String TYPE_REQUEST = "request";
-	String TYPE_RESULT = "result";
-	String TYPE_EXCEPTION = "exception";
-	String TYPE_TARGET = "target";
-
+	
 	String TOPIC_CORE = "topic/core";
-	// public static final String TOPIC_USERMANAGEMENT = "topic/usermanagement";
-	// public static final String TOPIC_USERMANAGEMENT_NAME = "java:/" +
-	// TOPIC_USERMANAGEMENT;
 	String TOPIC_CORE_NAME = "java:/" + TOPIC_CORE;
-	String TOPIC_ADAPTERS = "java:/topic/adapters";
+	
 	String TYPE = "rdf_type";
 	String REQUEST = "fiteagle_request";
 	String SERIALIZATION = "fiteagle_serialization";
@@ -34,6 +26,11 @@ public interface IMessageBus {
 	String TYPE_RELEASE = "type_release";
 	String TYPE_INFORM = "type_inform";
 	String TYPE_DISCOVER = "type_discover";
+	
+	String TYPE_RESPONSE = "response";
+  String TYPE_RESULT = "result";
+  String TYPE_EXCEPTION = "exception";
+  String TYPE_TARGET = "target";
 
 	// These serializations are compatible with Apache Jena
 	String SERIALIZATION_TURTLE2 = "TURTLE";
@@ -41,6 +38,8 @@ public interface IMessageBus {
 	String SERIALIZATION_NTRIPLE = "N-TRIPLE";
 
 	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE2;
+	
+	String DATABASE_SERVICE_NAME = "fiteagle_resourceDatabase";
 
 	String STATUS_400 = "400";
 	String STATUS_404 = "404";

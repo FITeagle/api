@@ -6,9 +6,6 @@ import com.hp.hpl.jena.util.FileManager;
 
 import java.io.InputStream;
 
-/**
- * Created by vju on 9/9/14.
- */
 public class OntologyModels {
     static{
        motorModel = loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
@@ -27,7 +24,6 @@ public class OntologyModels {
             throw new IllegalArgumentException("Ontology File: " + filename + " not found");
         }
 
-        // read the RDF/XML file
         fiteagle.read(in2, null, serialization);
 
         return fiteagle;

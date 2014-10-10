@@ -69,7 +69,6 @@ public class MessageBusOntologyModel {
             throw new IllegalArgumentException("Ontology File: " + filename + " not found");
         }
 
-        // read the RDF/XML file
         fiteagle.read(in2, null, serialization);
 
         return fiteagle;

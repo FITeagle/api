@@ -8,12 +8,12 @@ import java.io.InputStream;
 
 public class OntologyModels {
     static{
-       motorModel = loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
+       model = loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
     }
 
-    private static Model motorModel;
-    public static Model getMotorModel(){
-        return motorModel;
+    private static Model model;
+    public static Model getModel(){
+        return model;
     }
 
     public static Model loadModel(String filename, String serialization) {

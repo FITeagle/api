@@ -62,11 +62,8 @@ public class MessageBusMsgFactory {
     }
 
     public static String serializeModel(Model rdfModel) {
-
         StringWriter writer = new StringWriter();
-
         rdfModel.write(writer, IMessageBus.SERIALIZATION_DEFAULT);
-
         return writer.toString();
     }
 
@@ -74,9 +71,7 @@ public class MessageBusMsgFactory {
         Model rdfModel = ModelFactory.createDefaultModel();
 
         InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
-
         try{
-            // read the RDF/XML file
             rdfModel.read(is, null, IMessageBus.SERIALIZATION_DEFAULT);
         } catch (RiotException e){
             System.err.println("Error parsing serialized model: " + modelString);
@@ -107,6 +102,23 @@ public class MessageBusMsgFactory {
         return messageModel;
     }
     
+    public static String getTTLResultModelFromSerializedModel(String serializedModel){
+      Model resultModel = MessageBusMsgFactory.parseSerializedModel(serializedModel);
+      Resource message = resultModel.getResource(MessageBusOntologyModel.internalMessage.getURI());
+      String result = message.getProperty(MessageBusOntologyModel.propertyResultModelTTL).getString();
+      return result;
+    }
+    
+    public static String createSerializedSPARQLQueryModel(String query){
+      Model requestModel = ModelFactory.createDefaultModel();
+      Resource resource = requestModel.createResource("http://fiteagleinternal#Message");
+      resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
+      resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
+      requestModel = MessageBusMsgFactory.createMsgRequest(requestModel);
+
+      return MessageBusMsgFactory.serializeModel(requestModel); 
+    }
+    
     public static void setCommonPrefixes(Model model){
         model.setNsPrefix("", "http://fiteagleinternal#");
         model.setNsPrefix("motor", "http://fiteagle.org/ontology/adapter/motor#");
@@ -117,6 +129,5 @@ public class MessageBusMsgFactory {
         model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
         model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
     }
-
 
 }

@@ -152,7 +152,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://fiteagle.org/ontology#jsonResult
 
-:sparqlQuery rdf:type owl:AsymmetricProperty ,
+:jsonResult rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
                      owl:ObjectProperty ;
             
@@ -164,7 +164,19 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:range owl:Thing .
 
+###  http://fiteagle.org/ontology#resultModelTTl
 
+:resultModelTTl rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:label "a ttl result model"@en ;
+            
+            rdfs:comment "Specifies a result Model serialized as turtle"@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range owl:Thing .
 
 
 

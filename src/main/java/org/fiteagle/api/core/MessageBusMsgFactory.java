@@ -66,6 +66,12 @@ public class MessageBusMsgFactory {
         rdfModel.write(writer, IMessageBus.SERIALIZATION_DEFAULT);
         return writer.toString();
     }
+    
+  public static String serializeModel(Model rdfModel, String serialization) {
+    StringWriter writer = new StringWriter();
+    rdfModel.write(writer, serialization);
+    return writer.toString();
+  }
 
     public static Model parseSerializedModel(String modelString) throws RiotException {
         Model rdfModel = ModelFactory.createDefaultModel();

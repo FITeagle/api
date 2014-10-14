@@ -10,9 +10,11 @@ public interface IMessageBus {
 	String SERIALIZATION = "fiteagle_serialization";
 	String QUERY = "fiteagle_query";
 	String TARGET = "fiteagle_targets";
+	
 	int TIMEOUT = 6000;
-	String SERIALIZATION_TURTLE = "TTL";
+	
 	String SERIALIZATION_JSONLD = "JSON-LD";
+	
 	String DISCOVERY = "fiteagle_discovery";
 	String RESPONSE = "fiteagle_response";
 	String RESULT = "fiteagle_result";
@@ -33,11 +35,11 @@ public interface IMessageBus {
   String TYPE_TARGET = "target";
 
 	// These serializations are compatible with Apache Jena
-	String SERIALIZATION_TURTLE2 = "TURTLE";
+	String SERIALIZATION_TURTLE = "TURTLE";
 	String SERIALIZATION_RDFXML = "RDF/XML";
 	String SERIALIZATION_NTRIPLE = "N-TRIPLE";
 
-	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE2;
+	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE;
 	
 	String DATABASE_SERVICE_NAME = "fiteagle_resourceDatabase";
 

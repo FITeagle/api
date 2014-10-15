@@ -43,10 +43,4 @@ public interface IMessageBus {
 	
 	String DATABASE_SERVICE_NAME = "fiteagle_resourceDatabase";
 
-	String STATUS_400 = "400";
-	String STATUS_404 = "404";
-	String STATUS_408 = "408";
-	String STATUS_200 = "200";
-	String STATUS_201 = "201";
-
 }

@@ -126,14 +126,24 @@ public class MessageBusMsgFactory {
     }
     
     public static void setCommonPrefixes(Model model){
-        model.setNsPrefix("", "http://fiteagleinternal#");
-        model.setNsPrefix("motor", "http://fiteagle.org/ontology/adapter/motor#");
-        model.setNsPrefix("stopwatch", "http://fiteagle.org/ontology/adapter/stopwatch#");
-        model.setNsPrefix("fiteagle", "http://fiteagle.org/ontology#");
-        model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
-        model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-        model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
-        model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+      model.removeNsPrefix("j.0");
+      model.removeNsPrefix("j.1");
+      model.removeNsPrefix("j.2");
+      model.removeNsPrefix("j.3");
+      model.removeNsPrefix("j.4");
+      model.removeNsPrefix("j.5");
+      
+      model.setNsPrefix("", "http://fiteagleinternal#");
+      model.setNsPrefix("wgs", "http://www.w3.org/2003/01/geo/wgs84_pos#");
+      model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/");
+      model.setNsPrefix("motor", "http://fiteagle.org/ontology/adapter/motor#");
+      model.setNsPrefix("stopwatch", "http://fiteagle.org/ontology/adapter/stopwatch#");
+      model.setNsPrefix("openstack", "http://fiteagle.org/ontology/adapter/openstack#");
+      model.setNsPrefix("omn", "http://fiteagle.org/ontology#");
+      model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
+      model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+      model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
+      model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
     }
 
 }

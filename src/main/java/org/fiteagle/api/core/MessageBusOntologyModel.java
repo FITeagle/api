@@ -13,27 +13,27 @@ public class MessageBusOntologyModel {
     static{
         Model fiteagle = loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
         
-        propertyFiteagleCreate = fiteagle.getResource("http://fiteagle.org/ontology#Create");
-        propertyFiteagleInform = fiteagle.getResource("http://fiteagle.org/ontology#Inform");
-        propertyFiteagleConfigure = fiteagle.getResource("http://fiteagle.org/ontology#Configure");
-        propertyFiteagleDiscover = fiteagle.getResource("http://fiteagle.org/ontology#Discover");
-        propertyFiteagleRelease = fiteagle.getResource("http://fiteagle.org/ontology#Release");
-        propertyFiteagleRequest = fiteagle.getResource("http://fiteagle.org/ontology#Request");
+        propertyFiteagleCreate = fiteagle.getResource("http://open-multinet.info/ontology#Create");
+        propertyFiteagleInform = fiteagle.getResource("http://open-multinet.info/ontology#Inform");
+        propertyFiteagleConfigure = fiteagle.getResource("http://open-multinet.info/ontology#Configure");
+        propertyFiteagleDiscover = fiteagle.getResource("http://open-multinet.info/ontology#Discover");
+        propertyFiteagleRelease = fiteagle.getResource("http://open-multinet.info/ontology#Release");
+        propertyFiteagleRequest = fiteagle.getResource("http://open-multinet.info/ontology#Request");
         
-        propertyFiteagleImplementedBy = fiteagle.getProperty("http://fiteagle.org/ontology#implementedBy");
-        propertyFiteagleImplements = fiteagle.getProperty("http://fiteagle.org/ontology#implements");
-        propertyFiteagleContainsAdapter = fiteagle.getProperty("http://fiteagle.org/ontology#containsAdapter");
+        propertyFiteagleImplementedBy = fiteagle.getProperty("http://open-multinet.info/ontology#implementedBy");
+        propertyFiteagleImplements = fiteagle.getProperty("http://open-multinet.info/ontology#implements");
+        propertyFiteagleContainsAdapter = fiteagle.getProperty("http://open-multinet.info/ontology#containsAdapter");
         
-        methodReleases = fiteagle.getProperty("http://fiteagle.org/ontology#releases");
-        methodRestores = fiteagle.getProperty("http://fiteagle.org/ontology#restores");
+        methodReleases = fiteagle.getProperty("http://open-multinet.info/ontology#releases");
+        methodRestores = fiteagle.getProperty("http://open-multinet.info/ontology#restores");
         
-        propertySparqlQuery = fiteagle.getProperty("http://fiteagle.org/ontology#sparqlQuery");
-        propertyJsonResult = fiteagle.getProperty("http://fiteagle.org/ontology#jsonResult");
-        propertyResultModelTTL = fiteagle.getProperty("http://fiteagle.org/ontology#resultModelTTl");
+        propertySparqlQuery = fiteagle.getProperty("http://open-multinet.info/ontology#sparqlQuery");
+        propertyJsonResult = fiteagle.getProperty("http://open-multinet.info/ontology#jsonResult");
+        propertyResultModelTTL = fiteagle.getProperty("http://open-multinet.info/ontology#resultModelTTl");
         
-        classAdapter = fiteagle.getResource("http://fiteagle.org/ontology#Adapter");
-        classTestbed = fiteagle.getResource("http://fiteagle.org/ontology#Testbed");
-        classResource = fiteagle.getResource("http://fiteagle.org/ontology#Resource");
+        classAdapter = fiteagle.getResource("http://open-multinet.info/ontology#Adapter");
+        classTestbed = fiteagle.getResource("http://open-multinet.info/ontology#Testbed");
+        classResource = fiteagle.getResource("http://open-multinet.info/ontology#Resource");
         
         internalMessage = fiteagle.getResource("http://fiteagleinternal#Message");
     }

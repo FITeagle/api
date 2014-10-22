@@ -51,14 +51,7 @@ public class MessageBusMsgFactory {
 
         rdfModel.add(MessageBusOntologyModel.internalMessage, RDF.type, messageTypeProperty);
 
-        setFiteaglePrefixes(rdfModel);
-
         return rdfModel;
-    }
-
-    private static void setFiteaglePrefixes(Model rdfModel) {
-        rdfModel.setNsPrefix("", "http://fiteagleinternal#");
-        rdfModel.setNsPrefix("fiteagle", "http://fiteagle.org/ontology#");
     }
 
     public static String serializeModel(Model rdfModel) {
@@ -133,13 +126,9 @@ public class MessageBusMsgFactory {
       model.removeNsPrefix("j.4");
       model.removeNsPrefix("j.5");
       
-      model.setNsPrefix("", "http://fiteagleinternal#");
       model.setNsPrefix("wgs", "http://www.w3.org/2003/01/geo/wgs84_pos#");
       model.setNsPrefix("foaf", "http://xmlns.com/foaf/0.1/");
-      model.setNsPrefix("motor", "http://fiteagle.org/ontology/adapter/motor#");
-      model.setNsPrefix("stopwatch", "http://fiteagle.org/ontology/adapter/stopwatch#");
-      model.setNsPrefix("openstack", "http://fiteagle.org/ontology/adapter/openstack#");
-      model.setNsPrefix("omn", "http://fiteagle.org/ontology#");
+      model.setNsPrefix("omn", "http://open-multinet.info/ontology/omn#");
       model.setNsPrefix("owl", "http://www.w3.org/2002/07/owl#");
       model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
       model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");

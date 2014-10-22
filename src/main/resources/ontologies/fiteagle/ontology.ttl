@@ -1,4 +1,4 @@
-@prefix : <http://open-multinet.info/ontology#> .
+@prefix : <http://open-multinet.info/ontology/omn#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix wgs: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -7,9 +7,9 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://open-multinet.info/ontology> .
+@base <http://open-multinet.info/ontology/omn> .
 
-<http://open-multinet.info/ontology> rdf:type owl:Ontology ;
+<http://open-multinet.info/ontology/omn> rdf:type owl:Ontology ;
                                
                                rdfs:label "FITeagle"@en ;
                                
@@ -58,7 +58,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology#implementedBy
+###  http://open-multinet.info/ontology/omn#implementedBy
 
 :implementedBy rdf:type owl:AsymmetricProperty ,
                         owl:IrreflexiveProperty ,
@@ -74,7 +74,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#implements
+###  http://open-multinet.info/ontology/omn#implements
 
 :implements rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -91,7 +91,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
             
             
-###  http://open-multinet.info/ontology#releases
+###  http://open-multinet.info/ontology/omn#releases
 
 :releases rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -106,7 +106,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
             
             
-###  http://open-multinet.info/ontology#restores
+###  http://open-multinet.info/ontology/omn#restores
 
 :restores rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -121,7 +121,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
             
             
-###  http://open-multinet.info/ontology#containsAdapter
+###  http://open-multinet.info/ontology/omn#containsAdapter
 
 :containsAdapter rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -136,7 +136,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
             
             
-###  http://open-multinet.info/ontology#sparqlQuery
+###  http://open-multinet.info/ontology/omn#sparqlQuery
 
 :sparqlQuery rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -151,7 +151,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
 
 
-###  http://open-multinet.info/ontology#jsonResult
+###  http://open-multinet.info/ontology/omn#jsonResult
 
 :jsonResult rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -165,7 +165,7 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:range owl:Thing .
 
-###  http://open-multinet.info/ontology#resultModelTTl
+###  http://open-multinet.info/ontology/omn#resultModelTTl
 
 :resultModelTTl rdf:type owl:AsymmetricProperty ,
                      owl:IrreflexiveProperty ,
@@ -188,7 +188,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology#Configure
+###  http://open-multinet.info/ontology/omn#Configure
 
 :Configure rdf:type owl:Class ;
            
@@ -196,7 +196,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Create
+###  http://open-multinet.info/ontology/omn#Create
 
 :Create rdf:type owl:Class ;
         
@@ -204,7 +204,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Discover
+###  http://open-multinet.info/ontology/omn#Discover
 
 :Discover rdf:type owl:Class ;
           
@@ -212,7 +212,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Inform
+###  http://open-multinet.info/ontology/omn#Inform
 
 :Inform rdf:type owl:Class ;
         
@@ -220,13 +220,13 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Method
+###  http://open-multinet.info/ontology/omn#Method
 
 :Method rdf:type owl:Class .
 
 
 
-###  http://open-multinet.info/ontology#Release
+###  http://open-multinet.info/ontology/omn#Release
 
 :Release rdf:type owl:Class ;
          
@@ -234,7 +234,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Request
+###  http://open-multinet.info/ontology/omn#Request
 
 :Request rdf:type owl:Class ;
          
@@ -242,12 +242,12 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-###  http://open-multinet.info/ontology#Resource
+###  http://open-multinet.info/ontology/omn#Resource
 
 :Resource rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology#Adapter
+###  http://open-multinet.info/ontology/omn#Adapter
 
 :Adapter rdf:type owl:Class ;
 
@@ -259,7 +259,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 foaf:Person rdf:type owl:Class .
 
 
-###  http://open-multinet.info/ontology#Testbed
+###  http://open-multinet.info/ontology/omn#Testbed
 
 :Testbed rdf:type owl:Class ;
 
@@ -275,7 +275,7 @@ foaf:Person rdf:type owl:Class .
 #################################################################
 
 
-###  http://open-multinet.info/ontology#AlexanderWillner
+###  http://open-multinet.info/ontology/omn#AlexanderWillner
 
 :AlexanderWillner rdf:type owl:NamedIndividual ,
                            foaf:Person ;

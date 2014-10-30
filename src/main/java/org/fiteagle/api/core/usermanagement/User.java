@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -72,11 +71,11 @@ public class User implements Serializable{
   private List<UserPublicKey> publicKeys;
   
   @JsonIgnore
-  @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
+  @ManyToMany(mappedBy="participants")
   private List<Class> joinedClasses;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner", fetch=FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner")
   private List<Class> ownedClasses;
   
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
@@ -417,7 +416,9 @@ public class User implements Serializable{
   }
   
   protected void addClass(Class targetClass){
-    this.joinedClasses.add(targetClass);
+    if(!this.joinedClasses.contains(targetClass)){
+      this.joinedClasses.add(targetClass);
+    }
   }
   
   protected void removeClass(Class targetClass){

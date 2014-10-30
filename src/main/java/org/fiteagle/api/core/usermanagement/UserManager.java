@@ -3,6 +3,7 @@ package org.fiteagle.api.core.usermanagement;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Set;
 
 import org.fiteagle.api.core.IMessageBus;
 import org.fiteagle.api.core.usermanagement.User.PublicKeyNotFoundException;
@@ -70,7 +71,7 @@ public interface UserManager {
   public abstract void deleteUser(String username);
   
   public abstract void updateUser(String username, String firstName, String lastName, String email, String affiliation,
-      String password, List<UserPublicKey> publicKeys);
+      String password, Set<UserPublicKey> publicKeys);
   
   public abstract void setRole(String username, Role role);
   
@@ -147,9 +148,9 @@ public interface UserManager {
   
   public abstract void removeParticipant(long id, String username);
 
-  public abstract List<Class> getAllClassesFromUser(String username);
+  public abstract Set<Class> getAllClassesFromUser(String username);
 
-  public abstract List<Class> getAllClassesOwnedByUser(String username);
+  public abstract Set<Class> getAllClassesOwnedByUser(String username);
   
   public abstract List<Class> getAllClasses();
   

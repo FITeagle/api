@@ -1,8 +1,8 @@
 package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,21 +30,21 @@ public class Node implements Serializable{
   
   @JsonIgnore
   @ManyToMany(mappedBy="nodes")
-  private List<Class> classes;
+  private Set<Class> classes;
   
   @JsonIgnore
   @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="node")
-  private List<User> users;
+  private Set<User> users;
 
   protected Node(){
-    this.users = new ArrayList<User>();
-    this.classes = new ArrayList<Class>();
+    this.users = new HashSet<>();
+    this.classes = new HashSet<>();
   }
   
   public Node(String name){
     this.name = name;
-    this.users = new ArrayList<User>();
-    this.classes = new ArrayList<Class>();
+    this.users = new HashSet<>();
+    this.classes = new HashSet<>();
   }
   
   public static Node createDefaultNode(){
@@ -86,19 +86,19 @@ public class Node implements Serializable{
     this.name = name;
   }
 
-  public List<Class> getClasses(){
+  public Set<Class> getClasses(){
     return this.classes;
   }
   
-  public void setClasses(List<Class> classes) {
+  public void setClasses(Set<Class> classes) {
     this.classes = classes;
   }
 
-  public List<User> getUsers() {
+  public Set<User> getUsers() {
     return users;
   }
 
-  public void setUsers(List<User> users) {
+  public void setUsers(Set<User> users) {
     this.users = users;
   }
 

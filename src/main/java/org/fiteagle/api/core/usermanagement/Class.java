@@ -1,8 +1,8 @@
 package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,26 +34,26 @@ public class Class implements Serializable{
   private User owner;
   
   @ManyToMany(fetch=FetchType.EAGER)
-  private List<User> participants;
+  private Set<User> participants;
   
   @ManyToMany(fetch=FetchType.EAGER)
-  private List<Node> nodes;
+  private Set<Node> nodes;
 
   @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owningClass")
-  private List<Task> tasks;
+  private Set<Task> tasks;
   
   public Class(String name, String description){
     this.name = name;
     this.description = description;
-    this.participants = new ArrayList<User>();
-    this.nodes = new ArrayList<Node>();
-    this.tasks = new ArrayList<Task>();
+    this.participants = new HashSet<>();
+    this.nodes = new HashSet<>();
+    this.tasks = new HashSet<>();
   }
   
   protected Class(){
-    this.participants = new ArrayList<User>();
-    this.nodes = new ArrayList<Node>();
-    this.tasks = new ArrayList<Task>();
+    this.participants = new HashSet<>();
+    this.nodes = new HashSet<>();
+    this.tasks = new HashSet<>();
   }
   
   @PreRemove
@@ -71,21 +71,19 @@ public class Class implements Serializable{
   }
   
   public void addParticipant(User user){
-    if(!this.participants.contains(user)){
-      user.addClass(this);
-      this.participants.add(user);
-    }
+    user.addClass(this);
+    this.participants.add(user);
   }
   
   public void removeParticipant(User user){
     this.participants.remove(user);
   }
   
-  public List<User> getParticipants() {
+  public Set<User> getParticipants() {
     return participants;
   }
 
-  public void setParticipants(List<User> participants) {
+  public void setParticipants(Set<User> participants) {
     this.participants = participants;
   }
   
@@ -109,11 +107,11 @@ public class Class implements Serializable{
     this.nodes.add(node);
   }
   
-  public List<Node> getNodes() {
+  public Set<Node> getNodes() {
     return nodes;
   }
 
-  public void setNodes(List<Node> nodes) {
+  public void setNodes(Set<Node> nodes) {
     this.nodes = nodes;
   }
   
@@ -126,21 +124,19 @@ public class Class implements Serializable{
   }
   
   public void addTask(Task task){
-    if(!this.tasks.contains(task)){
-      task.setOwningClass(this);
-      this.tasks.add(task);
-    }
+    task.setOwningClass(this);
+    this.tasks.add(task);
   }
   
   public void removeTask(Task task){
     this.tasks.remove(task);
   }
 
-  public List<Task> getTasks() {
+  public Set<Task> getTasks() {
     return tasks;
   }
 
-  public void setTasks(List<Task> tasks) {
+  public void setTasks(Set<Task> tasks) {
     this.tasks = tasks;
   }
 

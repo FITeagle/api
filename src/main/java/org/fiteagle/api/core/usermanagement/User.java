@@ -1,9 +1,9 @@
 package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.persistence.CascadeType;
@@ -68,15 +68,15 @@ public class User implements Serializable{
   private Node node;
   
   @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner")
-  private List<UserPublicKey> publicKeys;
+  private Set<UserPublicKey> publicKeys;
   
   @JsonIgnore
   @ManyToMany(mappedBy="participants")
-  private List<Class> joinedClasses;
+  private Set<Class> joinedClasses;
 
   @JsonIgnore
   @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="owner")
-  private List<Class> ownedClasses;
+  private Set<Class> ownedClasses;
   
   private final static Pattern USERNAME_PATTERN = Pattern.compile("[\\w|-|@|.]{3,200}");
   private final static Pattern EMAIL_PATTERN = Pattern.compile("[^@]+@{1}[^@]+\\.+[^@]+");
@@ -86,7 +86,7 @@ public class User implements Serializable{
   protected User(){
   }
   
-  public User(String username, String firstName, String lastName, String email, String affiliation, Node node, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys){
+  public User(String username, String firstName, String lastName, String email, String affiliation, Node node, String passwordHash, String passwordSalt, Set<UserPublicKey> publicKeys){
     this.username = username;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -98,15 +98,15 @@ public class User implements Serializable{
     this.passwordHash = passwordHash;
     this.publicKeys = publicKeys;
     if(publicKeys == null){
-      this.publicKeys = new ArrayList<>();
+      this.publicKeys = new HashSet<>();
     }
-    this.joinedClasses = new ArrayList<>();
-    this.ownedClasses = new ArrayList<>();
+    this.joinedClasses = new HashSet<>();
+    this.ownedClasses = new HashSet<>();
     checkAttributes();
   }
   
   public static User createDefaultUser(String username, String passwordHash, String passwordSalt) {
-    return new User(username, "default", "default", createDefaultEmail(username), "default", Node.defaultNode, passwordHash, passwordSalt, new ArrayList<UserPublicKey>());
+    return new User(username, "default", "default", createDefaultEmail(username), "default", Node.defaultNode, passwordHash, passwordSalt, new HashSet<UserPublicKey>());
   }
   
   private static String createDefaultEmail(String username) {
@@ -186,7 +186,7 @@ public class User implements Serializable{
   }
   
   @SuppressWarnings("unchecked")
-  public void updateAttributes(String firstName, String lastName, String email, String affiliation, String passwordHash, String passwordSalt, List<UserPublicKey> publicKeys) {
+  public void updateAttributes(String firstName, String lastName, String email, String affiliation, String passwordHash, String passwordSalt, Set<UserPublicKey> publicKeys) {
     if(firstName != null){
      this.firstName = firstName;
     }
@@ -194,7 +194,7 @@ public class User implements Serializable{
       this.lastName = lastName;
     }
     if(publicKeys != null && publicKeys.size() != 0){
-      this.publicKeys = (List<UserPublicKey>)(List<?>) publicKeys;
+      this.publicKeys = (Set<UserPublicKey>)(Set<?>) publicKeys;
     }
     if(email != null){
       this.email = email;
@@ -381,19 +381,19 @@ public class User implements Serializable{
     return lastModified;
   }
 
-  public List<UserPublicKey> getPublicKeys() {
+  public Set<UserPublicKey> getPublicKeys() {
     return publicKeys;
   }
 
-  public List<Class> getOwnedClasses() {
+  public Set<Class> getOwnedClasses() {
     return ownedClasses;
   }
   
-  public List<Class> getJoinedClasses() {
+  public Set<Class> getJoinedClasses() {
     return joinedClasses;
   }
 
-  public void setJoinedClasses(List<Class> targetClasses) {
+  public void setJoinedClasses(Set<Class> targetClasses) {
     this.joinedClasses = targetClasses;
   }
 
@@ -416,9 +416,7 @@ public class User implements Serializable{
   }
   
   protected void addClass(Class targetClass){
-    if(!this.joinedClasses.contains(targetClass)){
-      this.joinedClasses.add(targetClass);
-    }
+    this.joinedClasses.add(targetClass);
   }
   
   protected void removeClass(Class targetClass){

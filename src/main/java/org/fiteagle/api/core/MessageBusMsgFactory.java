@@ -60,11 +60,20 @@ public class MessageBusMsgFactory {
         return writer.toString();
     }
     
-  public static String serializeModel(Model rdfModel, String serialization) {
-    StringWriter writer = new StringWriter();
-    rdfModel.write(writer, serialization);
-    return writer.toString();
-  }
+    public static String serializeModel(Model rdfModel, String serialization) {
+        StringWriter writer = new StringWriter();
+        rdfModel.write(writer, serialization);
+        String serializedModel = writer.toString();
+        if(serialization.equals(IMessageBus.SERIALIZATION_RDFXML)){
+        	String[] splitted = serializedModel.split("\n");
+        	for(int i = 0; i < splitted.length; i++){
+        		if(splitted[i].replace(" ", "").replace("\t", "").startsWith("xmlns:j.")){
+        			serializedModel = serializedModel.replace(splitted[i]+"\n", "");
+        		}
+        	}
+        }
+        return serializedModel;
+      }
 
     public static Model parseSerializedModel(String modelString) throws RiotException {
         Model rdfModel = ModelFactory.createDefaultModel();

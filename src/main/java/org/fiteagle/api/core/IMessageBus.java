@@ -12,7 +12,7 @@ public interface IMessageBus {
 	String TARGET = "fiteagle_targets";
 	
 	int TIMEOUT = 6000;
-	int SHORT_TIMEOUT = 1000;
+	int SHORT_TIMEOUT = 2000;
 	
 	String SERIALIZATION_JSONLD = "JSON-LD";
 	

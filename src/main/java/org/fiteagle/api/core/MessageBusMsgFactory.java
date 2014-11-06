@@ -88,6 +88,19 @@ public class MessageBusMsgFactory {
         return rdfModel;
     }
     
+    public static Model parseSerializedModel(String modelString, String serialization) throws RiotException {
+        Model rdfModel = ModelFactory.createDefaultModel();
+
+        InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
+        try{
+            rdfModel.read(is, null, serialization);
+        } catch (RiotException e){
+            System.err.println("Error parsing serialized model: " + modelString);
+        }
+
+        return rdfModel;
+    }
+    
     public static boolean isMessageType(Model messageModel, Resource messageTypeProperty) {
         return messageModel.contains(null, RDF.type, messageTypeProperty);
     }

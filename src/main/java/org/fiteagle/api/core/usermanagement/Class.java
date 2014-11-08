@@ -141,12 +141,6 @@ public class Class implements Serializable{
   }
 
   @Override
-  public String toString() {
-    return "Class [id=" + id + ", name=" + name + ", description=" + description + ", owner=" + owner
-        + ", participants=" + participants + ", nodes=" + nodes + "]";
-  }
-
-  @Override
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
@@ -168,6 +162,12 @@ public class Class implements Serializable{
     } else if (!name.equals(other.name))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Class [id=" + id + ", name=" + name + ", description=" + description + ", owner=" + owner
+        + ", participants=" + participants + ", nodes=" + nodes + ", tasks=" + tasks + "]";
   }
   
 }

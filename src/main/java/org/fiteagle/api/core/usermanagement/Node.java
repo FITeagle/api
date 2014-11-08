@@ -36,15 +36,21 @@ public class Node implements Serializable{
   @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="node")
   private Set<User> users;
 
+  @JsonIgnore
+  @OneToMany(orphanRemoval = true, mappedBy="node")
+  private Set<Resource> resources;
+  
   protected Node(){
     this.users = new HashSet<>();
     this.classes = new HashSet<>();
+    this.resources = new HashSet<>();
   }
   
   public Node(String name){
     this.name = name;
     this.users = new HashSet<>();
     this.classes = new HashSet<>();
+    this.resources = new HashSet<>();
   }
   
   public static Node createDefaultNode(){
@@ -68,6 +74,14 @@ public class Node implements Serializable{
   
   public void removeClass(Class targetClass){
     this.classes.remove(targetClass);
+  }
+  
+  public void addResource(Resource resource){
+    this.resources.add(resource);
+  }
+  
+  public void removeResource(Resource resource){
+    this.resources.remove(resource);
   }
   
   public static void setDefaultNode(Node node){

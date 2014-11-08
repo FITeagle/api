@@ -1,13 +1,17 @@
 package org.fiteagle.api.core.usermanagement;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
@@ -33,16 +37,31 @@ public class Task implements Serializable{
   @ManyToOne
   @JsonIgnore
   private Class owningClass;
+  
+  @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true, mappedBy="task")
+  private Set<Resource> resources;
    
   protected Task() {
+    this.resources = new HashSet<>();
   } 
   
-  public Task(String name, String description) {
+  public Task(String name, String description, Set<Resource> resources) {
     checkName(name);
     this.name = name;
     checkDescription(description); 
     this.description = description;
-  } 
+    this.resources = resources;
+    if(this.resources == null){
+      this.resources = new HashSet<>();
+    }
+    setTasksOfResources();
+  }
+  
+  private void setTasksOfResources(){
+    for(Resource resource: this.resources){
+      resource.setTask(this);
+    }
+  }
   
   private void checkDescription(String description) throws NotEnoughAttributesException {
     if(description == null || description.length() == 0){
@@ -95,7 +114,7 @@ public class Task implements Serializable{
 
   @Override
   public String toString() {
-    return "Task [id=" + id + ", name=" + name + ", description=" + description + "]";
+    return "Task [id=" + id + ", name=" + name + ", description=" + description + ", resources=" + resources + "]";
   }
 
   @Override
@@ -115,6 +134,15 @@ public class Task implements Serializable{
     } else if (!owningClass.equals(other.owningClass))
       return false;
     return true;
+  }
+
+  public Set<Resource> getResources() {
+    return resources;
+  }
+
+  public void setResources(Set<Resource> resources) {
+    this.resources = resources;
+    setTasksOfResources();
   }
 
 }

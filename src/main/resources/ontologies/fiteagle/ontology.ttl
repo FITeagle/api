@@ -91,6 +91,19 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
             
             
+###  http://open-multinet.info/ontology/omn#maxInstances
+
+:maxInstances rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "maxInstances"@en ;
+            
+            rdfs:comment "Defines the maximum amount of instances the subject can create."@en ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range xsd:integer .
+            
+            
 ###  http://open-multinet.info/ontology/omn#releases
 
 :releases rdf:type owl:AsymmetricProperty ,

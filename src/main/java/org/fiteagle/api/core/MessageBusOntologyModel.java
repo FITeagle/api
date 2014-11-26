@@ -13,6 +13,7 @@ public class MessageBusOntologyModel {
   public static final Resource propertyFiteagleRelease;
   public static final Resource propertyFiteagleRequest;
   
+  public static final Property maxInstances;
   public static final Property propertyFiteagleImplementedBy;
   public static final Property propertyFiteagleImplements;
   public static final Property propertyFiteagleContainsAdapter;
@@ -39,6 +40,7 @@ public class MessageBusOntologyModel {
         propertyFiteagleRelease = fiteagle.getResource("http://open-multinet.info/ontology/omn#Release");
         propertyFiteagleRequest = fiteagle.getResource("http://open-multinet.info/ontology/omn#Request");
         
+        maxInstances = fiteagle.getProperty("http://open-multinet.info/ontology/omn#maxInstances");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implements");
         propertyFiteagleContainsAdapter = fiteagle.getProperty("http://open-multinet.info/ontology/omn#containsAdapter");

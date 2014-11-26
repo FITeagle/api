@@ -11,15 +11,11 @@ public interface IMessageBus {
 	String QUERY = "fiteagle_query";
 	String TARGET = "fiteagle_targets";
 	
-	int TIMEOUT = 6000;
+	int TIMEOUT = 8000;
 	int SHORT_TIMEOUT = 2000;
 	
 	String SERIALIZATION_JSONLD = "JSON-LD";
 	
-	String DISCOVERY = "fiteagle_discovery";
-	String RESPONSE = "fiteagle_response";
-	String RESULT = "fiteagle_result";
-
 	String METHOD_TYPE = "method_type";
 	String RDF = "rdf";
 
@@ -43,6 +39,4 @@ public interface IMessageBus {
 
 	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE;
 	
-	String DATABASE_SERVICE_NAME = "fiteagle_resourceDatabase";
-
 }

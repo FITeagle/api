@@ -106,7 +106,6 @@ public class MessageBusMsgFactory {
     }
     
     public static Model getMessageRDFModel(Message jmsMessage) throws JMSException {
-        // create an empty model
         Model messageModel = null;
 
         if (jmsMessage.getStringProperty(IMessageBus.RDF) != null) {
@@ -116,7 +115,7 @@ public class MessageBusMsgFactory {
             try {
                 messageModel = parseSerializedModel(inputRDF);
             } catch (RiotException e) {
-                System.err.println("MDB Listener: Received invalid RDF");
+                System.err.println(e.getMessage());
             }
         }
 
@@ -132,7 +131,7 @@ public class MessageBusMsgFactory {
     
     public static String createSerializedSPARQLQueryModel(String query){
       Model requestModel = ModelFactory.createDefaultModel();
-      Resource resource = requestModel.createResource("http://fiteagleinternal#Message");
+      Resource resource = requestModel.createResource(MessageBusOntologyModel.internalMessage.getURI());
       resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
       resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
       requestModel = MessageBusMsgFactory.createMsgRequest(requestModel);

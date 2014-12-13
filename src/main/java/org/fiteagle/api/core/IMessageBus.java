@@ -28,7 +28,7 @@ public interface IMessageBus {
 	
 	String TYPE_RESPONSE = "response";
   String TYPE_RESULT = "result";
-  String TYPE_EXCEPTION = "exception";
+  String TYPE_ERROR = "error";
   String TYPE_TARGET = "target";
 
 	// These serializations are compatible with Apache Jena

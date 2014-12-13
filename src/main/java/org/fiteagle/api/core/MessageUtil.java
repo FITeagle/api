@@ -148,19 +148,28 @@ public class MessageUtil {
   
   public static String getRDFResult(final Message receivedMessage) {
     String result = null;
-    if (receivedMessage == null) {
-      result = Response.Status.REQUEST_TIMEOUT.name();
-    } else {
+    if (receivedMessage != null) {
       try {
         result = receivedMessage.getStringProperty(IMessageBus.RDF);
-        if (result == null) {
-          result = receivedMessage.getStringProperty(IMessageBus.TYPE_ERROR);
-        }
       } catch (JMSException e) {
         LOGGER.log(Level.SEVERE, e.getMessage());
       }
     }
     return result;
+  }
+  
+  public static String getError(final Message receivedMessage) {
+    String error = null;
+    if (receivedMessage == null) {
+      error = Response.Status.REQUEST_TIMEOUT.name();
+    } else {
+      try {
+        error = receivedMessage.getStringProperty(IMessageBus.TYPE_ERROR);
+      } catch (JMSException e) {
+        LOGGER.log(Level.SEVERE, e.getMessage());
+      }
+    }
+    return error;
   }
   
   public static Message waitForResult(Message requestMessage, JMSContext context, Topic topic) {

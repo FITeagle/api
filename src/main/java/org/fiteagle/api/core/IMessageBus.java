@@ -19,17 +19,17 @@ public interface IMessageBus {
 	String METHOD_TYPE = "method_type";
 	String RDF = "rdf";
 
-	String TYPE_REQUEST = "type_request";
-	String TYPE_CREATE = "type_create";
-	String TYPE_CONFIGURE = "type_configure";
-	String TYPE_RELEASE = "type_release";
-	String TYPE_INFORM = "type_inform";
-	String TYPE_DISCOVER = "type_discover";
+	String TYPE_REQUEST = "REQUEST";
+	String TYPE_CREATE = "CREATE";
+	String TYPE_CONFIGURE = "CONFIGURE";
+	String TYPE_RELEASE = "RELEASE";
+	String TYPE_INFORM = "INFORM";
+	String TYPE_DISCOVER = "DISCOVER";
 	
-	String TYPE_RESPONSE = "response";
-  String TYPE_RESULT = "result";
-  String TYPE_ERROR = "error";
-  String TYPE_TARGET = "target";
+	String TYPE_RESPONSE = "RESPONSE";
+  String TYPE_RESULT = "RESULT";
+  String TYPE_ERROR = "ERROR";
+  String TYPE_TARGET = "TARGET";
 
 	// These serializations are compatible with Apache Jena
 	String SERIALIZATION_TURTLE = "TURTLE";

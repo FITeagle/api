@@ -19,6 +19,7 @@ import org.apache.jena.riot.RiotException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class MessageUtil {
@@ -188,6 +189,13 @@ public class MessageUtil {
     Resource message = resultModel.getResource(MessageBusOntologyModel.internalMessage.getURI());
     String result = message.getProperty(MessageBusOntologyModel.propertyResultModelTTL).getString();
     return result;
+  }
+  
+  public static String getJSONResultModelFromSerializedModel(String serializedModel) {
+    Model resultModel = MessageUtil.parseSerializedModel(serializedModel);
+    Resource message = resultModel.getResource(MessageBusOntologyModel.internalMessage.getURI());
+    Statement resultStatement = message.getProperty(MessageBusOntologyModel.propertyJsonResult);
+    return resultStatement.getObject().toString();
   }
   
   public static String createSerializedSPARQLQueryModel(String query) {

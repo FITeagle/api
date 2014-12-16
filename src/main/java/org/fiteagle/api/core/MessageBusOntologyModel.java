@@ -18,8 +18,6 @@ public class MessageBusOntologyModel {
   public static final Property propertyFiteagleImplements;
   public static final Property propertyFiteagleContainsAdapter;
   public static final Property propertySparqlQuery;
-  public static final Property propertyJsonResult;
-  public static final Property propertyResultModelTTL;
   
   public static final Property methodReleases;
   public static final Property methodRestores;
@@ -49,8 +47,6 @@ public class MessageBusOntologyModel {
         methodRestores = fiteagle.getProperty("http://open-multinet.info/ontology/omn#restores");
         
         propertySparqlQuery = fiteagle.getProperty("http://open-multinet.info/ontology/omn#sparqlQuery");
-        propertyJsonResult = fiteagle.getProperty("http://open-multinet.info/ontology/omn#jsonResult");
-        propertyResultModelTTL = fiteagle.getProperty("http://open-multinet.info/ontology/omn#resultModelTTl");
         
         classAdapter = fiteagle.getResource("http://open-multinet.info/ontology/omn#Adapter");
         classTestbed = fiteagle.getResource("http://open-multinet.info/ontology/omn#Testbed");

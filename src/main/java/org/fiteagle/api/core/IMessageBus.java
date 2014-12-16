@@ -5,11 +5,7 @@ public interface IMessageBus {
 	String TOPIC_CORE = "topic/core";
 	String TOPIC_CORE_NAME = "java:/" + TOPIC_CORE;
 	
-	String TYPE = "rdf_type";
-	String REQUEST = "fiteagle_request";
 	String SERIALIZATION = "fiteagle_serialization";
-	String QUERY = "fiteagle_query";
-	String TARGET = "fiteagle_targets";
 	
 	int TIMEOUT = 8000;
 	int SHORT_TIMEOUT = 2000;

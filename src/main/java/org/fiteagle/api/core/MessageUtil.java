@@ -8,9 +8,9 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
-import javax.jms.JMSContext;
 import javax.jms.Topic;
 import javax.ws.rs.core.Response;
 
@@ -19,7 +19,6 @@ import org.apache.jena.riot.RiotException;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class MessageUtil {
@@ -111,12 +110,7 @@ public class MessageUtil {
   }
   
   public static Model parseSerializedModel(String modelString) throws RiotException {
-    Model rdfModel = ModelFactory.createDefaultModel();
-    
-    InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
-    rdfModel.read(is, null, IMessageBus.SERIALIZATION_DEFAULT);
-    
-    return rdfModel;
+    return parseSerializedModel(modelString, IMessageBus.SERIALIZATION_DEFAULT);
   }
   
   public static Model parseSerializedModel(String modelString, String serialization) throws RiotException {
@@ -173,25 +167,22 @@ public class MessageUtil {
     return rcvMessage;
   }
   
-  public static String getTTLResultModelFromSerializedModel(String serializedModel) {
-    Model resultModel = MessageUtil.parseSerializedModel(serializedModel);
-    Resource message = resultModel.getResource(MessageBusOntologyModel.internalMessage.getURI());
-    String result = message.getProperty(MessageBusOntologyModel.propertyResultModelTTL).getString();
-    return result;
-  }
-  
-  public static String getJSONResultModelFromSerializedModel(String serializedModel) {
-    Model resultModel = MessageUtil.parseSerializedModel(serializedModel);
-    Resource message = resultModel.getResource(MessageBusOntologyModel.internalMessage.getURI());
-    Statement resultStatement = message.getProperty(MessageBusOntologyModel.propertyJsonResult);
-    return resultStatement.getObject().toString();
-  }
-  
-  public static String createSerializedSPARQLQueryModel(String query) {
+  public static String createSerializedSPARQLQueryModel(String query, String serialization) {
     Model requestModel = ModelFactory.createDefaultModel();
     Resource resource = requestModel.createResource(MessageBusOntologyModel.internalMessage.getURI());
     resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
     resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
+    requestModel = MessageUtil.createMsgRequest(requestModel);
+    
+    return MessageUtil.serializeModel(requestModel, serialization);
+  }
+  
+  public static String createSerializedSPARQLQueryRestoresModel(String query, Resource adapter) {
+    Model requestModel = ModelFactory.createDefaultModel();
+    Resource resource = requestModel.createResource(MessageBusOntologyModel.internalMessage.getURI());
+    resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
+    resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
+    resource.addProperty(MessageBusOntologyModel.methodRestores, adapter);
     requestModel = MessageUtil.createMsgRequest(requestModel);
     
     return MessageUtil.serializeModel(requestModel);

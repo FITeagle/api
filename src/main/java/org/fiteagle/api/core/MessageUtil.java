@@ -136,17 +136,6 @@ public class MessageUtil {
     return messageModel.contains(null, RDF.type, messageTypeProperty);
   }
   
-  public static Model getRDFResultModel(final Message receivedMessage) {
-    String rdfResult = getRDFResult(receivedMessage);
-    
-    Model resultModel = null;
-    try {
-      resultModel = parseSerializedModel(rdfResult);
-    } catch (RiotException e) {
-    }
-    return resultModel;
-  }
-  
   public static String getRDFResult(final Message receivedMessage) {
     String result = null;
     if (receivedMessage != null) {

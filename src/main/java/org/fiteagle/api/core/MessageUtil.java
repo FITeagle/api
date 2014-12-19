@@ -49,26 +49,53 @@ public class MessageUtil {
     return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleConfigure);
   }
 
-  public static Message createRDFMessage(final Model rdfModel, final String methodType, final String serialization, JMSContext context) {
+  public static Message createRDFMessage(Model rdfModel, String methodType, String serialization, String correlationID, JMSContext context) {
     final Message message = context.createMessage();
     try {
       message.setStringProperty(IMessageBus.METHOD_TYPE, methodType);
       message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
       message.setStringProperty(IMessageBus.RDF, serializeModel(rdfModel));
-      message.setJMSCorrelationID(UUID.randomUUID().toString());
+      if(correlationID != null){
+        message.setJMSCorrelationID(correlationID);
+      }
+      else{
+        message.setJMSCorrelationID(UUID.randomUUID().toString());
+      }
     } catch (JMSException e) {
       LOGGER.log(Level.SEVERE, e.getMessage());
     }
     return message;
   }
   
-  public static Message createRDFMessage(final String rdfModel, final String methodType, final String serialization, JMSContext context) {
+  public static Message createRDFMessage(String rdfModel, String methodType, String serialization, String correlationID, JMSContext context) {
     final Message message = context.createMessage();
     try {
       message.setStringProperty(IMessageBus.METHOD_TYPE, methodType);
       message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
       message.setStringProperty(IMessageBus.RDF, rdfModel);
-      message.setJMSCorrelationID(UUID.randomUUID().toString());
+      if(correlationID != null){
+        message.setJMSCorrelationID(correlationID);
+      }
+      else{
+        message.setJMSCorrelationID(UUID.randomUUID().toString());
+      }
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return message;
+  }
+  
+  public static Message createErrorMessage(String errorMessage, String correlationID, JMSContext context) {
+    final Message message = context.createMessage();
+    try {
+      message.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_INFORM);
+      message.setStringProperty(IMessageBus.TYPE_ERROR, errorMessage);
+      if(correlationID != null){
+        message.setJMSCorrelationID(correlationID);
+      }
+      else{
+        message.setJMSCorrelationID(UUID.randomUUID().toString());
+      }
     } catch (JMSException e) {
       LOGGER.log(Level.SEVERE, e.getMessage());
     }

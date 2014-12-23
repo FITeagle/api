@@ -1,6 +1,8 @@
 package org.fiteagle.api.core;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -16,9 +18,12 @@ import javax.ws.rs.core.Response;
 
 import org.apache.jena.riot.RiotException;
 
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class MessageUtil {
@@ -215,6 +220,32 @@ public class MessageUtil {
     return MessageUtil.serializeModel(requestModel);
   }
   
+  public static String parseResultSetToJson(ResultSet resultSet) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ResultSetFormatter.outputAsJSON(baos, resultSet);
+    String jsonString = "";
+    try {
+      jsonString = baos.toString(Charset.defaultCharset().toString());
+      baos.close();
+    } catch (IOException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return jsonString;
+  }
+  
+  public static String getSPARQLQueryFromModel(Model model) throws ParsingException {
+    String query = null;
+    Resource message = model.getResource(MessageBusOntologyModel.internalMessage.getURI());
+    Statement st = message.getProperty(MessageBusOntologyModel.propertySparqlQuery);
+    if(st != null){
+      query =  st.getObject().toString();
+    }
+    if (query == null || query.isEmpty()) {
+      throw new ParsingException("SPARQL Query expected, but no sparql query found!");
+    }
+    return query;
+  }
+  
   public static void setCommonPrefixes(Model model) {
     model.removeNsPrefix("j.0");
     model.removeNsPrefix("j.1");
@@ -230,6 +261,15 @@ public class MessageUtil {
     model.setNsPrefix("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
     model.setNsPrefix("xsd", "http://www.w3.org/2001/XMLSchema#");
     model.setNsPrefix("rdfs", "http://www.w3.org/2000/01/rdf-schema#");
+  }
+  
+ public static class ParsingException extends Exception {
+    
+    private static final long serialVersionUID = 8213556984621316215L;
+
+    public ParsingException(String message){
+      super(message);
+    }
   }
   
 }

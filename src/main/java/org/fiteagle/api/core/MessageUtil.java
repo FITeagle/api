@@ -203,6 +203,7 @@ public class MessageUtil {
     Model requestModel = ModelFactory.createDefaultModel();
     Resource resource = requestModel.createResource(MessageBusOntologyModel.internalMessage.getURI());
     resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
+    resource.addProperty(MessageBusOntologyModel.requestType, IMessageBus.REQUEST_TYPE_SPARQL_QUERY);
     resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
     requestModel = MessageUtil.createMsgRequest(requestModel);
     
@@ -213,6 +214,7 @@ public class MessageUtil {
     Model requestModel = ModelFactory.createDefaultModel();
     Resource resource = requestModel.createResource(MessageBusOntologyModel.internalMessage.getURI());
     resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
+    resource.addProperty(MessageBusOntologyModel.requestType, IMessageBus.REQUEST_TYPE_SPARQL_QUERY);
     resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
     resource.addProperty(MessageBusOntologyModel.methodRestores, adapter);
     requestModel = MessageUtil.createMsgRequest(requestModel);

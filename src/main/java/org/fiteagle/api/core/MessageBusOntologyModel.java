@@ -22,6 +22,8 @@ public class MessageBusOntologyModel {
   public static final Property methodReleases;
   public static final Property methodRestores;
   
+  public static final Property requestType;
+  
   public static final Resource classAdapter;
   public static final Resource classTestbed;
   public static final Resource classResource;
@@ -47,6 +49,8 @@ public class MessageBusOntologyModel {
         methodRestores = fiteagle.getProperty("http://open-multinet.info/ontology/omn#restores");
         
         propertySparqlQuery = fiteagle.getProperty("http://open-multinet.info/ontology/omn#sparqlQuery");
+        
+        requestType = fiteagle.getProperty("http://open-multinet.info/ontology/omn#requestType");
         
         classAdapter = fiteagle.getResource("http://open-multinet.info/ontology/omn#Adapter");
         classTestbed = fiteagle.getResource("http://open-multinet.info/ontology/omn#Testbed");

@@ -59,7 +59,7 @@ public class MessageUtil {
     try {
       message.setStringProperty(IMessageBus.METHOD_TYPE, methodType);
       message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
-      message.setStringProperty(IMessageBus.RDF, serializeModel(rdfModel));
+      message.setStringProperty(IMessageBus.RDF, serializeModel(rdfModel, serialization));
       if(correlationID != null){
         message.setJMSCorrelationID(correlationID);
       }

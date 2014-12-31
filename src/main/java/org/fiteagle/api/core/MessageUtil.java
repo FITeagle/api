@@ -30,30 +30,6 @@ public class MessageUtil {
   
   private static Logger LOGGER = Logger.getLogger(MessageUtil.class.toString());
   
-  public static Model createMsgCreate(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleCreate);
-  }
-  
-  public static Model createMsgDiscover(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleDiscover);
-  }
-  
-  public static Model createMsgRequest(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleRequest);
-  }
-  
-  public static Model createMsgRelease(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleRelease);
-  }
-  
-  public static Model createMsgInform(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleInform);
-  }
-  
-  public static Model createMsgConfigure(Model messageModel) {
-    return createDefaultMessageModel(messageModel, MessageBusOntologyModel.propertyFiteagleConfigure);
-  }
-
   public static Message createRDFMessage(Model rdfModel, String methodType, String serialization, String correlationID, JMSContext context) {
     final Message message = context.createMessage();
     try {
@@ -105,19 +81,6 @@ public class MessageUtil {
       LOGGER.log(Level.SEVERE, e.getMessage());
     }
     return message;
-  }
-  
-  private static Model createDefaultMessageModel(Model messageModel, Resource messageTypeProperty) {
-    Model rdfModel = ModelFactory.createDefaultModel();
-    
-    if (messageModel != null) {
-      rdfModel.add(messageModel);
-      rdfModel.setNsPrefixes(messageModel.getNsPrefixMap());
-    }
-    
-    rdfModel.add(MessageBusOntologyModel.internalMessage, RDF.type, messageTypeProperty);
-    
-    return rdfModel;
   }
   
   public static String serializeModel(Model rdfModel) {
@@ -205,8 +168,7 @@ public class MessageUtil {
     resource.addProperty(RDF.type, MessageBusOntologyModel.propertyFiteagleRequest);
     resource.addProperty(MessageBusOntologyModel.requestType, IMessageBus.REQUEST_TYPE_SPARQL_QUERY);
     resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
-    requestModel = MessageUtil.createMsgRequest(requestModel);
-    
+
     return MessageUtil.serializeModel(requestModel, serialization);
   }
   
@@ -217,7 +179,6 @@ public class MessageUtil {
     resource.addProperty(MessageBusOntologyModel.requestType, IMessageBus.REQUEST_TYPE_SPARQL_QUERY);
     resource.addProperty(MessageBusOntologyModel.propertySparqlQuery, query);
     resource.addProperty(MessageBusOntologyModel.methodRestores, adapter);
-    requestModel = MessageUtil.createMsgRequest(requestModel);
     
     return MessageUtil.serializeModel(requestModel);
   }

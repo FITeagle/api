@@ -158,7 +158,7 @@ public class MessageUtil {
     } catch (JMSException e) {
       LOGGER.log(Level.SEVERE, e.getMessage());
     }
-    final Message rcvMessage = context.createConsumer(topic, filter).receive(IMessageBus.SHORT_TIMEOUT);
+    final Message rcvMessage = context.createConsumer(topic, filter).receive(IMessageBus.TIMEOUT);
     return rcvMessage;
   }
   

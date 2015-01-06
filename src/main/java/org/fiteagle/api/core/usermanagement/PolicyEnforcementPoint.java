@@ -11,7 +11,7 @@ public interface PolicyEnforcementPoint {
   public static final String TYPE_PARAMETER_ACTION = "parameter_action";
   
   public static final String TARGET = "policyEnforcementPoint";
-  public static final String MESSAGE_FILTER = IMessageBus.TYPE_TARGET + " = '" + TARGET + "'";
+  public static final String MESSAGE_FILTER = IMessageBus.METHOD_TARGET + " = '" + TARGET + "'";
   
   public abstract boolean isRequestAuthorized(String subjectUsername, String resource, String action);
   

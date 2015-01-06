@@ -58,7 +58,7 @@ public interface UserManager {
   
   public static final String TARGET = "usermanagement";
   
-  public static final String MESSAGE_FILTER = IMessageBus.TYPE_TARGET + " = '" + TARGET + "'";
+  public static final String MESSAGE_FILTER = IMessageBus.METHOD_TARGET + " = '" + TARGET + "'";
   
   public abstract void addUser(User user);
   

@@ -12,7 +12,7 @@ public interface IMessageBus {
 	String TYPE_GET = "GET";
 	String TYPE_CREATE = "CREATE";
 	String TYPE_CONFIGURE = "CONFIGURE";
-	String TYPE_DELETE = "RELEASE";
+	String TYPE_DELETE = "DELETE";
 	String TYPE_INFORM = "INFORM";
 	
 	String METHOD_TARGET = "METHOD_TARGET";

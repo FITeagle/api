@@ -2,9 +2,9 @@ package org.fiteagle.api.core;
 
 public interface MessageFilters {
   
-  String FILTER_ORCHESTRATOR = IMessageBus.METHOD_TARGET + " = '" + IMessageBus.TARGET_ORCHESTRATOR + "'"
+  String FILTER_ORCHESTRATOR = IMessageBus.METHOD_TARGET + " = '" + IMessageBus.TARGET_ORCHESTRATOR + "' "
       + "AND ("+IMessageBus.METHOD_TYPE+" = '"+IMessageBus.TYPE_CONFIGURE+"' "
-      + "OR "+IMessageBus.METHOD_TYPE+" = '"+IMessageBus.TYPE_DELETE+")";
+      + "OR "+IMessageBus.METHOD_TYPE+" = '"+IMessageBus.TYPE_DELETE+"')";
   
   String FILTER_RESERVATION = IMessageBus.METHOD_TARGET + " = '" + IMessageBus.TARGET_RESERVATION + "' "
       + "AND ("+IMessageBus.METHOD_TYPE+" = '"+IMessageBus.TYPE_CREATE+"' "

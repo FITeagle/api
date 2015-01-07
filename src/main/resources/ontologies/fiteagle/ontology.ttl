@@ -204,7 +204,44 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:range owl:Thing .
 
 
+###  http://open-multinet.info/ontology/omn#partOf
 
+:partOf rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "partOf"@en ;
+            
+            rdfs:comment "Defines to which Group it belongs" ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range xsd:string .
+
+
+###  http://open-multinet.info/ontology/omn#endTime
+
+:partOf rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "endTime"@en ;
+            
+            rdfs:comment "Defines the end time of the reservation" ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range xsd:string .
+            
+            
+###  http://open-multinet.info/ontology/omn#reserveInstanceFrom
+
+:reserveInstanceFrom rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "reserveInstanceFrom"@en ;
+            
+            rdfs:comment "Defines what to reservation" ;
+            
+            rdfs:domain owl:Thing ;
+            
+            rdfs:range xsd:string .
+            
 #################################################################
 #
 #    Classes
@@ -290,6 +327,13 @@ foaf:Person rdf:type owl:Class .
      rdfs:subClassOf :Resource .
             
 
+###  http://open-multinet.info/ontology/omn#Group
+
+:Group rdf:type owl:Class .
+
+###  http://open-multinet.info/ontology/omn#Reservation
+
+:Reservation rdf:type owl:Class .
 
 
 #################################################################

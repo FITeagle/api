@@ -31,8 +31,6 @@ public interface IMessageBus {
 
 	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE;
 	
-	String GROUP = "group";
-	String RESERVATION = "Reservation";
 	
   String TYPE_ERROR = "ERROR";
   

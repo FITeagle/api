@@ -22,8 +22,6 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
 
 public class MessageUtil {
   
@@ -69,11 +67,25 @@ public class MessageUtil {
     return message;
   }
   
-  public static Message createErrorMessage(String errorMessage, String correlationID, JMSContext context) {
-    final Message message = context.createMessage();
+  public static Message createSPARQLQueryMessage(String query, String methodTarget, String serialization, JMSContext context) {
+    final Message message = context.createTextMessage(query);
     try {
-      message.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_INFORM);
-      message.setStringProperty(IMessageBus.TYPE_ERROR, errorMessage);
+      message.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_GET);
+      message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
+      message.setJMSCorrelationID(UUID.randomUUID().toString());
+      if(methodTarget != null){
+        message.setStringProperty(IMessageBus.METHOD_TARGET, methodTarget);
+      }
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return message;
+  }
+  
+  public static Message createErrorMessage(String errorMessage, String correlationID, JMSContext context) {
+    final Message message = context.createTextMessage(errorMessage);
+    try {
+      message.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_ERROR);
       if(correlationID != null){
         message.setJMSCorrelationID(correlationID);
       }
@@ -86,10 +98,22 @@ public class MessageUtil {
     return message;
   }
   
-  public static String serializeModel(Model rdfModel) {
-    StringWriter writer = new StringWriter();
-    rdfModel.write(writer, IMessageBus.SERIALIZATION_DEFAULT);
-    return writer.toString();
+  public static String getMessageType(Message message) {
+    try {
+      return message.getStringProperty(IMessageBus.METHOD_TYPE);
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return null;
+  }
+  
+  public static String getMessageTarget(Message message) {
+    try {
+      return message.getStringProperty(IMessageBus.METHOD_TARGET);
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return null;
   }
   
   public static String serializeModel(Model rdfModel, String serialization) {
@@ -107,10 +131,6 @@ public class MessageUtil {
     return serializedModel;
   }
   
-  public static Model parseSerializedModel(String modelString) throws RiotException {
-    return parseSerializedModel(modelString, IMessageBus.SERIALIZATION_DEFAULT);
-  }
-  
   public static Model parseSerializedModel(String modelString, String serialization) throws RiotException {
     Model rdfModel = ModelFactory.createDefaultModel();
     
@@ -124,34 +144,14 @@ public class MessageUtil {
     return rdfModel;
   }
   
-  public static boolean isMessageType(Model messageModel, Resource messageTypeProperty) {
-    return messageModel.contains(null, RDF.type, messageTypeProperty);
-  }
-  
-  public static String getRDFResult(final Message receivedMessage) {
+  public static String getStringBody(final Message receivedMessage) {
     String result = null;
-    if (receivedMessage != null) {
-      try {
-        result = receivedMessage.getBody(String.class);
-      } catch (JMSException e) {
-        LOGGER.log(Level.SEVERE, e.getMessage());
-      }
+    try {
+      result = receivedMessage.getBody(String.class);
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
     }
     return result;
-  }
-  
-  public static String getError(final Message receivedMessage) {
-    String error = null;
-    if (receivedMessage == null) {
-      error = Response.Status.REQUEST_TIMEOUT.name();
-    } else {
-      try {
-        error = receivedMessage.getStringProperty(IMessageBus.TYPE_ERROR);
-      } catch (JMSException e) {
-        LOGGER.log(Level.SEVERE, e.getMessage());
-      }
-    }
-    return error;
   }
   
   public static Message waitForResult(Message requestMessage, JMSContext context, Topic topic) {
@@ -161,36 +161,17 @@ public class MessageUtil {
     } catch (JMSException e) {
       LOGGER.log(Level.SEVERE, e.getMessage());
     }
-    final Message rcvMessage = context.createConsumer(topic, filter).receive(IMessageBus.TIMEOUT);
+    Message rcvMessage = context.createConsumer(topic, filter).receive(IMessageBus.TIMEOUT);
+    
+    if(rcvMessage == null){
+      rcvMessage = context.createTextMessage(Response.Status.REQUEST_TIMEOUT.name());
+      try {
+        rcvMessage.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_ERROR);
+      } catch (JMSException e) {
+        LOGGER.log(Level.SEVERE, e.getMessage());
+      }      
+    }
     return rcvMessage;
-  }
-  
-  public static Message createSPARQLQueryMessage(String query, String methodTarget, String serialization, JMSContext context) {
-    final Message message = context.createTextMessage(query);
-    try {
-      message.setStringProperty(IMessageBus.METHOD_TYPE, IMessageBus.TYPE_GET);
-      message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
-      message.setJMSCorrelationID(UUID.randomUUID().toString());
-      if(methodTarget != null){
-        message.setStringProperty(IMessageBus.METHOD_TARGET, methodTarget);
-      }
-    } catch (JMSException e) {
-      LOGGER.log(Level.SEVERE, e.getMessage());
-    }
-    return message;
-  }
-  
-  public static String parseResultSetToJson(ResultSet resultSet) {
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    ResultSetFormatter.outputAsJSON(baos, resultSet);
-    String jsonString = "";
-    try {
-      jsonString = baos.toString(Charset.defaultCharset().toString());
-      baos.close();
-    } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, e.getMessage());
-    }
-    return jsonString;
   }
   
   public static String getSPARQLQuery(Message message) throws RuntimeException {
@@ -204,6 +185,19 @@ public class MessageUtil {
       throw new RuntimeException("SPARQL Query expected, but no sparql query found!");
     }
     return query;
+  }
+  
+  public static String parseResultSetToJson(ResultSet resultSet) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ResultSetFormatter.outputAsJSON(baos, resultSet);
+    String jsonString = "";
+    try {
+      jsonString = baos.toString(Charset.defaultCharset().toString());
+      baos.close();
+    } catch (IOException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return jsonString;
   }
   
   public static void setCommonPrefixes(Model model) {

@@ -14,6 +14,7 @@ public interface IMessageBus {
 	String TYPE_CONFIGURE = "CONFIGURE";
 	String TYPE_DELETE = "DELETE";
 	String TYPE_INFORM = "INFORM";
+	String TYPE_ERROR = "ERROR";
 	
 	String METHOD_TARGET = "METHOD_TARGET";
 	String TARGET_ORCHESTRATOR = "TARGET_ORCHESTRATOR";
@@ -30,9 +31,6 @@ public interface IMessageBus {
 	String SERIALIZATION_JSONLD = "JSON-LD";
 
 	String SERIALIZATION_DEFAULT = SERIALIZATION_TURTLE;
-	
-	
-  String TYPE_ERROR = "ERROR";
   
   //To be refactored - currently used by usermanagement
   String TYPE_RESULT = "RESULT";

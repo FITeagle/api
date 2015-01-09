@@ -116,6 +116,24 @@ public class MessageUtil {
     return null;
   }
   
+  public static String getMessageSerialization(Message message) {
+    try {
+      return message.getStringProperty(IMessageBus.SERIALIZATION);
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return null;
+  }
+  
+  public static String getJMSCorrelationID(Message message) {
+    try {
+      return message.getJMSCorrelationID();
+    } catch (JMSException e) {
+      LOGGER.log(Level.SEVERE, e.getMessage());
+    }
+    return null;
+  }
+  
   public static String serializeModel(Model rdfModel, String serialization) {
     StringWriter writer = new StringWriter();
     rdfModel.write(writer, serialization);

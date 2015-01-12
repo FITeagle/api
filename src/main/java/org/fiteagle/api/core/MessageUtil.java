@@ -243,5 +243,14 @@ public class MessageUtil {
       super(message);
     }
   }
+ 
+ public static class TimeoutException extends RuntimeException {
+   
+   private static final long serialVersionUID = -5630226460026376892L;
+   
+   public TimeoutException(String message) {
+     super("Timeout while waiting for a response: " + message);
+   }
+ }
   
 }

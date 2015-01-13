@@ -219,7 +219,7 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology/omn#endTime
 
-:partOf rdf:type owl:DatatypeProperty ;
+:endTime rdf:type owl:DatatypeProperty ;
             
             rdfs:label "endTime"@en ;
             

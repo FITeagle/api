@@ -119,15 +119,15 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology/omn#partOf
 
-:partOf rdf:type owl:DatatypeProperty ;
+:partOf rdf:type owl:ObjectProperty ;
             
             rdfs:label "partOf"@en ;
             
             rdfs:comment "Defines to which Group it belongs" ;
             
-            rdfs:domain owl:Thing ;
+            rdfs:domain :Resource ;
             
-            rdfs:range xsd:string .
+            rdfs:range :Group .
 
 
 ###  http://open-multinet.info/ontology/omn#endTime
@@ -158,7 +158,16 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:domain owl:Thing ;
             
             rdfs:range xsd:string .
-            
+
+
+###  http://open-multinet.info/ontology/omn#hasState
+
+:hasState rdf:type owl:DatatypeProperty ;
+
+            rdfs:range xsd:string ;
+
+            rdfs:Domain :Resource .     
+                   
 #################################################################
 #
 #    Classes
@@ -188,7 +197,9 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 ###  http://open-multinet.info/ontology/omn#Reservation
 
-:Reservation rdf:type owl:Class .
+:Reservation rdf:type owl:Class ;
+     
+     rdfs:subClassOf :Resource .
 
 
 #################################################################

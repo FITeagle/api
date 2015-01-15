@@ -13,6 +13,7 @@ public class MessageBusOntologyModel {
   public static final Property partOf;
   public static final Property endTime;
   public static final Property reserveInstanceFrom;
+  public static final Property hasState;
   
   public static final Resource classAdapter;
   public static final Resource classTestbed;
@@ -28,6 +29,7 @@ public class MessageBusOntologyModel {
         partOf = fiteagle.getProperty("http://open-multinet.info/ontology/omn#partOf");
         endTime = fiteagle.getProperty("http://open-multinet.info/ontology/omn#endTime");
         reserveInstanceFrom = fiteagle.getProperty("http://open-multinet.info/ontology/omn#reserveInstanceFrom");
+        hasState = fiteagle.getProperty("http://open-multinet.info/ontology/omn#hasState");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implements");
         

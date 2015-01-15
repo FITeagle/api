@@ -49,8 +49,6 @@ foaf:name rdf:type owl:AnnotationProperty .
 
 
 
-
-
 #################################################################
 #
 #    Object Properties
@@ -90,10 +88,11 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:range owl:Thing .
             
-            
 ###  http://open-multinet.info/ontology/omn#maxInstances
 
-:maxInstances rdf:type owl:DatatypeProperty ;
+:maxInstances a owl:DatatypeProperty ;
+
+            a owl:FunctionalProperty ;
             
             rdfs:label "maxInstances"@en ;
             
@@ -102,48 +101,6 @@ foaf:name rdf:type owl:AnnotationProperty .
             rdfs:domain owl:Thing ;
             
             rdfs:range xsd:integer .
- 
-###  http://open-multinet.info/ontology/omn#requestType
-
-:requestType rdf:type owl:DatatypeProperty ;
-            
-            rdfs:label "requestType"@en ;
-            
-            rdfs:comment "Defines the method e.g., reservation, provision ... etc ."@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range xsd:string .           
-            
-###  http://open-multinet.info/ontology/omn#releases
-
-:releases rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "releases"@en ;
-            
-            rdfs:comment "Defines that the subject releases object."@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range owl:Thing .
-            
-            
-###  http://open-multinet.info/ontology/omn#restores
-
-:restores rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "restores"@en ;
-            
-            rdfs:comment "Defines that the subject restores the object."@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range owl:Thing .
-            
             
 ###  http://open-multinet.info/ontology/omn#containsAdapter
 
@@ -159,50 +116,6 @@ foaf:name rdf:type owl:AnnotationProperty .
             
             rdfs:range owl:Thing .
             
-            
-###  http://open-multinet.info/ontology/omn#sparqlQuery
-
-:sparqlQuery rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "a SPARQL Query"@en ;
-            
-            rdfs:comment "Specifies a SPARQL Query"@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range owl:Thing .
-
-
-###  http://open-multinet.info/ontology/omn#jsonResult
-
-:jsonResult rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "a JSON Result"@en ;
-            
-            rdfs:comment "Specifies a JSON Result"@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range owl:Thing .
-
-###  http://open-multinet.info/ontology/omn#resultModelTTl
-
-:resultModelTTl rdf:type owl:AsymmetricProperty ,
-                     owl:IrreflexiveProperty ,
-                     owl:ObjectProperty ;
-            
-            rdfs:label "a ttl result model"@en ;
-            
-            rdfs:comment "Specifies a result Model serialized as turtle"@en ;
-            
-            rdfs:domain owl:Thing ;
-            
-            rdfs:range owl:Thing .
-
 
 ###  http://open-multinet.info/ontology/omn#partOf
 
@@ -220,6 +133,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 ###  http://open-multinet.info/ontology/omn#endTime
 
 :endTime rdf:type owl:DatatypeProperty ;
+
+            a owl:FunctionalProperty ;
             
             rdfs:label "endTime"@en ;
             
@@ -233,6 +148,8 @@ foaf:name rdf:type owl:AnnotationProperty .
 ###  http://open-multinet.info/ontology/omn#reserveInstanceFrom
 
 :reserveInstanceFrom rdf:type owl:DatatypeProperty ;
+
+            a owl:FunctionalProperty ;
             
             rdfs:label "reserveInstanceFrom"@en ;
             
@@ -249,64 +166,9 @@ foaf:name rdf:type owl:AnnotationProperty .
 #################################################################
 
 
-###  http://open-multinet.info/ontology/omn#Configure
-
-:Configure rdf:type owl:Class ;
-           
-           rdfs:subClassOf :Method .
-
-
-
-###  http://open-multinet.info/ontology/omn#Create
-
-:Create rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Method .
-
-
-
-###  http://open-multinet.info/ontology/omn#Discover
-
-:Discover rdf:type owl:Class ;
-          
-          rdfs:subClassOf :Method .
-
-
-
-###  http://open-multinet.info/ontology/omn#Inform
-
-:Inform rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Method .
-
-
-
-###  http://open-multinet.info/ontology/omn#Method
-
-:Method rdf:type owl:Class .
-
-
-
-###  http://open-multinet.info/ontology/omn#Release
-
-:Release rdf:type owl:Class ;
-         
-         rdfs:subClassOf :Method .
-
-
-
-###  http://open-multinet.info/ontology/omn#Request
-
-:Request rdf:type owl:Class ;
-         
-         rdfs:subClassOf :Method .
-
-
-
 ###  http://open-multinet.info/ontology/omn#Resource
 
 :Resource rdf:type owl:Class .
-
 
 ###  http://open-multinet.info/ontology/omn#Adapter
 
@@ -314,18 +176,11 @@ foaf:name rdf:type owl:AnnotationProperty .
 
       rdfs:subClassOf :Resource .
 
-
-###  http://xmlns.com/foaf/0.1/Person
-
-foaf:Person rdf:type owl:Class .
-
-
 ###  http://open-multinet.info/ontology/omn#Testbed
 
 :Testbed rdf:type owl:Class ;
 
      rdfs:subClassOf :Resource .
-            
 
 ###  http://open-multinet.info/ontology/omn#Group
 

@@ -8,7 +8,7 @@ public class MessageBusOntologyModelTest {
   
   @Test
   public void testLoadModel() {
-    assertEquals(MessageBusOntologyModel.classResource.toString(), "http://open-multinet.info/ontology/omn#Resource");
+    assertEquals(MessageBusOntologyModel.classResource.getURI(), "http://open-multinet.info/ontology/omn#Resource");
   }
   
 }

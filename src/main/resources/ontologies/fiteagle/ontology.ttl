@@ -34,6 +34,18 @@
 #
 #################################################################
 
+###  http://open-multinet.info/ontology/omn-federation#partOfFederation
+
+:partOfFederation rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:label "is part of federation" ;
+                  
+                  rdfs:comment "an adapter can be part of a federation (e.g. a testbed)" ;
+                  
+                  rdfs:range owl:Class ;
+                  
+                  rdfs:domain owl:Class .
+
 
 ###  http://open-multinet.info/ontology/omn#implementedBy
 

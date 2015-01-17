@@ -15,6 +15,8 @@ public class MessageBusOntologyModel {
   public static final Property reserveInstanceFrom;
   public static final Property hasState;
   
+  public static final Property partOfFederation;
+  
   public static final Resource classAdapter;
   public static final Resource classTestbed;
   public static final Resource classResource;
@@ -32,6 +34,8 @@ public class MessageBusOntologyModel {
         hasState = fiteagle.getProperty("http://open-multinet.info/ontology/omn#hasState");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implements");
+        
+        partOfFederation = fiteagle.getProperty("http://open-multinet.info/ontology/omn#partOfFederation");
         
         classAdapter = fiteagle.getResource("http://open-multinet.info/ontology/omn#Adapter");
         classTestbed = fiteagle.getResource("http://open-multinet.info/ontology/omn#Testbed");

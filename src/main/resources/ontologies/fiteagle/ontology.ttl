@@ -108,9 +108,9 @@
             rdfs:range owl:Thing .
             
 
-###  http://open-multinet.info/ontology/omn#partOf
+###  http://open-multinet.info/ontology/omn#partOfGroup
 
-:partOf rdf:type owl:ObjectProperty ;
+:partOfGroup rdf:type owl:ObjectProperty ;
             
             rdfs:label "partOf"@en ;
             
@@ -119,6 +119,19 @@
             rdfs:domain :Resource ;
             
             rdfs:range :Group .
+
+
+###  http://open-multinet.info/ontology/omn#hasReservation
+
+:hasReservation rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "partOf"@en ;
+            
+            rdfs:comment "Defines reservation IDs belonging to certain Group" ;
+            
+            rdfs:domain :Resource ;
+            
+            rdfs:range :Reservation .
 
 
 ###  http://open-multinet.info/ontology/omn#endTime

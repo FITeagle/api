@@ -10,10 +10,11 @@ public class MessageBusOntologyModel {
   public static final Property propertyFiteagleImplementedBy;
   public static final Property propertyFiteagleImplements;
   
-  public static final Property partOf;
+  public static final Property partOfGroup;
   public static final Property endTime;
   public static final Property reserveInstanceFrom;
   public static final Property hasState;
+  public static final Property hasReservation;
   
   public static final Property partOfFederation;
   
@@ -28,10 +29,11 @@ public class MessageBusOntologyModel {
         Model fiteagle = OntologyModelUtil.loadModel("ontologies/fiteagle/ontology.ttl", "TURTLE");
         
         maxInstances = fiteagle.getProperty("http://open-multinet.info/ontology/omn#maxInstances");
-        partOf = fiteagle.getProperty("http://open-multinet.info/ontology/omn#partOf");
+        partOfGroup = fiteagle.getProperty("http://open-multinet.info/ontology/omn#partOfGroup");
         endTime = fiteagle.getProperty("http://open-multinet.info/ontology/omn#endTime");
         reserveInstanceFrom = fiteagle.getProperty("http://open-multinet.info/ontology/omn#reserveInstanceFrom");
         hasState = fiteagle.getProperty("http://open-multinet.info/ontology/omn#hasState");
+        hasReservation = fiteagle.getProperty("http://open-multinet.info/ontology/omn#hasReservation");
         propertyFiteagleImplementedBy = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implementedBy");
         propertyFiteagleImplements = fiteagle.getProperty("http://open-multinet.info/ontology/omn#implements");
         

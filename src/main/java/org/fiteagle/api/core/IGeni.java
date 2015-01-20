@@ -34,4 +34,5 @@ public interface IGeni {
 	String GENI_VALUE = "geni_value";
 	String GENI_RSPEC_VERSION = "geni_rspec_version";
 	String GENI_NOT_ALLOCATED = "geni_not_allocated";
+	String GENI_UNALLOCATED  = "geni_unallocated";
 }

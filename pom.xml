@@ -15,6 +15,14 @@
 		<version>0.1-SNAPSHOT</version>
 	</parent>
 
+	<dependencies>
+		<dependency>
+			<groupId>info.open-multinet</groupId>
+			<artifactId>omnlib</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 	<repositories>
 		<repository>
 			<id>fiteagle-repo</id>

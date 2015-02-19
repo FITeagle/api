@@ -25,8 +25,9 @@ public class OntologyModelUtil {
   }
   
   public static String getLocalNamespace() {
+    String hostname = Config.getProperty("hostname");
     //@todo: move this to a org.fiteagle.api.core.Config.get(Config.HOSTNAME) or similar
-    String hostname = "localhost";
+//    String hostname = "localhost";
     /*
     try {     
       hostname = "localhost"; //InetAddress.getLocalHost().getCanonicalHostName();

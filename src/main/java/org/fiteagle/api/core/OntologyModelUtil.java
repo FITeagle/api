@@ -25,12 +25,15 @@ public class OntologyModelUtil {
   }
   
   public static String getLocalNamespace() {
-    String hostname = null;
-    try {
-      hostname = InetAddress.getLocalHost().getCanonicalHostName();
+    //@todo: move this to a org.fiteagle.api.core.Config.get(Config.HOSTNAME) or similar
+    String hostname = "localhost";
+    /*
+    try {     
+      hostname = "localhost"; //InetAddress.getLocalHost().getCanonicalHostName();
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }
+    */
     return "http://".concat(hostname).concat("/");
   }
   

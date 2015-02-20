@@ -12,7 +12,7 @@ import com.hp.hpl.jena.util.FileManager;
 
 public class Config {
   
-  private String fileName;
+  private static String fileName;
   private final static String home = System.getProperty("user.home");
   private final static String hostname = "Config.HOSTNAME";
   private final static String localhost = "localhost";
@@ -20,24 +20,30 @@ public class Config {
   private static Config instance;
   
   public static Config getInstance(){
-    return createInstance(home.concat("/.fiteagle/fiteagle.properties"));
+    fileName = home.concat("/.fiteagle/fiteagle.properties");
+    return createInstance();
+    
   }
   
   public static Config getInstance(String file){
-    return createInstance(home.concat("/.fiteagle/").concat(file));
+    fileName = home.concat("/.fiteagle/").concat(file); 
+    return createInstance();
   }
   
-  private static Config createInstance(String fileName){
+  private static Config createInstance(){
+    File file = new File(fileName);
+    if(!file.exists()){
+      setDefaultProperty();
+    }
     if(instance == null){
       instance = new Config();
-      instance.fileName = fileName;
       return instance;
     } else{
       return instance;
     }
   }
   
-  public void setDefaultProperty() {
+  public static void setDefaultProperty() {
     Properties property = new Properties();
     property.put(hostname, localhost);
     writeProperties(property);
@@ -97,7 +103,7 @@ public class Config {
     return property;
   }
   
-  private void writeProperties(Properties property) {
+  private static void writeProperties(Properties property) {
     try {
       File file = new File(fileName);
       FileOutputStream fileOut = new FileOutputStream(file);

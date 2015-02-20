@@ -8,7 +8,7 @@ public class ConfigTest {
 //  @Test
   public void testConfigProperties(){
     Config config = Config.getInstance();
-    config.setDefaultProperty();
+    
     config.setNewProperty("Key", "value");
     config.setNewProperty("anotherProperty", "anotherValue");
     

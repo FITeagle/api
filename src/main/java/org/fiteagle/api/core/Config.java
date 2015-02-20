@@ -1,5 +1,6 @@
 package org.fiteagle.api.core;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,53 +12,76 @@ import com.hp.hpl.jena.util.FileManager;
 
 public class Config {
   
-  private static String fileName = "propety.properties";
+  private String fileName;
+  private final static String home = System.getProperty("user.home");
+  private final static String hostname = "Config.HOSTNAME";
+  private final static String localhost = "localhost";
   
-  static{
-    setProperty("hostname", "localhost");
+  private static Config instance;
+  
+  public static Config getInstance(){
+    return createInstance(home.concat("/.fiteagle/fiteagle.properties"));
   }
   
-  public static void setProperty(String propertyKey, String propertyValue) {
-    
-      Properties property = new Properties();
-      property.setProperty(propertyKey, propertyValue);
-      writeProperties(property);
+  public static Config getInstance(String file){
+    return createInstance(home.concat("/.fiteagle/").concat(file));
   }
   
-  public static String getProperty(String propertyKey) {
+  private static Config createInstance(String fileName){
+    if(instance == null){
+      instance = new Config();
+      instance.fileName = fileName;
+      return instance;
+    } else{
+      return instance;
+    }
+  }
+  
+  public void setDefaultProperty() {
+    Properties property = new Properties();
+    property.put(hostname, localhost);
+    writeProperties(property);
+  }
+  
+  public void setNewProperty(String propertyKey, String propertyValue) {
+    Properties property = readProperties();
+    property.put(propertyKey, propertyValue);
+    writeProperties(property);
+  }
+  
+  public String getProperty(String propertyKey) {
     String propertyValue = null;
     propertyValue = readProperties().getProperty(propertyKey);
     if (propertyValue == null) {
       throw new IllegalArgumentException("there is no value for the property " + propertyKey);
-      }
+    }
     return propertyValue;
   }
   
-  public static void getAllProperties(){
+  public void getAllProperties() {
     Properties property = readProperties();
     Enumeration<Object> enuKeys = property.keys();
     while (enuKeys.hasMoreElements()) {
       String key = (String) enuKeys.nextElement();
       String value = property.getProperty(key);
-      System.out.println(key + ": " + value);
-      }
+      System.out.println(key + ":" + value);
+    }
   }
   
-  public static void deleteProperty(String propertyKey){
+  public void deleteProperty(String propertyKey) {
     Properties property = readProperties();
     property.remove(propertyKey);
     writeProperties(property);
   }
-
-  public static void updateProperty(String propertyKey, String propertyValue){
+  
+  public void updateProperty(String propertyKey, String propertyValue) {
     Properties property = readProperties();
-    property.remove(propertyKey);
-    property.setProperty(propertyKey, propertyValue);
+    property.put(propertyKey, propertyValue);
     writeProperties(property);
   }
   
-  private static Properties readProperties(){
-  InputStream inputStream = FileManager.get().open(fileName);
+  private Properties readProperties() {
+    InputStream inputStream = FileManager.get().open(fileName);
     
     if (inputStream == null) {
       throw new IllegalArgumentException("Properties File: " + fileName + " is NOT found");
@@ -73,17 +97,16 @@ public class Config {
     return property;
   }
   
-  private static void writeProperties(Properties property){
+  private void writeProperties(Properties property) {
     try {
-      FileOutputStream fileOut = new FileOutputStream(fileName);
-      property.store(fileOut, "Storing property");
+      File file = new File(fileName);
+      FileOutputStream fileOut = new FileOutputStream(file);
+      property.store(fileOut, "");
       fileOut.close();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
-    } 
-    catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
- 
   }
 }

@@ -61,21 +61,4 @@ public class UserTest {
     Assert.assertEquals(user, user2);
   }
   
-  @Test
-  public void testGetHostname(){
-    String propertyValue = Config.getProperty("hostname");
-    Assert.assertEquals("localhost", propertyValue);
-  }
-  
-  @Test
-  public void testConfigProperties(){
-    Config.setProperty("Key", "value");
-    String propertyValue = Config.getProperty("Key");
-    Assert.assertEquals("value", propertyValue);
-    Config.getAllProperties();
-    Config.updateProperty("Key", "newValue");
-    propertyValue = Config.getProperty("Key");
-    Assert.assertEquals("newValue", propertyValue);
-  }
-  
 }

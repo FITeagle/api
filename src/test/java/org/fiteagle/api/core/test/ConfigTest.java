@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class ConfigTest {
   
-  @Test
+//  @Test
   public void testConfigProperties(){
     Config config = Config.getInstance();
     config.setDefaultProperty();

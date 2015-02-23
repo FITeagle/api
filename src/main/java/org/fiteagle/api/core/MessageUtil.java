@@ -153,11 +153,7 @@ public class MessageUtil {
     Model rdfModel = ModelFactory.createDefaultModel();
     
     InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
-    try {
-      rdfModel.read(is, null, serialization);
-    } catch (RiotException e) {
-      LOGGER.log(Level.SEVERE, "Error parsing serialized model: " + modelString);
-    }
+    rdfModel.read(is, null, serialization);
     
     return rdfModel;
   }

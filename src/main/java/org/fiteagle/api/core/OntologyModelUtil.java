@@ -25,8 +25,7 @@ public class OntologyModelUtil {
   }
   
   public static String getLocalNamespace() {
-    String hostname = Config.getInstance().getProperty("Config.HOSTNAME");
-    return "http://".concat(hostname).concat("/");
+    return Config.getInstance().getProperty(IConfig.LOCAL_NAMESPACE);
   }
   
   public static String[] getNamespaceAndLocalname(String uri, Map<String, String> prefixes) throws IllegalArgumentException {

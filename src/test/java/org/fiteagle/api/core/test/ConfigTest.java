@@ -1,31 +1,21 @@
 package org.fiteagle.api.core.test;
 
 import org.fiteagle.api.core.Config;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ConfigTest {
   
-//  @Test
+  @Test
   public void testConfigProperties(){
     Config config = Config.getInstance();
+    config.setNewProperty("testProperty", "testValue");
+    Assert.assertEquals(config.getProperty("testProperty"), "testValue");
     
-    config.setNewProperty("Key", "value");
-    config.setNewProperty("anotherProperty", "anotherValue");
+    config.updateProperty("testProperty", "newValue");
+    Assert.assertEquals(config.getProperty("testProperty"), "newValue");
     
-    System.out.println("printing all properties");
-    config.getAllProperties();
-    System.out.println("-------------");
-    
-    config.updateProperty("Key", "newValue");
-    System.out.println("printing all values after update");
-    config.getAllProperties();
-    System.out.println("-------------");
-    
-    config.deleteProperty("Key");
-    config.deleteProperty("anotherProperty");
-    System.out.println("printing all values after delete");
-    config.getAllProperties();
-    System.out.println("-------------");
+    config.deleteProperty("testProperty");
 
   }
   

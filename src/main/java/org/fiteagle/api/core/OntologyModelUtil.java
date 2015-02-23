@@ -1,8 +1,6 @@
 package org.fiteagle.api.core;
 
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.hp.hpl.jena.rdf.model.Model;

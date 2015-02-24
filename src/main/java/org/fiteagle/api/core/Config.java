@@ -62,8 +62,8 @@ public class Config {
   
   public static void setDefaultProperty() {
     Properties property = new Properties();
-    property.put(IConfig.HOSTNAME, IConfig.DEFAULT_HOST);
-    property.put(IConfig.LOCAL_NAMESPACE, "urn:host:".concat(IConfig.DEFAULT_HOST).concat(":"));
+    property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
+    property.put(IConfig.LOCAL_NAMESPACE, "urn:host:".concat(IConfig.DEFAULT_HOSTNAME ).concat(":"));
     writeProperties(property);
   }
   

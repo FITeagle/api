@@ -6,8 +6,8 @@ import java.nio.file.Paths;
 public interface IConfig {
   
   public final static String HOME = System.getProperty("user.home");
-  public final static String HOSTNAME = "Config.HOSTNAME";
-  public final static String DEFAULT_HOST = "localhost";
+  public final static String KEY_HOSTNAME = "hostname";
+  public final static String DEFAULT_HOSTNAME = "localhost";
   public final static String FITEAGLE_DIRECTORY = ".fiteagle";
   public final static String FITEAGLE_FILE_NAME = "fiteagle.properties";
   public final static String LOCAL_NAMESPACE = "Local_namespace";

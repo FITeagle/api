@@ -1,8 +1,6 @@
 package org.fiteagle.api.core;
 
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -25,13 +23,9 @@ public class OntologyModelUtil {
   }
   
   public static String getLocalNamespace() {
-    String hostname = null;
-    try {
-      hostname = InetAddress.getLocalHost().cd ();
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
-    }
-    return "http://".concat(hostname).concat("/");
+
+    return Config.getInstance().getProperty(IConfig.LOCAL_NAMESPACE);
+
   }
   
   public static String[] getNamespaceAndLocalname(String uri, Map<String, String> prefixes) throws IllegalArgumentException {

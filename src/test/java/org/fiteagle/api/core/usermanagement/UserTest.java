@@ -2,6 +2,7 @@ package org.fiteagle.api.core.usermanagement;
 
 import java.io.IOException;
 
+import org.fiteagle.api.core.Config;
 import org.fiteagle.api.core.usermanagement.User.InValidAttributeException;
 import org.fiteagle.api.core.usermanagement.User.NotEnoughAttributesException;
 import org.fiteagle.api.core.usermanagement.User.Role;
@@ -59,4 +60,5 @@ public class UserTest {
     User user2 = objectMapper.readValue(json, User.class);
     Assert.assertEquals(user, user2);
   }
+  
 }

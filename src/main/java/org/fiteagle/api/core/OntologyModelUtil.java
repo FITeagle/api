@@ -27,7 +27,7 @@ public class OntologyModelUtil {
   public static String getLocalNamespace() {
     String hostname = null;
     try {
-      hostname = InetAddress.getLocalHost().getCanonicalHostName();
+      hostname = InetAddress.getLocalHost().cd ();
     } catch (UnknownHostException e) {
       e.printStackTrace();
     }

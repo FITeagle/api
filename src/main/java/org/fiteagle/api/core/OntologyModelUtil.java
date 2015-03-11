@@ -28,7 +28,7 @@ public class OntologyModelUtil {
 
   }
   public static String getResourceNamespace(){
-      return Config.getInstance().getProperty(IConfig.RESOURCE_NAcd MESPACE);
+      return Config.getInstance().getProperty(IConfig.RESOURCE_NAMESPACE);
   }
   
   public static String[] getNamespaceAndLocalname(String uri, Map<String, String> prefixes) throws IllegalArgumentException {

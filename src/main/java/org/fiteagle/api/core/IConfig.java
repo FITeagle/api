@@ -15,5 +15,5 @@ public interface IConfig {
   
   public final static Path HOME_PATH = Paths.get(HOME);
   public final static Path PROPERTIES_DIRECTORY = HOME_PATH.resolve(FITEAGLE_DIRECTORY);
-  
+    public final  String RESOURCE_NAMESPACE = "Resource_namespace" ;
 }

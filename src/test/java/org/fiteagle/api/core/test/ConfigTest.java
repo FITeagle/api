@@ -8,7 +8,8 @@ public class ConfigTest {
   
   @Test
   public void testConfigProperties(){
-    Config config = Config.getInstance();
+    Config config = new Config("test");
+    config.creatPropertiesFile();
     config.setNewProperty("testProperty", "testValue");
     Assert.assertEquals(config.getProperty("testProperty"), "testValue");
     
@@ -16,7 +17,7 @@ public class ConfigTest {
     Assert.assertEquals(config.getProperty("testProperty"), "newValue");
     
     config.deleteProperty("testProperty");
-
+    config.deletePropertiesFile();
   }
   
 }

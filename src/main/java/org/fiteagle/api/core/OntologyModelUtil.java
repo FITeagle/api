@@ -23,12 +23,13 @@ public class OntologyModelUtil {
   }
   
   public static String getLocalNamespace() {
-
-    return Config.getInstance().getProperty(IConfig.LOCAL_NAMESPACE);
+    Config config = new Config();
+    return config.getProperty(IConfig.LOCAL_NAMESPACE);
 
   }
   public static String getResourceNamespace(){
-      return Config.getInstance().getProperty(IConfig.RESOURCE_NAMESPACE);
+    Config config = new Config();
+    return config.getProperty(IConfig.RESOURCE_NAMESPACE);
   }
   
   public static String[] getNamespaceAndLocalname(String uri, Map<String, String> prefixes) throws IllegalArgumentException {

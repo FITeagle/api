@@ -18,53 +18,60 @@ import com.hp.hpl.jena.util.FileManager;
 
 public class Config {
   
-  private static Path FILE_PATH;
+  private  Path FILE_PATH;
   
-  private static Config instance;
   
   private static Logger LOGGER = Logger.getLogger(Config.class.toString());
   
-  public static Config getInstance(){
-    FILE_PATH = IConfig.PROPERTIES_DIRECTORY.resolve(IConfig.FITEAGLE_FILE_NAME);
-    return createInstance();
+  public Config(){
+    this.FILE_PATH = IConfig.PROPERTIES_DIRECTORY.resolve(IConfig.FITEAGLE_FILE_NAME);
+    checkFolder();
+    setDefaultProperty();
   }
   
-  public static Config getInstance(String file){
-    file = file.concat(IConfig.EXTENSION);
-    FILE_PATH = IConfig.PROPERTIES_DIRECTORY.resolve(file);
-    return createInstance();
+  public Config(String file_name){
+    file_name = file_name.concat(IConfig.EXTENSION);
+    this.FILE_PATH = IConfig.PROPERTIES_DIRECTORY.resolve(file_name);
+    checkFolder();
   }
   
-  private static Config createInstance(){
-    checkFolderAndFile();
-    if(instance == null){
-      instance = new Config();
-      return instance;
-    } else{
-      return instance;
-    }
+  public void creatPropertiesFile(){
+    deletePropertiesFile();
+    setDefaultProperty();
   }
   
-  private static void checkFolderAndFile() {
+  private void checkFolder(){
+    
     if(Files.notExists(IConfig.PROPERTIES_DIRECTORY)){
-        try {
-          Files.createDirectory(IConfig.PROPERTIES_DIRECTORY);
-        } catch (IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+      try {
+        Files.createDirectory(IConfig.PROPERTIES_DIRECTORY);
+      } catch (IOException e) {
+        LOGGER.log(Level.SEVERE, "The directory can't be created ", e);
         }
-    }
+      }
+  }
+  
+  public void setDefaultProperty() {
     File file = FILE_PATH.toFile();
     if(!file.exists()){
-      setDefaultProperty();
-    }
-  }
-  
-  public static void setDefaultProperty() {
     Properties property = new Properties();
     property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
-    property.put(IConfig.LOCAL_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/resource/"));
+    property.put(IConfig.RESOURCE_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/resource/"));
+    property.put(IConfig.LOCAL_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/"));
     writeProperties(property);
+    } else{
+      Properties property = readProperties();
+      if(!property.containsKey(IConfig.KEY_HOSTNAME)){
+        property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
+      }
+      if(!property.containsKey(IConfig.RESOURCE_NAMESPACE)){
+        property.put(IConfig.RESOURCE_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/resource/"));
+      }
+      if(!property.containsKey(IConfig.LOCAL_NAMESPACE)){
+        property.put(IConfig.LOCAL_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/"));
+      }
+      writeProperties(property);
+    }
   }
   
   public void setNewProperty(String propertyKey, String propertyValue) {
@@ -112,8 +119,7 @@ public class Config {
       try {
         Files.delete(FILE_PATH);
       } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        LOGGER.log(Level.SEVERE, "The file can't be deleted", e);
       }
     }
   }
@@ -121,29 +127,29 @@ public class Config {
   private Properties readProperties() {
     InputStream inputStream = FileManager.get().open(FILE_PATH.toString());
     if (inputStream == null) {
-      throw new IllegalArgumentException("Properties File: " + FILE_PATH.toString() + " is NOT found");
+      throw new IllegalArgumentException("Properties File: " + FILE_PATH.toString() + " is NOT found ");
     }
     Properties property = new Properties();
     try {
       property.load(inputStream);
       inputStream.close();
     } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString() + " can't be opened ", e);
     }
     return property;
   }
   
-  private static void writeProperties(Properties property) {
+  private void writeProperties(Properties property) {
     try {
       File file = FILE_PATH.toFile();
       FileOutputStream fileOut = new FileOutputStream(file);
       property.store(fileOut, "");
       fileOut.close();
     } catch (FileNotFoundException e) {
+      LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString() + " is not found ", e);
       e.printStackTrace();
     } catch (IOException e) {
-      e.printStackTrace();
+      LOGGER.log(Level.SEVERE, "properties couldn't be stored in " + FILE_PATH.toString(), e);
     }
   }
 }

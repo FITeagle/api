@@ -56,8 +56,8 @@ public class Config {
     if(!file.exists()){
     Properties property = new Properties();
     property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
-    property.put(IConfig.RESOURCE_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/resource/"));
-    property.put(IConfig.LOCAL_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/"));
+    property.put(IConfig.LOCAL_NAMESPACE, IConfig.LOCAL_NAMESPACE_VALUE);
+    property.put(IConfig.RESOURCE_NAMESPACE, IConfig.LOCAL_NAMESPACE_VALUE.concat("resource/"));
     writeProperties(property);
     } else{
       Properties property = readProperties();
@@ -65,10 +65,10 @@ public class Config {
         property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
       }
       if(!property.containsKey(IConfig.RESOURCE_NAMESPACE)){
-        property.put(IConfig.RESOURCE_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/resource/"));
+        property.put(IConfig.RESOURCE_NAMESPACE, IConfig.LOCAL_NAMESPACE_VALUE.concat("resource/"));
       }
       if(!property.containsKey(IConfig.LOCAL_NAMESPACE)){
-        property.put(IConfig.LOCAL_NAMESPACE, "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/"));
+        property.put(IConfig.LOCAL_NAMESPACE, IConfig.LOCAL_NAMESPACE_VALUE);
       }
       writeProperties(property);
     }

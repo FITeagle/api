@@ -18,4 +18,5 @@ public interface IConfig {
     public final  String RESOURCE_NAMESPACE = "Resource_namespace" ;
     public final String  LOCAL_NAMESPACE_VALUE = "http://".concat(IConfig.DEFAULT_HOSTNAME ).concat("/");
     public final String RESOURCE_NAMESPACE_VALUE = IConfig.LOCAL_NAMESPACE_VALUE.concat("resource/");
+    public final String TOPOLOGY_NAMESPACE_VALUE = IConfig.RESOURCE_NAMESPACE_VALUE.concat("topology/");
 }

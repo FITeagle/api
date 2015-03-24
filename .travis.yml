@@ -13,7 +13,7 @@ cache:
   - $HOME/.m2
 env:
   global:
-    secure: "ZmS5U1H6eaQKHjeX7p27xV0MC+pigzo6atwvfxRBo+IWnyBbybW/5uXuPQWI5LXPkVfGaU2664hvEXQVKRpVQGZPE1g1DavYAUp8T3VWA0GzAidbzGBq5pF2HGNNf4hAgCHop+Omdkki+oqEG+oQVF5onCj/J005WLz94zLJMKo="
-    secure: "q4bQaLv9EcM1GnjRoPuDlcONO6LA7wVDKDXu7NnK0E0dYrDnCpwipqhXqOGDGgf5LvzzmsQzN7xDq++1Z//fkl7XtCT/7nmPq7d7qchEtz9GCMV015yXwCfnzkmBcGpC8kTU3dzmlTB0BnnCc1rPxGSEn56NvqXgAkuYBFcZQQI="
+    - secure: "ZmS5U1H6eaQKHjeX7p27xV0MC+pigzo6atwvfxRBo+IWnyBbybW/5uXuPQWI5LXPkVfGaU2664hvEXQVKRpVQGZPE1g1DavYAUp8T3VWA0GzAidbzGBq5pF2HGNNf4hAgCHop+Omdkki+oqEG+oQVF5onCj/J005WLz94zLJMKo="
+    - secure: "q4bQaLv9EcM1GnjRoPuDlcONO6LA7wVDKDXu7NnK0E0dYrDnCpwipqhXqOGDGgf5LvzzmsQzN7xDq++1Z//fkl7XtCT/7nmPq7d7qchEtz9GCMV015yXwCfnzkmBcGpC8kTU3dzmlTB0BnnCc1rPxGSEn56NvqXgAkuYBFcZQQI="
 after_success:
   - curl -X POST -u $HTTP_USER:$HTTP_PASS -F "fileToUpload=@/home/travis/build/FITeagle/api/target/api-0.1-SNAPSHOT.jar" https://services.av.tu-berlin.de/travis-upload/upload.php

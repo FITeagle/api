@@ -35,4 +35,8 @@ public interface IGeni {
 	String GENI_RSPEC_VERSION = "geni_rspec_version";
 	String GENI_NOT_ALLOCATED = "geni_not_allocated";
 	String GENI_UNALLOCATED  = "geni_unallocated";
+	String GENI_STATRT = "geni_start";
+	String GENI_RESTART = "geni_restart";
+	String GENI_STOP = "geni_stop";
+	String GENI_PENDING_ALLOCATION = "geni_pending_allocation";
 }

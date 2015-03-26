@@ -1,19 +1,23 @@
 language: java
 jdk:
-  - oraclejdk7
+- oraclejdk7
 script:
-  - travis_retry mvn clean install site
+- travis_retry mvn clean install site
 notifications:
   slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:
-    - alexander.willner@tu-berlin.de
-    - fiteagle.dev@av.tu-berlin.de
+  - alexander.willner@tu-berlin.de
+  - fiteagle.dev@av.tu-berlin.de
 cache:
   directories:
   - $HOME/.m2
 env:
   global:
-    - secure: "ZmS5U1H6eaQKHjeX7p27xV0MC+pigzo6atwvfxRBo+IWnyBbybW/5uXuPQWI5LXPkVfGaU2664hvEXQVKRpVQGZPE1g1DavYAUp8T3VWA0GzAidbzGBq5pF2HGNNf4hAgCHop+Omdkki+oqEG+oQVF5onCj/J005WLz94zLJMKo="
-    - secure: "q4bQaLv9EcM1GnjRoPuDlcONO6LA7wVDKDXu7NnK0E0dYrDnCpwipqhXqOGDGgf5LvzzmsQzN7xDq++1Z//fkl7XtCT/7nmPq7d7qchEtz9GCMV015yXwCfnzkmBcGpC8kTU3dzmlTB0BnnCc1rPxGSEn56NvqXgAkuYBFcZQQI="
+  - secure: ZmS5U1H6eaQKHjeX7p27xV0MC+pigzo6atwvfxRBo+IWnyBbybW/5uXuPQWI5LXPkVfGaU2664hvEXQVKRpVQGZPE1g1DavYAUp8T3VWA0GzAidbzGBq5pF2HGNNf4hAgCHop+Omdkki+oqEG+oQVF5onCj/J005WLz94zLJMKo=
+  - secure: q4bQaLv9EcM1GnjRoPuDlcONO6LA7wVDKDXu7NnK0E0dYrDnCpwipqhXqOGDGgf5LvzzmsQzN7xDq++1Z//fkl7XtCT/7nmPq7d7qchEtz9GCMV015yXwCfnzkmBcGpC8kTU3dzmlTB0BnnCc1rPxGSEn56NvqXgAkuYBFcZQQI=
+  - secure: PxdWws9YQ87jgZVW9vfWSvvVrqBAXs014/9NiRq2RRrJyHOkXbMlTpD+ZJEXpR6/6Rg0d1gyVWpCQpvcrFDt6x2kolLrkKusTuteYpTw9kB4J8TlyBi5LjiXe1R5YaxD1+8GlWxPn3VbiQ24hWlP9qoxbchrhNdoednpjCWgzlo=
+  - secure: aEEk410fwQNNI5Twy3yH/0rxP66h5p3Y895KbUDtii8wPVTW1IvRi/WRW0+UI3ifRVhQSODtjFE/70Xg/WgOR31corf70wGCCs1HyuUiXNMo4Ia4n6BjEKEH66DAXYoSXDyj1WCnsg5m6/1x1qfmHVzMzgZZENpZt3HJGnC/qx4=
 after_success:
-  - curl -X POST -u $HTTP_USER:$HTTP_PASS -F "fileToUpload=@/home/travis/build/FITeagle/api/target/api-0.1-SNAPSHOT.jar" https://services.av.tu-berlin.de/travis-upload/upload.php
+- mvn deploy --settings .travis/settings.xml
+- curl -X POST -u $HTTP_USER:$HTTP_PASS -F "fileToUpload=@/home/travis/build/FITeagle/api/target/api-0.1-SNAPSHOT.jar"
+  https://services.av.tu-berlin.de/travis-upload/upload.php

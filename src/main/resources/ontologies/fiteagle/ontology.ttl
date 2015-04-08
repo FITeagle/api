@@ -184,7 +184,7 @@
       
              rdfs:range xsd:string ;
              
-             rdfs:domain :Resource;
+             rdfs:domain :Resource .
              
 #################################################################
 #

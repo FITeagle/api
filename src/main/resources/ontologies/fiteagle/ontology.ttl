@@ -172,19 +172,6 @@
 
             rdfs:domain :Resource .     
                    
-
-
-:hasPublicKey rdf:type owl:DatatypeProperty ;
-
-            rdfs:range xsd:string ;
-            
-            rdfs:domain :Resource .
-           
-:hasUserName rdf:type owl:DatatypeProperty ;
-      
-             rdfs:range xsd:string ;
-             
-             rdfs:domain :Resource .
              
 #################################################################
 #

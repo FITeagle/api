@@ -17,3 +17,4 @@ env:
   - secure: kFonZuxq630GR7Vag7qiYTXltEpxw31MYPo81SmOlVGe7j4mBzD49w7Zhcnyc4J2hyKgq9vZ/Wo94IbakXLs/sab4Iv97/fZ+OapvttM4b9KuiKlzB5jZqFr23MH1Ge1/rYY+wV/AWyQ4Ix4Bv/ywrgwIi2g65W8QMF/589PEns=
 after_success:
 - mvn deploy --settings .travis/settings.xml
+- curl http://trescimo.av.tu-berlin.de/static/trigger.php?c=fiteagle

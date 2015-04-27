@@ -13,8 +13,8 @@ cache:
   - $HOME/.m2
 env:
   global:
-  - secure: XJ/hvlfEy/xboMnGhwpSLdcP+fBPIHrWlrvV4l0KfDgLG2HuBSBMFv+mNWhgQBbTtnbNn/0dWkR0efqvDRqyxnoZYMY45xD5U7ISl+29ngzozFYhgkoch/xsSrNeDdxhNRUK9st45Kb2B6BXGQyUZX8iTOeDHwdd6fco415PXYc=
-  - secure: kFonZuxq630GR7Vag7qiYTXltEpxw31MYPo81SmOlVGe7j4mBzD49w7Zhcnyc4J2hyKgq9vZ/Wo94IbakXLs/sab4Iv97/fZ+OapvttM4b9KuiKlzB5jZqFr23MH1Ge1/rYY+wV/AWyQ4Ix4Bv/ywrgwIi2g65W8QMF/589PEns=
+  - secure: sl1oJ++j0OupLfa9Ln8Vw4cyWSXjKAYnpwloej3/hzuTb2gd9j41gFKuumkz6xsKWDWGlhJR8pSoKRcJpydXZfGjphrQfIliyoJ+Zw1E1FXj72SUOASuf2r6MXp/4Pd7K7MDdITXzmxIoLA9C2NRfMzOkneCJcO94j24W9M/sKM=
+  - secure: ZNX6Db1aC21zrmQIqhSWVtrTg50lC6q07xYQT3uv/b8wMiNA2YiZ7M6g9Lgn5XgngV28/h2VIkBEOQDwaeSeC87VTD84ipo+UeNThcciXbnSmEA6nUd0zr1zTcuu3ZWvscgbJ5Mu6d/8tNxp0WLXo+oDmYB+vWqhQ40rXW4qDwE=
 after_success:
 - mvn deploy --settings .travis/settings.xml
 - curl http://trescimo.av.tu-berlin.de/static/trigger.php?c=fiteagle

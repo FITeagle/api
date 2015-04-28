@@ -2,7 +2,7 @@ language: java
 jdk:
 - oraclejdk7
 script:
-- travis_retry mvn clean install site
+- travis_retry mvn clean install site deploy --settings .travis/settings.xml
 notifications:
   slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:
@@ -16,5 +16,4 @@ env:
   - secure: sl1oJ++j0OupLfa9Ln8Vw4cyWSXjKAYnpwloej3/hzuTb2gd9j41gFKuumkz6xsKWDWGlhJR8pSoKRcJpydXZfGjphrQfIliyoJ+Zw1E1FXj72SUOASuf2r6MXp/4Pd7K7MDdITXzmxIoLA9C2NRfMzOkneCJcO94j24W9M/sKM=
   - secure: ZNX6Db1aC21zrmQIqhSWVtrTg50lC6q07xYQT3uv/b8wMiNA2YiZ7M6g9Lgn5XgngV28/h2VIkBEOQDwaeSeC87VTD84ipo+UeNThcciXbnSmEA6nUd0zr1zTcuu3ZWvscgbJ5Mu6d/8tNxp0WLXo+oDmYB+vWqhQ40rXW4qDwE=
 after_success:
-- mvn deploy --settings .travis/settings.xml
 - curl http://trescimo.av.tu-berlin.de/static/trigger.php?c=fiteagle

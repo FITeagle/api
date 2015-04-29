@@ -3,7 +3,7 @@ jdk:
 - oraclejdk7
 script:
 - travis_retry mvn clean install site
-- "[ ${TRAVIS_PULL_REQUEST} = 'false' ] && mvn clean deploy --settings .travis/settings.xml"
+- "[ ${TRAVIS_PULL_REQUEST} = 'false' ] && [ ${TRAVIS_BRANCH} = 'master' ] && mvn clean deploy --settings .travis/settings.xml"
 notifications:
   slack: av-fitt:FmLx2wj2Td3cNfmrjaQXUXBO
   email:

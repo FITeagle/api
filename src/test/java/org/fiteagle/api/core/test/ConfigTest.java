@@ -9,7 +9,7 @@ public class ConfigTest {
   @Test
   public void testConfigProperties(){
     Config config = new Config("test");
-    config.creatPropertiesFile();
+    config.createPropertiesFile();
     config.setNewProperty("testProperty", "testValue");
     Assert.assertEquals(config.getProperty("testProperty"), "testValue");
     

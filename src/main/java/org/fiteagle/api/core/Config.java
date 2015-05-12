@@ -35,7 +35,7 @@ public class Config {
     checkFolder();
   }
   
-  public void creatPropertiesFile(){
+  public void createPropertiesFile(){
     deletePropertiesFile();
     setDefaultProperty();
   }

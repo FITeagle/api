@@ -124,7 +124,7 @@ public class Config {
     }
   }
   
-  private Properties readProperties() {
+  public Properties readProperties() {
     InputStream inputStream = FileManager.get().open(FILE_PATH.toString());
     if (inputStream == null) {
       throw new IllegalArgumentException("Properties File: " + FILE_PATH.toString() + " is NOT found ");

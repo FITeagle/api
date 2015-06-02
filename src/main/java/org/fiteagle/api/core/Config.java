@@ -150,7 +150,7 @@ public class Config {
 		return property;
 	}
 
-	private void writeProperties(Properties property) {
+	public void writeProperties(Properties property) {
 		FileWriter writer;
 		try {
 			File file = FILE_PATH.toFile();

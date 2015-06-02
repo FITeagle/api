@@ -22,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.hp.hpl.jena.util.FileManager;
 
 public class Config {
@@ -143,7 +144,24 @@ public class Config {
 		try {
 	        String input = IOUtils.toString(new FileInputStream(FILE_PATH.toFile()), "UTF-8");
 			property = gson.fromJson(input, Properties.class);
-		} catch (IOException e) {
+		} catch (JsonSyntaxException e) {
+			InputStream inputStream = FileManager.get().open(FILE_PATH.toString());
+		    try {
+		      property.load(inputStream);
+		      inputStream.close();
+		      writeProperties(property);
+		      try{	
+		      readProperties();
+		      }catch (Exception e2){
+		    	  LOGGER.log(Level.SEVERE, "Couldn't read JSON Property - Then tried to convert into JSON but failed - Pls check it");
+		      }
+		    } catch (IOException ex) {
+		      LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString() + " can't be opened ", ex);
+		    }
+			
+					
+		}		
+		catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString()
 					+ " can't be opened ", e);
 		}

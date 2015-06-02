@@ -165,7 +165,7 @@ public class Config {
 			try{
 				property = convertProperties();
 			}catch(Exception e2){
-				
+				LOGGER.log(Level.SEVERE, "JSONException - Could not read Properties file - Then tried to convert it into JSON but failed");	
 			}
 		} 
 		return property;

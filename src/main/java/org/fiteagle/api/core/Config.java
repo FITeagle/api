@@ -137,6 +137,20 @@ public class Config {
 		}
 	}
 
+	private Properties convertProperties() throws Exception{
+		Properties property = new Properties();	
+		InputStream inputStream = FileManager.get().open(FILE_PATH.toString());
+
+	      property.load(inputStream);
+	      inputStream.close();
+	      writeProperties(property);
+	      Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	      String input = IOUtils.toString(new FileInputStream(FILE_PATH.toFile()), "UTF-8");
+	      property = gson.fromJson(input, Properties.class);
+
+	      return property;
+	}
+	
 	public Properties readProperties() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		Properties property = new Properties();	
@@ -144,27 +158,16 @@ public class Config {
 		try {
 	        String input = IOUtils.toString(new FileInputStream(FILE_PATH.toFile()), "UTF-8");
 			property = gson.fromJson(input, Properties.class);
-		} catch (JsonSyntaxException e) {
-			InputStream inputStream = FileManager.get().open(FILE_PATH.toString());
-		    try {
-		      property.load(inputStream);
-		      inputStream.close();
-		      writeProperties(property);
-		      try{	
-		      readProperties();
-		      }catch (Exception e2){
-		    	  LOGGER.log(Level.SEVERE, "Couldn't read JSON Property - Then tried to convert into JSON but failed - Pls check it");
-		      }
-		    } catch (IOException ex) {
-		      LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString() + " can't be opened ", ex);
-		    }
-			
-					
-		}		
-		catch (IOException e) {
+		}catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Properties file " + FILE_PATH.toString()
 					+ " can't be opened ", e);
-		}
+		} catch (JsonSyntaxException e) {
+			try{
+				property = convertProperties();
+			}catch(Exception e2){
+				
+			}
+		} 
 		return property;
 	}
 

@@ -170,6 +170,25 @@ public class Config {
 		} 
 		return property;
 	}
+	
+	public String readJsonProperties(){
+	  InputStream is;
+	  byte[] buffer = null;
+    try {
+      is = new FileInputStream(FILE_PATH.toFile());
+      int size;
+      size = is.available();
+       buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer);
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return new String(buffer);
+    
+	}
 
 	public void writeProperties(Properties property) {
 		FileWriter writer;

@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.jena.atlas.logging.Log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -70,19 +71,23 @@ public class Config {
 					IConfig.RESOURCE_NAMESPACE_VALUE);
 			writeProperties(property);
 		} else {
+			Boolean changed = false;
 			Properties property = readProperties();
 			if (!property.containsKey(IConfig.KEY_HOSTNAME)) {
 				property.put(IConfig.KEY_HOSTNAME, IConfig.DEFAULT_HOSTNAME);
+				changed = true;
 			}
 			if (!property.containsKey(IConfig.RESOURCE_NAMESPACE)) {
 				property.put(IConfig.RESOURCE_NAMESPACE,
 						IConfig.RESOURCE_NAMESPACE_VALUE);
+				changed = true;
 			}
 			if (!property.containsKey(IConfig.LOCAL_NAMESPACE)) {
 				property.put(IConfig.LOCAL_NAMESPACE,
 						IConfig.LOCAL_NAMESPACE_VALUE);
+				changed = true;
 			}
-			writeProperties(property);
+			if (changed == true) writeProperties(property);
 		}
 	}
 
@@ -172,21 +177,17 @@ public class Config {
 	}
 	
 	public String readJsonProperties(){
-	  InputStream is;
-	  byte[] buffer = null;
-    try {
-      is = new FileInputStream(FILE_PATH.toFile());
-      int size;
-      size = is.available();
-       buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer);
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    return new String(buffer);
+        String input = "";
+		try {
+			input = IOUtils.toString(new FileInputStream(FILE_PATH.toFile()), "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return input;
     
 	}
 

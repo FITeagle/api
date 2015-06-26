@@ -5,7 +5,7 @@ public interface IMessageBus {
 	String TOPIC_CORE = "topic/core";
 	String TOPIC_CORE_NAME = "java:/" + TOPIC_CORE;
 	
-	int TIMEOUT = 0;
+	int TIMEOUT = 10000;
 	int SHORT_TIMEOUT = 2000;
 	
 	String METHOD_TYPE = "METHOD_TYPE";

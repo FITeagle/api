@@ -86,6 +86,29 @@ public class ConfigTest {
     }
 
   }
-  
-  
+
+  @Test
+  public void testRepeatedReadWrite() {
+    for(int i=  0; i < 10; i++) {
+      Config config = new Config("Repeated");
+      config.setDefaultProperty();
+
+      Properties properties = new Properties();
+      properties.put(IConfig.KEY_HOSTNAME,"Foo");
+      properties.put(IConfig.RESOURCE_NAMESPACE,"Foo");
+      properties.put(IConfig.LOCAL_NAMESPACE,"Foo");
+      properties.put("sdad","Foo");
+      config.writeProperties(properties);
+
+      Config config1 = new Config("Repeated");
+      config1.setDefaultProperty();
+
+      Properties properties1 = config1.readProperties();
+      properties1.put(IConfig.KEY_HOSTNAME, "welt");
+      config1.writeProperties(properties1);
+
+    }
+
+
+  }
 }

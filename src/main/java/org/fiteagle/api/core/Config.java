@@ -45,6 +45,10 @@ public class Config {
 		checkFolder();
 	}
 
+	public Path getFilePath(){
+	  return this.FILE_PATH;
+	}
+	
 	public void createPropertiesFile() {
 		deletePropertiesFile();
 		setDefaultProperty();
@@ -181,10 +185,9 @@ public class Config {
 		try {
 			input = IOUtils.toString(new FileInputStream(FILE_PATH.toFile()), "UTF-8");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Properties file is not found ", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			LOGGER.log(Level.SEVERE, "Properties couldn't be read ", e);
 			e.printStackTrace();
 		}
         return input;

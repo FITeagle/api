@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.UUID;
@@ -22,6 +23,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFReader;
 
 public class MessageUtil {
   
@@ -150,10 +152,12 @@ public class MessageUtil {
   }
   
   public static Model parseSerializedModel(String modelString, String serialization) throws RiotException {
+    
     Model rdfModel = ModelFactory.createDefaultModel();
     
+    RDFReader reader = rdfModel.getReader(serialization);
     InputStream is = new ByteArrayInputStream(modelString.getBytes(Charset.defaultCharset()));
-    rdfModel.read(is, null, serialization);
+    reader.read(rdfModel, is, IConfig.RESOURCE_NAMESPACE_VALUE);
     
     return rdfModel;
   }

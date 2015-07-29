@@ -42,7 +42,7 @@ public class TimerHelper{
 }
 
 	@Timeout
-	public void timerMethod(Timer timer) throws Exception {
+	public void timerMethod(Timer timer) {
 		if(failureCounter <10){
 			
 			try{

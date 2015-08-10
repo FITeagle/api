@@ -49,6 +49,26 @@ public class MessageUtil {
     return message;
   }
   
+  public static Message createDefaultMessage (String methodType, String methodTarget, String serialization, String correlationID, JMSContext context){
+	    final Message message = context.createMessage();
+	    try {
+	      message.setStringProperty(IMessageBus.METHOD_TYPE, methodType);
+	      message.setStringProperty(IMessageBus.SERIALIZATION, serialization);
+	      if(correlationID != null){
+	        message.setJMSCorrelationID(correlationID);
+	      }
+	      else{
+	        message.setJMSCorrelationID(UUID.randomUUID().toString());
+	      }
+	      if(methodTarget != null){
+	        message.setStringProperty(IMessageBus.METHOD_TARGET, methodTarget);
+	      }
+	    } catch (JMSException e) {
+	      LOGGER.log(Level.SEVERE, e.getMessage());
+	    }
+	    return message;
+  }
+  
   public static Message createRDFMessage(String rdfModel, String methodType, String methodTarget, String serialization, String correlationID, JMSContext context) {
     final Message message = context.createTextMessage(rdfModel);
     try {

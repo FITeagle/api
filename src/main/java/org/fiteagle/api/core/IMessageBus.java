@@ -23,6 +23,8 @@ public interface IMessageBus {
 	String TARGET_RESOURCE_ADAPTER_MANAGER = "TARGET_RESOURCE_ADAPTER_MANAGER";
 	String TARGET_FEDERATION_MANAGER = "TARGET_FEDERATION_MANAGER";
 	String TARGET_ADAPTER = "TARGET_ADAPTER";
+	String TARGET_USERMANAGEMENT = "usermanagement";
+
 
   String SERIALIZATION = "serialization"; // These serializations are compatible with Apache Jena
 	String SERIALIZATION_TURTLE = "TURTLE";

@@ -38,4 +38,7 @@ public interface IMessageBus {
 
   //To be refactored - currently used by usermanagement
   String TYPE_RESULT = "RESULT";
+  
+  String MESSAGE_SOURCE = "MESSAGE_SOURCE";
+  String SOURCE_RESERVATION = "SOURCE_RESERVATION";
 }

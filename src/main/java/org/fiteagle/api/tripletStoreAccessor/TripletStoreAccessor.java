@@ -3,12 +3,10 @@ package org.fiteagle.api.tripletStoreAccessor;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.vocabulary.OWL;
 
+import com.hp.hpl.jena.vocabulary.RDFS;
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
-import info.openmultinet.ontology.vocabulary.Omn_federation;
-import info.openmultinet.ontology.vocabulary.Omn_lifecycle;
-import info.openmultinet.ontology.vocabulary.Omn_resource;
-import info.openmultinet.ontology.vocabulary.Omn_service;
+import info.openmultinet.ontology.vocabulary.*;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -118,7 +116,8 @@ public class TripletStoreAccessor {
 
         ElementGroup whereClause = new ElementGroup();
         whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.canImplement.asNode(), new Node_Variable("p")));
-        whereClause.addTriplePattern(tripleForPattern);
+       // whereClause.addTriplePattern(tripleForPattern);
+        whereClause.addTriplePattern(new Triple(new Node_Variable("p"), RDFS.subClassOf.asNode(), Omn.Resource.asNode()));
         query.setQueryPattern(whereClause);
 
         QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);

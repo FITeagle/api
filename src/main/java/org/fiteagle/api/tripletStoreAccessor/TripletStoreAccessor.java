@@ -2,8 +2,8 @@ package org.fiteagle.api.tripletStoreAccessor;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.vocabulary.OWL;
-
 import com.hp.hpl.jena.vocabulary.RDFS;
+
 import info.openmultinet.ontology.Parser;
 import info.openmultinet.ontology.exceptions.InvalidModelException;
 import info.openmultinet.ontology.vocabulary.*;
@@ -24,6 +24,7 @@ import org.fiteagle.api.tripletStoreAccessor.QueryExecuter;
 //import org.fiteagle.api.tripletStoreAccessor.ResourceRepositoryException;
 import org.fiteagle.api.tripletStoreAccessor.TripletStoreAccessor;
 
+import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.graph.Node_Variable;
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.DatasetAccessor;
@@ -111,21 +112,27 @@ public class TripletStoreAccessor {
         Query query = QueryFactory.create();
         query.setQueryDescribeType();
         query.addResultVar("resource");
-        Triple tripleForPattern = new Triple(new Node_Variable("resource"),new Node_Variable("o"),new Node_Variable("p"));
 
-
-        ElementGroup whereClause = new ElementGroup();
-        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.canImplement.asNode(), new Node_Variable("p")));
-       // whereClause.addTriplePattern(tripleForPattern);
-        whereClause.addTriplePattern(new Triple(new Node_Variable("p"), RDFS.subClassOf.asNode(), Omn.Resource.asNode()));
-        query.setQueryPattern(whereClause);
-
-        QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
-        Model model = execution.execDescribe();
+        Model model = getNodesAndLinks(query, Omn.Resource.asNode());
+        model.add(getNodesAndLinks(query, Omn_resource.Link.asNode()));
+        
         model.setNsPrefixes(getNsPrefixMappings());
         
         String serializedAnswer = MessageUtil.serializeModel(model,IMessageBus.SERIALIZATION_TURTLE);
         return serializedAnswer;
+    }
+    
+    public static Model getNodesAndLinks(Query query, Node node) throws ResourceRepositoryException {
+      ElementGroup whereClause = new ElementGroup();
+      whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.canImplement.asNode(), new Node_Variable("p")));
+     // whereClause.addTriplePattern(tripleForPattern);
+      whereClause.addTriplePattern(new Triple(new Node_Variable("p"), RDFS.subClassOf.asNode(), node));
+      query.setQueryPattern(whereClause);
+
+      QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
+      Model model = execution.execDescribe();
+      
+      return model;
     }
 
     public static boolean exists(String uri) {

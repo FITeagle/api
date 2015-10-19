@@ -1,7 +1,11 @@
 package org.fiteagle.api.core;
 
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.Map;
+
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -22,6 +26,11 @@ public class OntologyModelUtil {
     return model;
   }
   
+  public static String toString(Model model) {
+      StringWriter out = new StringWriter();
+      RDFDataMgr.write(out, model, Lang.NT);
+      return out.toString();
+  }
   public static String getLocalNamespace() {
     Config config = new Config();
     return config.getProperty(IConfig.LOCAL_NAMESPACE);

@@ -112,6 +112,7 @@ public class TripletStoreAccessor {
         Query query = QueryFactory.create();
         query.setQueryDescribeType();
         query.addResultVar("resource");
+        query.addResultVar("p");
 
         Model model = getNodesAndLinks(query, Omn.Resource.asNode());
         model.add(getNodesAndLinks(query, Omn_resource.Link.asNode()));
@@ -136,22 +137,31 @@ public class TripletStoreAccessor {
     }
 
     public static boolean exists(String uri) {
-        Query query  = QueryFactory.create();
-        query.setQueryAskType();
         Triple triple = new Triple(ResourceFactory.createResource(uri).asNode(), new Node_Variable("p"), new Node_Variable("o"));
-        ElementGroup whereclause = new ElementGroup();
-        whereclause.addTriplePattern(triple);
-        query.setQueryPattern(whereclause);
-        QueryExecution execution  = QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
-        return execution.execAsk();
-
+        return executeAskQuery(triple);
     }
+    
+    public static boolean exists(Resource resource, Property property, RDFNode rdfNode){
+      Triple triple = new Triple(resource.asNode(), property.asNode(), rdfNode.asNode());
+      return executeAskQuery(triple);
+    }
+    
+    private static boolean executeAskQuery(Triple triple){
+      Query query = QueryFactory.create();
+      query.setQueryAskType();
+      ElementGroup whereclause = new ElementGroup();
+      whereclause.addTriplePattern(triple);
+      query.setQueryPattern(whereclause);
+      QueryExecution execution = QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
+      
+      return execution.execAsk();
+    }
+    
 
     public static Model getResource(String uri) {
         Query query =  QueryFactory.create();
         query.setQueryDescribeType();
         query.addDescribeNode(ResourceFactory.createResource(uri).asNode());
-
 
         LOGGER.log(Level.INFO, query.serialize());
         QueryExecution queryExecution = QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);

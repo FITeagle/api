@@ -22,7 +22,6 @@ import org.fiteagle.api.core.MessageUtil;
 import org.fiteagle.api.core.MessageUtil.ParsingException;
 import org.fiteagle.api.tripletStoreAccessor.QueryExecuter;
 //import org.fiteagle.api.tripletStoreAccessor.ResourceRepositoryException;
-import org.fiteagle.api.tripletStoreAccessor.TripletStoreAccessor;
 
 import com.hp.hpl.jena.graph.Node;
 import com.hp.hpl.jena.graph.Node_Variable;

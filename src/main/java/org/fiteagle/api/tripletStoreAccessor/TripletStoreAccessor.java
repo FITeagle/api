@@ -116,13 +116,31 @@ public class TripletStoreAccessor {
 
         Model model = getNodesAndLinks(query, Omn.Resource.asNode());
         model.add(getNodesAndLinks(query, Omn_resource.Link.asNode()));
-        
+        Model locationModel = getLocations(model);
+        model.add(locationModel);
         model.setNsPrefixes(getNsPrefixMappings());
         
         String serializedAnswer = MessageUtil.serializeModel(model,IMessageBus.SERIALIZATION_TURTLE);
         return serializedAnswer;
     }
-    
+
+    private static Model getLocations(Model model) {
+        ResIterator resIterator = model.listResourcesWithProperty(Omn_lifecycle.canImplement);
+        Model locationModel =  ModelFactory.createDefaultModel();
+        while(resIterator.hasNext()) {
+            Resource adapter = resIterator.nextResource();
+            Statement statement = adapter.getProperty(Omn_resource.hasLocation);
+            if (statement != null && statement.getObject() != null) {
+                Model location = getResource(statement.getObject().asResource().getURI());
+                locationModel.add(location);
+
+            }
+        }
+        return locationModel;
+
+
+    }
+
     public static Model getNodesAndLinks(Query query, Node node) throws ResourceRepositoryException {
       ElementGroup whereClause = new ElementGroup();
       whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.canImplement.asNode(), new Node_Variable("p")));

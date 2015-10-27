@@ -129,13 +129,19 @@ public class TripletStoreAccessor {
         Model locationModel =  ModelFactory.createDefaultModel();
         while(resIterator.hasNext()) {
             Resource adapter = resIterator.nextResource();
-            Statement statement = adapter.getProperty(Omn_resource.hasLocation);
-            if (statement != null && statement.getObject() != null) {
+            StmtIterator stmtIterator = adapter.listProperties(Omn_resource.hasLocation);
+
+            while(stmtIterator.hasNext()){
+                Statement statement = stmtIterator.nextStatement();
+                //TODO getAll Resources in one request
                 Model location = getResource(statement.getObject().asResource().getURI());
                 locationModel.add(location);
-
             }
+
+
+
         }
+
         return locationModel;
 
 

@@ -214,4 +214,9 @@ public class Config {
 					+ FILE_PATH.toString(), e);
 		}
 	}
+
+	public boolean fileExists() {
+		File file = FILE_PATH.toFile();
+		return file.exists();
+	}
 }

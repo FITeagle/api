@@ -147,7 +147,21 @@
             rdfs:domain owl:Thing ;
             
             rdfs:range xsd:string .
-            
+
+
+###  http://open-multinet.info/ontology/omn#startTime
+
+:startTime rdf:type owl:DatatypeProperty ;
+
+            a owl:FunctionalProperty ;
+
+            rdfs:label "startTime"@en ;
+
+            rdfs:comment "Defines the start time of the reservation" ;
+
+            rdfs:domain owl:Thing ;
+
+            rdfs:range xsd:string .
             
 ###  http://open-multinet.info/ontology/omn#reserveInstanceFrom
 

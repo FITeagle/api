@@ -29,8 +29,7 @@ public class TimeHelperMethods {
 		return dateString;
 	}
 
-	public static Date getTimeFromString(String time)
-			throws TimeParsingException {
+	public static Date getTimeFromString(String time) {
 
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd'T'HH:mm:ss");
@@ -39,9 +38,10 @@ public class TimeHelperMethods {
 		try {
 			date = simpleDateFormat.parse(time);
 		} catch (ParseException e) {
-			throw new TimeParsingException(
-					"Something went wrong trying to parse the reservation time.",
-					e);
+			e.printStackTrace();
+			// throw new TimeParsingException(
+			// "Something went wrong trying to parse the reservation time.",
+			// e);
 		}
 
 		return date;
@@ -57,7 +57,7 @@ public class TimeHelperMethods {
 	}
 
 	public static boolean timesOverlap(String start1, String end1,
-			String start2, String end2) throws TimeParsingException {
+			String start2, String end2) {
 
 		Date start1Date = getTimeFromString(start1);
 		Date end1Date = getTimeFromString(end1);

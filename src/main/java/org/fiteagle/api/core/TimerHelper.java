@@ -42,8 +42,9 @@ public void setup(){
 
 	public void setNewTimer(Callable<Void> task) {
 		this.task = task;
-
-		timerService.createIntervalTimer(0, 5000, new TimerConfig());
+    	TimerConfig config = new TimerConfig();
+		config.setPersistent(false);
+		timerService.createIntervalTimer(0, 5000, config);
 	}
 
 	@Timeout

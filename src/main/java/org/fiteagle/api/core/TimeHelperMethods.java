@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
+
 /**
  * Created by robynml 22 Jan 2016
  */
@@ -27,6 +29,17 @@ public class TimeHelperMethods {
 		dateString = simpleDateFormat.format(time);
 
 		return dateString;
+	}
+
+	public static Date getDateFromXSD(XSDDateTime time) {
+		return time.asCalendar().getTime();
+	}
+
+	public static String getStringFromTime(XSDDateTime dateTime) {
+
+		Date time = getDateFromXSD(dateTime);
+
+		return getStringFromTime(time);
 	}
 
 	public static Date getTimeFromString(String time)

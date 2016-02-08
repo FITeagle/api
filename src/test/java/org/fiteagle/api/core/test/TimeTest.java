@@ -1,11 +1,14 @@
 package org.fiteagle.api.core.test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.fiteagle.api.core.TimeHelperMethods;
 import org.fiteagle.api.core.TimeParsingException;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 
 public class TimeTest {
 
@@ -14,18 +17,28 @@ public class TimeTest {
 
 		String s = "2016-01-06T16:03:24";
 		TimeHelperMethods.getTimeFromString(s);
-		
+
 		String s2 = "2016-01-26T15:32:28+01:00";
 		Date date = TimeHelperMethods.getTimeFromString(s2);
 		String dateTime = TimeHelperMethods.getStringFromTime(date);
 		// System.out.println(dateTime);
 	}
-	
+
 	@Test
 	public void test_getStringFromTime() throws TimeParsingException {
 
 		Date date = new Date();
 		String dateString = TimeHelperMethods.getStringFromTime(date);
+		// System.out.println(dateString);
+	}
+
+	@Test
+	public void test_getStringFromXSDTime() throws TimeParsingException {
+		
+		Calendar date = Calendar.getInstance();
+		XSDDateTime timeXSDDateTime = new XSDDateTime(date);
+		String dateString = TimeHelperMethods
+				.getStringFromTime(timeXSDDateTime);
 		// System.out.println(dateString);
 	}
 
@@ -87,17 +100,17 @@ public class TimeTest {
 		Assert.assertFalse(TimeHelperMethods.timesOverlap(s3, s3, e3, e3));
 		Assert.assertFalse(TimeHelperMethods.timesOverlap(e3, e3, s3, s3));
 	}
-	
+
 	@Test
 	public void test_dateNotInPast() throws TimeParsingException {
 		String s1 = "2056-01-06T16:03:24";
 		Date d1 = TimeHelperMethods.getTimeFromString(s1);
-		
+
 		Assert.assertTrue(TimeHelperMethods.dateNotInPast(d1));
-		
+
 		String s2 = "2016-01-06T16:03:24";
 		Date d2 = TimeHelperMethods.getTimeFromString(s2);
-		
+
 		Assert.assertFalse(TimeHelperMethods.dateNotInPast(d2));
 	}
 }

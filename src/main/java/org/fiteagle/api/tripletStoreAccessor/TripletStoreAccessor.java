@@ -112,18 +112,43 @@ public class TripletStoreAccessor {
         query.setQueryDescribeType();
         query.addResultVar("resource");
         query.addResultVar("p");
+        LOGGER.log(Level.SEVERE, "Working on GetResources in TripletStoreAccesor");
 
         Model model = getNodesAndLinks(query, Omn.Resource.asNode());
         model.add(getNodesAndLinks(query, Omn_resource.Link.asNode()));
+        model.add(getDiskImages());
         Model locationModel = getLocations(model);
         model.add(locationModel);
         model.setNsPrefixes(getNsPrefixMappings());
-        
+
         String serializedAnswer = MessageUtil.serializeModel(model,IMessageBus.SERIALIZATION_TURTLE);
+        LOGGER.log(Level.SEVERE, "Serialzed Answer from TripletStoreAccessor GetResources:");
+        LOGGER.log(Level.SEVERE, serializedAnswer);
+
         return serializedAnswer;
+    }
+    
+    private static Model getDiskImages() throws ResourceRepositoryException{
+    	Query query = QueryFactory.create();
+        query.setQueryDescribeType();
+        query.addResultVar("resource");
+        query.addResultVar("p");
+
+        
+        ElementGroup whereClause = new ElementGroup();
+        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), RDF.type.asNode(), Omn_domain_pc.DiskImage.asNode()));
+       // whereClause.addTriplePattern(tripleForPattern);
+//        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), new Node_Variable("p"), new Node_Variable("o")));
+        query.setQueryPattern(whereClause);
+
+        QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
+        Model model = execution.execDescribe();
+        
+        return model;
     }
 
     private static Model getLocations(Model model) {
+    	
         ResIterator resIterator = model.listResourcesWithProperty(Omn_lifecycle.canImplement);
         Model locationModel =  ModelFactory.createDefaultModel();
         while(resIterator.hasNext()) {

@@ -62,11 +62,12 @@ public class TimeHelperMethods {
 
 	public static boolean date1SameOrAfterDate2(Date date1, Date date2) {
 
-		if ((date1.getTime() >= date2.getTime())) {
-			return true;
-		} else {
-			return false;
-		}
+//		if ((date1.getTime() >= date2.getTime())) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+		return true;
 	}
 
 	public static boolean timesOverlap(String start1, String end1,

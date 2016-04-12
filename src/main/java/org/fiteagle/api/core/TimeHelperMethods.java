@@ -24,8 +24,7 @@ public class TimeHelperMethods {
 	public static String getStringFromTime(Date time) {
 
 		String dateString = null;
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
 		dateString = simpleDateFormat.format(time);
 
 		return dateString;
@@ -42,19 +41,20 @@ public class TimeHelperMethods {
 		return getStringFromTime(time);
 	}
 
-	public static Date getTimeFromString(String time)
-			throws TimeParsingException {
+	public static Date getTimeFromString(String time) throws TimeParsingException {
 
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss");
+		SimpleDateFormat simpleDateFormat;
+		if (time.length() < 20) {
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		} else {
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+		}
 		Date date = null;
 
 		try {
 			date = simpleDateFormat.parse(time);
 		} catch (ParseException e) {
-			throw new TimeParsingException(
-					"Something went wrong trying to parse the reservation time.",
-					e);
+			throw new TimeParsingException("Something went wrong trying to parse the reservation time.", e);
 		}
 
 		return date;
@@ -62,16 +62,15 @@ public class TimeHelperMethods {
 
 	public static boolean date1SameOrAfterDate2(Date date1, Date date2) {
 
-//		if ((date1.getTime() >= date2.getTime())) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-		return true;
+		if ((date1.getTime() >= date2.getTime())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public static boolean timesOverlap(String start1, String end1,
-			String start2, String end2) throws TimeParsingException {
+	public static boolean timesOverlap(String start1, String end1, String start2, String end2)
+			throws TimeParsingException {
 
 		Date start1Date = getTimeFromString(start1);
 		Date end1Date = getTimeFromString(end1);
@@ -82,8 +81,7 @@ public class TimeHelperMethods {
 
 	}
 
-	public static boolean timesOverlap(Date start1, Date end1, Date start2,
-			Date end2) {
+	public static boolean timesOverlap(Date start1, Date end1, Date start2, Date end2) {
 
 		Boolean timesOverlap = false;
 

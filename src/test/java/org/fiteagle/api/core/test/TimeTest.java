@@ -16,12 +16,24 @@ public class TimeTest {
 	public void test_getTimeFromString() throws TimeParsingException {
 
 		String s = "2016-01-06T16:03:24";
-		TimeHelperMethods.getTimeFromString(s);
-
-		String s2 = "2016-01-26T15:32:28+01:00";
-		Date date = TimeHelperMethods.getTimeFromString(s2);
+		Date date = TimeHelperMethods.getTimeFromString(s);
 		String dateTime = TimeHelperMethods.getStringFromTime(date);
 		// System.out.println(dateTime);
+
+		String s1 = "2016-01-06T16:03:24Z";
+		Date date1 = TimeHelperMethods.getTimeFromString(s1);
+		String dateTime1 = TimeHelperMethods.getStringFromTime(date1);
+		// System.out.println(dateTime1);
+
+		String s2 = "2016-01-26T15:32:28+01:00";
+		Date date2 = TimeHelperMethods.getTimeFromString(s2);
+		String dateTime2 = TimeHelperMethods.getStringFromTime(date2);
+		// System.out.println(dateTime2);
+
+		String s3 = "2016-01-26T15:32:28+03:00";
+		Date date3 = TimeHelperMethods.getTimeFromString(s3);
+		String dateTime3 = TimeHelperMethods.getStringFromTime(date3);
+		// System.out.println(dateTime3);
 	}
 
 	@Test
@@ -34,11 +46,10 @@ public class TimeTest {
 
 	@Test
 	public void test_getStringFromXSDTime() throws TimeParsingException {
-		
+
 		Calendar date = Calendar.getInstance();
 		XSDDateTime timeXSDDateTime = new XSDDateTime(date);
-		String dateString = TimeHelperMethods
-				.getStringFromTime(timeXSDDateTime);
+		String dateString = TimeHelperMethods.getStringFromTime(timeXSDDateTime);
 		// System.out.println(dateString);
 	}
 
@@ -71,8 +82,27 @@ public class TimeTest {
 		String s6 = "2016-01-06T16:05:24";
 		Date date6 = TimeHelperMethods.getTimeFromString(s6);
 
-		Assert.assertFalse(TimeHelperMethods
-				.date1SameOrAfterDate2(date5, date6));
+		Assert.assertFalse(TimeHelperMethods.date1SameOrAfterDate2(date5, date6));
+		Assert.assertTrue(TimeHelperMethods.date1SameOrAfterDate2(date6, date5));
+
+		// Same time
+		String s7 = "2016-01-26T16:00:00+02:00"; // Germany
+		Date date7 = TimeHelperMethods.getTimeFromString(s7);
+		String s8 = "2016-01-26T15:00:00+01:00"; // London
+		Date date8 = TimeHelperMethods.getTimeFromString(s8);
+		Assert.assertTrue(TimeHelperMethods.date1SameOrAfterDate2(date7, date8));
+
+		// Germany after London
+		String s9 = "2016-01-26T16:01:00+02:00"; // Germany
+		Date date9 = TimeHelperMethods.getTimeFromString(s9);
+		String dateTime9 = TimeHelperMethods.getStringFromTime(date9);
+		// System.out.println(dateTime9);
+		String s10 = "2016-01-26T15:00:00+01:00"; // London
+		Date date10 = TimeHelperMethods.getTimeFromString(s10);
+		String dateTime10 = TimeHelperMethods.getStringFromTime(date10);
+		// System.out.println(dateTime10);
+		Assert.assertTrue(TimeHelperMethods.date1SameOrAfterDate2(date9, date10));
+		Assert.assertFalse(TimeHelperMethods.date1SameOrAfterDate2(date10, date9));
 	}
 
 	@Test

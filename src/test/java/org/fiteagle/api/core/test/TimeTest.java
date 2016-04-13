@@ -34,6 +34,11 @@ public class TimeTest {
 		Date date3 = TimeHelperMethods.getTimeFromString(s3);
 		String dateTime3 = TimeHelperMethods.getStringFromTime(date3);
 		// System.out.println(dateTime3);
+
+		String s4 = "2016-01-26T15:32:28+0300";
+		Date date4 = TimeHelperMethods.getTimeFromString(s4);
+		String dateTime4 = TimeHelperMethods.getStringFromTime(date4);
+		System.out.println(dateTime4);
 	}
 
 	@Test

@@ -46,6 +46,9 @@ public class TimeHelperMethods {
 		SimpleDateFormat simpleDateFormat;
 		if (time.length() < 20) {
 			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		} else if(time.length() == 24) {
+			// 2016-04-12T19:33:45+0200
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		} else {
 			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
 		}

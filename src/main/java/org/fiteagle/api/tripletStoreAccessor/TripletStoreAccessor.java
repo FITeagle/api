@@ -1,5 +1,6 @@
 package org.fiteagle.api.tripletStoreAccessor;
 
+import com.hp.hpl.jena.graph.*;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -23,9 +24,6 @@ import org.fiteagle.api.core.MessageUtil.ParsingException;
 import org.fiteagle.api.tripletStoreAccessor.QueryExecuter;
 //import org.fiteagle.api.tripletStoreAccessor.ResourceRepositoryException;
 
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Node_Variable;
-import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.DatasetAccessor;
 import com.hp.hpl.jena.query.DatasetAccessorFactory;
 import com.hp.hpl.jena.query.Query;
@@ -298,13 +296,15 @@ public class TripletStoreAccessor {
         Query query = QueryFactory.create();
         query.setQueryDescribeType();
         query.addResultVar("resource");
-        Triple tripleForPattern = new Triple(new Node_Variable("resource"),new Node_Variable("o"),new Node_Variable("p"));
+        query.addResultVar("o");
+        query.addResultVar("p");
         ElementGroup whereClause = new ElementGroup();
-        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.hasID.asNode(), new Node_Variable(id)));
-        whereClause.addTriplePattern(tripleForPattern);
+        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.hasID.asNode(), NodeFactory.createLiteral(id)));
         query.setQueryPattern(whereClause);
+        LOGGER.severe(query.serialize());
         QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
         Model dModel = execution.execDescribe();
+
         TripletStoreAccessor.deleteModel(dModel);
 
 

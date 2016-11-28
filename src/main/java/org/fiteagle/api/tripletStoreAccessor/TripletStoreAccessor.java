@@ -293,6 +293,22 @@ public class TripletStoreAccessor {
     	return model;
     }
 
+    public static void deleteVNF(Model model) throws InvalidModelException, ResourceRepositoryException {
+        String id =  model.listObjectsOfProperty(Omn_lifecycle.hasID).next().toString();
+        Query query = QueryFactory.create();
+        query.setQueryDescribeType();
+        query.addResultVar("resource");
+        Triple tripleForPattern = new Triple(new Node_Variable("resource"),new Node_Variable("o"),new Node_Variable("p"));
+        ElementGroup whereClause = new ElementGroup();
+        whereClause.addTriplePattern(new Triple(new Node_Variable("resource"), Omn_lifecycle.hasID.asNode(), new Node_Variable(id)));
+        whereClause.addTriplePattern(tripleForPattern);
+        query.setQueryPattern(whereClause);
+        QueryExecution execution =  QueryExecutionFactory.sparqlService(QueryExecuter.SESAME_SERVICE, query);
+        Model dModel = execution.execDescribe();
+        TripletStoreAccessor.deleteModel(dModel);
+
+
+    }
 
 
     public static class ResourceRepositoryException extends Exception {
